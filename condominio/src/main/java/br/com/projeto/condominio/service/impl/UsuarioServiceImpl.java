@@ -1,5 +1,7 @@
 package br.com.projeto.condominio.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,14 +27,20 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return null;
 	}
 
-	@Override
-	public void pesquisar(Long id) {
-		usuarioRepository.findById(id);
-		
-	}
 
 	@Override
 	public void deletar(Long id) {
 		usuarioRepository.deleteById(id);
+	}
+
+	@Override
+	public List<Usuario> pesquisar() {
+		
+		return usuarioRepository.findAll();
+	}
+
+	@Override
+	public Usuario consultar(Long id) {
+		return usuarioRepository.findById(id).get();
 	}
 }
