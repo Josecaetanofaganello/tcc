@@ -33,7 +33,7 @@ public class UsuarioController {
 
 	@PostMapping("/salvar")
 	public void salvar(@RequestBody Usuario usuario) {
-		usuarioRepository.save(usuario);
+		
 	}
 
 }

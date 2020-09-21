@@ -1,8 +1,12 @@
 package br.com.projeto.condominio.service;
 
-import org.springframework.stereotype.Service;
+import br.com.projeto.condominio.model.Usuario;
 
-@Service
-public class UsuarioService {
+public interface UsuarioService {
 
+		Usuario salvar(Usuario Usuario);
+	    Usuario atualizar(Usuario usuario);
+	    void pesquisar(Long id);
+	    void deletar(Long id);
+	   
 }
