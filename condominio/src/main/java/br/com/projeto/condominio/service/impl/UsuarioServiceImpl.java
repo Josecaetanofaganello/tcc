@@ -14,26 +14,25 @@ public class UsuarioServiceImpl implements UsuarioService {
 	private UsuarioRepository usuarioRepository;
 
 	@Override
-	public Usuario salvar(Usuario Usuario) {
-		// TODO Auto-generated method stub
+	public Usuario salvar(Usuario usuario) {
+		usuarioRepository.save(usuario);
 		return null;
 	}
 
 	@Override
 	public Usuario atualizar(Usuario usuario) {
-		// TODO Auto-generated method stub
+		usuarioRepository.save(usuario);
 		return null;
 	}
 
 	@Override
 	public void pesquisar(Long id) {
-		// TODO Auto-generated method stub
+		usuarioRepository.findById(id);
 		
 	}
 
 	@Override
 	public void deletar(Long id) {
-		// TODO Auto-generated method stub
-		
+		usuarioRepository.deleteById(id);
 	}
 }
