@@ -43,6 +43,11 @@ public class UsuarioController {
 		usuarioServiceImpl.salvar(usuario);
 	}
 	
+	@PostMapping("/atualizar")
+	public void atualizar(@RequestBody Usuario usuario) {
+		usuarioServiceImpl.atualizar(usuario);
+	}
+	
 	
 	@DeleteMapping("/{id}")
 	public void deletar(@PathVariable Long id) {
