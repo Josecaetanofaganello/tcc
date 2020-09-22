@@ -35,7 +35,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public List<Usuario> pesquisar() {
-		
 		return usuarioRepository.findAll();
 	}
 

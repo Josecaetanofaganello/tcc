@@ -17,9 +17,7 @@ import br.com.projeto.condominio.model.Usuario;
 import br.com.projeto.condominio.service.impl.UsuarioServiceImpl;
 
 @RestController()
-@RequestMapping(value = "/usuario", 
-	produces = MediaType.APPLICATION_JSON_VALUE, 
-	consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/usuario")
 public class UsuarioController {
 
 	@Autowired
@@ -33,14 +31,18 @@ public class UsuarioController {
 		return usuarios;
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/consultar/{id}")
 	  public @ResponseBody Usuario consultar(@PathVariable Long id) {
 	    return usuarioServiceImpl.consultar(id);
 	  }
 
 	@PostMapping("/salvar")
-	public void salvar(@RequestBody Usuario usuario) {
+	public @ResponseBody String salvar(@RequestBody Usuario usuario) {
+		
+		
 		usuarioServiceImpl.salvar(usuario);
+		
+		return "Sucesso";
 	}
 	
 	@PostMapping("/atualizar")
@@ -49,7 +51,7 @@ public class UsuarioController {
 	}
 	
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/deletar/{id}")
 	public void deletar(@PathVariable Long id) {
 		usuarioServiceImpl.deletar(id);
 	}
