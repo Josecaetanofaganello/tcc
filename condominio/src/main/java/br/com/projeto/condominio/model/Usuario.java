@@ -29,9 +29,10 @@ public class Usuario implements Serializable{
 
 	@Id
 	private Long id;
-	
 	@Column
 	private String nome;
+	@Column
+	private String cpf;
 	
 	
 	
