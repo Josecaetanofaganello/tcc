@@ -33,6 +33,21 @@ public class Usuario implements Serializable{
 	private String nome;
 	@Column
 	private String cpf;
+	@Column 
+	private String tipo;
+	@Column 
+	private String email;
+	@Column 
+	private String senha;
+	@Column 
+	private String telefone;
+	@Column 
+	private String rg;
+	@Column 
+	private String apto;
+	@Column 
+	private String bloco;
+	
 	
 	
 	
