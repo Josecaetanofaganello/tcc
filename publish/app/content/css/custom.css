@@ -7,3 +7,8 @@
     font-size: large;
     line-height: 35px;
 }
+
+.box {
+    height: auto;
+    width: auto;
+}
