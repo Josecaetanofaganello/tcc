@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="pt_BR" ng-app="myApp">
+<html lang="pt_BR" ng-app="myApp" ng-controller="AppCtrl">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="Sistema Web de Controle Financeiro">
-    <meta name="author" content="Jonathan R. Peixoto">
+    <meta name="author" content="Facet Developers">
     <link rel="icon" href="favicon.ico">
 
     <title>Controle Financeiro</title>
 
     <link href="css/myApp.css" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link ng-href="css/bootstrap-{{theme}}.min.css" rel="stylesheet" />
     <link href="./node_modules/angular-material/angular-material.css" rel="stylesheet">
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <link href="css/jumbotron-narrow.css" rel="stylesheet">
@@ -46,7 +46,40 @@
   </head>
   <body>
     <!--<loading></loading>-->
-    <div ui-view></div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+          <li class="active"><a href="#/">Home</a></li>
+          <li class="dropdown">
+              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Configurações <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                  <li><a href="#/progile">Meu Perfil</a></li>
+                  <li><a href="#/account/change-password">Alterar Senha</a></li>
+                  <li><a href="#/account/logout">Sair</a></li>
+                  <li class="divider"></li>
+                  <li><a href="javascript:void(0)" ng-click="changeTheme('default')">Default</a></li>
+                  <li><a href="javascript:void(0)" ng-click="changeTheme('cerulean')">Cerulean</a></li>
+                  <li><a href="javascript:void(0)" ng-click="changeTheme('cosmo')">Cosmo</a></li>
+                  <li><a href="javascript:void(0)" ng-click="changeTheme('cyborg')">Cyborg</a></li>
+                  <li><a href="javascript:void(0)" ng-click="changeTheme('darkly')">Darkly</a></li>
+                  <li><a href="javascript:void(0)" ng-click="changeTheme('flatly')">Flatly</a></li>
+                  <li><a href="javascript:void(0)" ng-click="changeTheme('journal')">Journal</a></li>
+                  <li><a href="javascript:void(0)" ng-click="changeTheme('lumen')">Lumen</a></li>
+                  <li><a href="javascript:void(0)" ng-click="changeTheme('paper')">Paper</a></li>
+                  <li><a href="javascript:void(0)" ng-click="changeTheme('readable')">Readable</a></li>
+                  <li><a href="javascript:void(0)" ng-click="changeTheme('sandstone')">Sandstone</a></li>
+                  <li><a href="javascript:void(0)" ng-click="changeTheme('symplex')">Symplex</a></li>
+                  <li><a href="javascript:void(0)" ng-click="changeTheme('slate')">Slate</a></li>
+                  <li><a href="javascript:void(0)" ng-click="changeTheme('spacelab')">Space Lab</a></li>
+                  <li><a href="javascript:void(0)" ng-click="changeTheme('superhero')">Super Hero</a></li>
+                  <li><a href="javascript:void(0)" ng-click="changeTheme('united')">United</a></li>
+                  <li><a href="javascript:void(0)" ng-click="changeTheme('yeti')">Yeti</a></li>
+              </ul>
+          </li>
+      </ul>
+  </div>
+    <div ui-view>
+      
+    </div>
 
     <footer class="footer text-center navbar-bottom">
       <p>&copy; TCC 2020 </p>
@@ -57,6 +90,7 @@
     <script src="./configs/configs.js"></script>
 
     <!--CONTROLLERS-->
+    <script src="./controllers/AppCtrl.js"></script>
     <script src="./controllers/loginCtrl.js"></script>
     <script src="./controllers/registerCtrl.js"></script>
     <script src="./controllers/menuCtrl.js"></script>

@@ -1,19 +1,9 @@
 (function () {
     'use strict';
 
-angular.module("myApp", [
-        'ngCookies',
-        'ngAnimate',
-        'ngSanitize',
-        'ngAria',
-        'ngMaterial',
-        'ui.router', 
-        'ui.bootstrap', 
-        'ui.utils.masks',
-        'ngMessages',
-        'chart.js'
-    ])
-    .config(function ($stateProvider, $urlRouterProvider){
+var app = angular.module("myApp", ['ngCookies','ngAnimate','ngSanitize','ngAria', 'ngMaterial', 'ui.router', 'ui.bootstrap', 'ui.utils.masks','ngMessages','chart.js' ])
+    
+    app.config(function ($stateProvider, $urlRouterProvider){
 
             $urlRouterProvider.otherwise('/login');
             $stateProvider
@@ -64,30 +54,36 @@ angular.module("myApp", [
                 })
         })
 
-    // .config(['OAuthProvider', function(OAuthProvider) {
-    //         OAuthProvider.configure({
-    //         baseUrl: 'https://localhost:3000',
-    //         clientId: '303805458100-ih29l4mj4rndhaj8lhfc4bpt0171tifv.apps.googleusercontent.com',
-    //         clientSecret: 'MCdGXSgQRSGl-JcZhpoUWTt2' // optional
-    //     });
-    // }])
-
-    // .run(['$rootScope', '$window', 'OAuth', function($rootScope, $window, OAuth) {
-    //     $rootScope.$on('oauth:error', function(event, rejection) {
-    //         // Ignore `invalid_grant` error - should be catched on `LoginController`.
-    //         if ('invalid_grant' === rejection.data.error) {
-    //             return;
-    //         }
-
-    //         // Refresh token when a `invalid_token` error occurs.
-    //         if ('invalid_token' === rejection.data.error) {
-    //             return OAuth.getRefreshToken();
-    //         }
-
-    //         // Redirect to `/login` with the `error_reason`.
-    //         return $window.location.href = '/login?error_reason=' + rejection.data.error;
-    //     })
-    // }]);
+        app.run(['$http', '$rootScope', '$location', function ($http, $rootScope, $location) {
+            // Usuário logado        
+            $rootScope.isAuthorized = false;
+            $rootScope.user = {
+                name: '',
+                email: ''
+            };
+    
+            // Verifica se não existe um token
+            if (!localStorage.getItem('token')) {
+                localStorage.setItem('token', '');
+            } else {
+                $rootScope.isAuthorized = true;
+              
+            }
+    
+            // Verifica o tema
+            if (!localStorage.getItem('theme')) {
+                localStorage.setItem('theme', 'default');
+                $rootScope.theme = 'default';
+            } else {
+                $rootScope.theme = localStorage.getItem('theme');
+            }
+    
+            $rootScope.$on("$routeChangeStart", function (event, next, current) {
+                if (next.requireLogin && $rootScope.isAuthorized == false) {
+                    $location.path('/account/login');
+                }
+            });
+        }]);
 
 })();
 
