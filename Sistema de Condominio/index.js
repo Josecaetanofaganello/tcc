@@ -4,7 +4,8 @@ var database = require('./config/database');
 
 var porta = 3000;
 
-database('mongodb://teste:teste@127.0.0.1/controlefinanceiro');
+const uri = 'mongodb://teste:teste@127.0.0.1/dbcondominio';
+database(uri);
 
 
 http.createServer(app)
