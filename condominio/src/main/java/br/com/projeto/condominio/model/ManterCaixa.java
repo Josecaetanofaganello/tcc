@@ -1,5 +1,7 @@
 package br.com.projeto.condominio.model;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -19,9 +21,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter @Setter
 @Entity
-@Table(name = "tarefas")
+@Table(name = "caixa")
 @JsonDeserialize
-public class Tarefa {
+public class ManterCaixa implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7840017833127524353L;
 
 	@Id
 	private Long id;
@@ -29,19 +36,19 @@ public class Tarefa {
 	@Column
 	private String descricao;
 	
-	@Column(name = "data_ini")
-	private Date dataInicial;
+	@Column
+	private BigDecimal entrada;
 	
-	@Column(name = "data_fim")
-	private Date dataFinal;
+	@Column
+	private BigDecimal saida;
 	
-	@Column(name = "data_atualizacao")
-	private Date dataAtualizacao;
+	@Column
+	private BigDecimal saldo;
 	
-	@Column(name = "status")
-	private String statusTarefa;
+	@Column
+	private Date data;
 	
-	@Column(name = "responsavel")
-	private String nomeResponsavel;
+	@Column
+	private Date dataInsercao;
 	
 }

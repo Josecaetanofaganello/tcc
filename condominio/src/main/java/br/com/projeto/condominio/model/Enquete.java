@@ -14,34 +14,29 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
 @Entity
-@Table(name = "tarefas")
+@Table(name = "enquete")
 @JsonDeserialize
-public class Tarefa {
+public class Enquete {
 
 	@Id
 	private Long id;
 	
-	@Column
-	private String descricao;
-	
-	@Column(name = "data_ini")
+	@Column(name ="data_ini" )
 	private Date dataInicial;
 	
 	@Column(name = "data_fim")
 	private Date dataFinal;
 	
-	@Column(name = "data_atualizacao")
-	private Date dataAtualizacao;
+	@Column
+	private String assunto;
 	
 	@Column(name = "status")
-	private String statusTarefa;
+	private String statusEnquete;
 	
-	@Column(name = "responsavel")
-	private String nomeResponsavel;
-	
+	@Column(name = "data_criacao")
+	private Date dataCriacao;
 }

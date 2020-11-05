@@ -12,44 +12,44 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.projeto.condominio.model.Usuario;
-import br.com.projeto.condominio.service.impl.UsuarioServiceImpl;
+import br.com.projeto.condominio.model.ManterCaixa;
+import br.com.projeto.condominio.service.ManterCaixaService;
 
 @RestController()
-@RequestMapping(value = "/usuario")
-public class UsuarioController {
+@RequestMapping(value = "/caixa")
+public class ManterCaixaController {
 
 	@Autowired
-	private UsuarioServiceImpl usuarioServiceImpl;
-
+	private ManterCaixaService manterCaixaService;
+	
+	
 	@GetMapping("/pesquisar")
-	public @ResponseBody List<Usuario> buscarUsuario() {
+	public @ResponseBody List<ManterCaixa> buscarCaixa() {
 
-		List<Usuario> usuarios = usuarioServiceImpl.pesquisar();
+		List<ManterCaixa> caixas = manterCaixaService.pesquisar();
 
-		return usuarios;
+		return caixas;
 	}
 	
 	@GetMapping("/consultar/{id}")
-	  public @ResponseBody Usuario consultar(@PathVariable Long id) {
-	    return usuarioServiceImpl.consultar(id);
+	  public @ResponseBody ManterCaixa consultar(@PathVariable Long id) {
+	    return manterCaixaService.consultar(id);
 	  }
 
 	@PostMapping("/salvar")
-	public @ResponseBody String salvar(@RequestBody Usuario usuario) {
-		usuarioServiceImpl.salvar(usuario);
+	public @ResponseBody String salvar(@RequestBody ManterCaixa manterCaixa) {
+		manterCaixaService.salvar(manterCaixa);
 		return "Sucesso";
 	}
 	
 	@PostMapping("/atualizar")
-	public void atualizar(@RequestBody Usuario usuario) {
-		usuarioServiceImpl.atualizar(usuario);
+	public void atualizar(@RequestBody ManterCaixa manterCaixa) {
+		manterCaixaService.atualizar(manterCaixa);
 	}
 	
 	
 	@DeleteMapping("/deletar/{id}")
 	public void deletar(@PathVariable Long id) {
-		usuarioServiceImpl.deletar(id);
+		manterCaixaService.deletar(id);
 	}
-
 }
