@@ -14,8 +14,8 @@ public class EnquenteServiceImpl implements EnqueteService{
 	private EnqueteRepository enqueteRepository;
 
 	@Override
-	public void salvar(Enquete enquete) {
-		enqueteRepository.save(enquete);
+	public Enquete salvar(Enquete enquete) {
+		return enqueteRepository.save(enquete);
 		
 	}
 

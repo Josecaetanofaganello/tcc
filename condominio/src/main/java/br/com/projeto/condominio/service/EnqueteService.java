@@ -5,7 +5,7 @@ import java.util.List;
 import br.com.projeto.condominio.model.Enquete;
 
 public interface EnqueteService {
-	void salvar(Enquete enquete);
+	Enquete salvar(Enquete enquete);
 	Enquete atualizar(Enquete enquete);
     List<Enquete> pesquisar();
     Enquete consultar(Long id);
