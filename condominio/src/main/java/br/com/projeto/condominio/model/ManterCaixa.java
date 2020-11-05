@@ -48,7 +48,7 @@ public class ManterCaixa implements Serializable {
 	@Column
 	private Date data;
 	
-	@Column
+	@Column(name = "datainsercao")
 	private Date dataInsercao;
 	
 }

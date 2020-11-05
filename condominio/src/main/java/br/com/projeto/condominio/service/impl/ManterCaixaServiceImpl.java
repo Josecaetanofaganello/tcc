@@ -16,9 +16,8 @@ public class ManterCaixaServiceImpl implements ManterCaixaService {
 	private ManterCaixaRepository manterCaixaRepository;
 
 	@Override
-	public ManterCaixa salvar(ManterCaixa manterCaixa) {
+	public void salvar(ManterCaixa manterCaixa) {
 		manterCaixaRepository.save(manterCaixa);
-		return null;
 	}
 
 	@Override
