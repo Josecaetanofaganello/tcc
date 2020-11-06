@@ -38,7 +38,7 @@ public class ManterCaixaController {
 
 	@PostMapping("/salvar")
 	public @ResponseBody String salvar(@RequestBody ManterCaixa manterCaixa) {
-		manterCaixaService.salvar(manterCaixa);
+		ManterCaixa caixa = manterCaixaService.salvar(manterCaixa);
 		return "Sucesso";
 	}
 	
