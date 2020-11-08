@@ -1,7 +1,16 @@
 package br.com.projeto.condominio.model;
 
-public class Unidade {
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table
+public class Unidade implements Serializable{
 	
+	private static final long serialVersionUID = 4497780012978226548L;
+
 	private Long id;
 	
 	private String identificacao;
