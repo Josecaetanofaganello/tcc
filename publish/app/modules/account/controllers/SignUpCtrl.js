@@ -5,15 +5,20 @@
         .module('app')
         .controller('SignUpCtrl', SignUpCtrl);
 
-    SignUpCtrl.$inject = ['$scope', 'UserRepository', '$location'];
+    SignUpCtrl.$inject = ['$http','$scope', 'UserRepository', '$location'];
 
-    function SignUpCtrl($scope, UserRepository, $location) {
+    function SignUpCtrl($http,$scope, UserRepository, $location) {
         $scope.signupModel = {
-            name: '',
+            nome: '',
             email: '',
-            password: '',
-            confirmPassword: ''
+            telefone: '',
+            senha: '',
+            apto: '',
+            confirmPassword: '',
+            id: 0
         };
+
+
 
         $scope.signup = function ($event) {
             console.log($event);
@@ -34,5 +39,13 @@
         $scope.matchPassword = function () {
             return $scope.password === $scope.repassword;
         }
+
+        $http({
+            method: 'GET',
+            url: 'http://localhost:8084/usuario/pesquisar/',
+            data: { applicationId: 3 }
+        }).success(function (result) {
+            $scope.aptos = result;
+        });
     }
 })();

@@ -17,13 +17,14 @@
         $scope.authenticate = function () {
             var promise = AuthRepository.getToken($scope.login.email, $scope.login.password).then(
                    function (result) {
-                       localStorage.setItem('token', result.data.access_token);
-                       $rootScope.isAuthorized = true;
-                       UserRepository.setCurrentProfile();
-                       $location.path('/');
+                    localStorage.setItem('tipo', result.tipo);
+                    localStorage.setItem('id', result.id);
+                    $rootScope.isAuthorized = true;
+                    UserRepository.setCurrentProfile(result.id);
+                    $location.path('/');
                    },
                    function (error) {
-                       toastr.error(error.data.error_description, 'Falha na autenticação');
+                       toastr.error(error.responseJSON.message, 'Falha na autenticação');
                    });
         }
     }
