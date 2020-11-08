@@ -10,6 +10,7 @@ public interface UsuarioService {
 	    Usuario atualizar(Usuario usuario);
 	    List<Usuario> pesquisar();
 	    Usuario consultar(Long id);
+	    Usuario autenticar(String username,String password);
 	    void deletar(Long id);
 	   
 }

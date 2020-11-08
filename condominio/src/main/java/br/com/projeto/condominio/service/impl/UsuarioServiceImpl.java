@@ -42,4 +42,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public Usuario consultar(Long id) {
 		return usuarioRepository.findById(id).get();
 	}
+	
+	public Usuario autenticar(String email, String password) {
+	
+		
+		 Usuario user = usuarioRepository.findByemail(email,password);
+		
+		 return user;
+		 
+	}
 }
