@@ -11,7 +11,7 @@ import br.com.projeto.condominio.model.EnqueteUsuario;
 public interface AssembleiaRepository extends JpaRepository<EnqueteUsuario, Long>{
 
 	
-	@Query(" EnqueteUsuario eu where eu.enquete = :idEnquete and eu.usuario = :idUsuario")
-	public List<EnqueteUsuario> findByIds(@Param("idEnquete") Long idEnquete, @Param("idUsuario") Long idUsuario);
+//	@Query(" EnqueteUsuario eu where eu.enquete = :idEnquete and eu.usuario = :idUsuario")
+//	public List<EnqueteUsuario> findByIds(@Param("idEnquete") Long idEnquete, @Param("idUsuario") Long idUsuario);
 		
 }

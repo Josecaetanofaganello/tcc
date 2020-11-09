@@ -49,10 +49,10 @@ public class AssembleiaServiceImpl {
 	}
 	
 	private boolean isInserir(EnqueteUsuario enqueteUsuario) {
-		List<EnqueteUsuario> enqueteUsuarios = assembleiaRepository.findByIds(enqueteUsuario.getEnquete(), enqueteUsuario.getUsuario());
-		if(enqueteUsuarios == null || enqueteUsuarios.isEmpty()) {
-			return true;
-		}
+//		List<EnqueteUsuario> enqueteUsuarios = assembleiaRepository.findByIds(enqueteUsuario.getEnquete(), enqueteUsuario.getUsuario());
+//		if(enqueteUsuarios == null || enqueteUsuarios.isEmpty()) {
+//			return true;
+//		}
 		return false;
 	}
 	
