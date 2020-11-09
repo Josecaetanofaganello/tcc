@@ -17,4 +17,12 @@ public class UnidadeServiceImpl {
 	public List<Unidade> listar(){
 		return unidadeRepository.findAll();
 	}
+	
+	public Unidade salvar(Unidade unidade) {
+		return unidadeRepository.save(unidade);
+	}
+	
+	public void deletar(Long id) {
+		unidadeRepository.deleteById(id);
+	}
 }
