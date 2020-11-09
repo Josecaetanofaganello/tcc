@@ -1,5 +1,6 @@
 package br.com.projeto.condominio.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -21,7 +22,9 @@ import lombok.Setter;
 @Entity
 @Table(name = "tarefas")
 @JsonDeserialize
-public class Tarefa {
+public class Tarefa implements Serializable{
+
+	private static final long serialVersionUID = 4992671923581164455L;
 
 	@Id
 	private Long id;
