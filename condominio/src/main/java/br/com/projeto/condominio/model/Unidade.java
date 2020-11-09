@@ -2,25 +2,28 @@ package br.com.projeto.condominio.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name  = "unidade")
 public class Unidade implements Serializable{
 	
 	private static final long serialVersionUID = 4497780012978226548L;
 
+	@Id
 	private Long id;
-	
+	@Column
 	private String identificacao;
-	
+	@Column
 	private String bloco;
-	
+	@Column
 	private String garagem;
-	
+	@Column
 	private String veiculo;
-	
+	@Column
 	private String proprietario;
 	
 	
