@@ -11,5 +11,6 @@ public interface UsuarioService {
 	    List<Usuario> pesquisar();
 	    Usuario consultar(Long id);
 	    void deletar(Long id);
+	    Usuario autenticar(String username,String password);
 	   
 }
