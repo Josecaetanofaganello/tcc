@@ -17,8 +17,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Usuario salvar(Usuario usuario) {
-		usuarioRepository.save(usuario);
-		return null;
+		
+		if (validaSeEmailJaExiste(usuario.getEmail())) {
+			return null;
+		}
+		
+		return usuarioRepository.save(usuario);
 	}
 
 	@Override
@@ -50,6 +54,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 		
 		 return user;
 		 
+	}
+	
+	public boolean validaSeEmailJaExiste(String email) {
+		Usuario usuario = usuarioRepository.findByEmail(email);
+		
+		return usuario != null;
 	}
 }
 

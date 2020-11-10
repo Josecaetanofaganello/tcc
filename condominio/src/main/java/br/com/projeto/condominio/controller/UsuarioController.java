@@ -17,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.com.projeto.condominio.model.Usuario;
 import br.com.projeto.condominio.service.impl.UsuarioServiceImpl;
+//import br.com.projeto.condominio.utils.JavaMailApp;
 
 @RestController()
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -61,9 +62,14 @@ public class UsuarioController {
 	  }
 
 	@PostMapping("/salvar")
-	public @ResponseBody String salvar(@RequestBody Usuario usuario) {
-		usuarioServiceImpl.salvar(usuario);
-		return "Sucesso";
+	public @ResponseBody Usuario salvar(@RequestBody Usuario usuario) {
+		Usuario usuarioRetorno = usuarioServiceImpl.salvar(usuario);
+		
+		if (usuarioRetorno == null) {
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Usuario já cadastrado!");
+		}
+		usuarioRetorno.setSenha("");
+		return usuarioRetorno;
 	}
 	
 	@PostMapping("/atualizar")
@@ -75,6 +81,13 @@ public class UsuarioController {
 	@DeleteMapping("/deletar/{id}")
 	public void deletar(@PathVariable Long id) {
 		usuarioServiceImpl.deletar(id);
+	}
+	
+	@GetMapping("/envia")
+	public void forgot() {
+//		JavaMailApp mail = new JavaMailApp();
+		
+//		mail.configEmail();
 	}
 
 }
