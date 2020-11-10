@@ -10,9 +10,25 @@
     function AuthRepository($http, $rootScope, UserRepository) {
         return {
             getToken: function (username, password) {
-                var data = "grant_type=password&username=" + username + "&password=" + password;
-                return $http.post("/api/security/token", data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } });
+                var settings = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "http://localhost:8084/usuario/autenticar",
+                    "method": "POST",
+                    "headers": {
+                        "content-type": "application/json",
+                        "authorization": "bearer f3a3a5d0-4fde-4616-bf25-6826f1fd6aed",
+                        "cache-control": "no-cache"
+                    },
+                    "processData": false,
+                    "data": "{\"email\":\"" + username + "\", \"senha\":\"" + password+"\"}"
+                }
+               
+                return $.ajax(settings).done(function (response) {
+                    response
+                });
             }
         };
+        ;
     }
 })();

@@ -28,11 +28,17 @@
     <meta name="msapplication-TileColor" content="#f5f5f5">
 
     <!-- CSS -->
-    <link href="content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />    
-    <link href="content/css/themes/bootstrap-{{ theme }}.min.css" rel="stylesheet" />
+    <link href="content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="content/css/themes/bootstrap-{{theme}}.min.css" rel="stylesheet" />
     <link href="content/vendor/toastr/toastr.min.css" rel="stylesheet" />
     <link href="content/vendor/animate/animate.css" rel="stylesheet" />
     <link href="content/css/custom.css" rel="stylesheet" />
+    <link href="content/vendor/menu/menu.css" rel="stylesheet" />
+    <style type="text/css">
+        .hideAll {
+            visibility: hidden;
+        }
+    </style>
 
     <!-- Old browser support -->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -45,91 +51,125 @@
 </head>
 
 <body role="document">
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#/">NG Todo List</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#/">Home</a></li>
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Configurações <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#/progile">Meu Perfil</a></li>
-                            <li><a href="#/account/change-password">Alterar Senha</a></li>
-                            <li><a href="#/account/logout">Sair</a></li>
-                            <li class="divider"></li>
-                            <li><a href="javascript:void(0)" ng-click="changeTheme('default')">Default</a></li>
-                            <li><a href="javascript:void(0)" ng-click="changeTheme('cerulean')">Cerulean</a></li>
-                            <li><a href="javascript:void(0)" ng-click="changeTheme('cosmo')">Cosmo</a></li>
-                            <li><a href="javascript:void(0)" ng-click="changeTheme('cyborg')">Cyborg</a></li>
-                            <li><a href="javascript:void(0)" ng-click="changeTheme('darkly')">Darkly</a></li>
-                            <li><a href="javascript:void(0)" ng-click="changeTheme('flatly')">Flatly</a></li>
-                            <li><a href="javascript:void(0)" ng-click="changeTheme('journal')">Journal</a></li>
-                            <li><a href="javascript:void(0)" ng-click="changeTheme('lumen')">Lumen</a></li>
-                            <li><a href="javascript:void(0)" ng-click="changeTheme('paper')">Paper</a></li>
-                            <li><a href="javascript:void(0)" ng-click="changeTheme('readable')">Readable</a></li>
-                            <li><a href="javascript:void(0)" ng-click="changeTheme('sandstone')">Sandstone</a></li>
-                            <li><a href="javascript:void(0)" ng-click="changeTheme('symplex')">Symplex</a></li>
-                            <li><a href="javascript:void(0)" ng-click="changeTheme('slate')">Slate</a></li>
-                            <li><a href="javascript:void(0)" ng-click="changeTheme('spacelab')">Space Lab</a></li>
-                            <li><a href="javascript:void(0)" ng-click="changeTheme('superhero')">Super Hero</a></li>
-                            <li><a href="javascript:void(0)" ng-click="changeTheme('united')">United</a></li>
-                            <li><a href="javascript:void(0)" ng-click="changeTheme('yeti')">Yeti</a></li>
+  
+    <div id="main">
+        <div id="tabs" class="hideAll">
+
+
+            <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
+                <div class="container">
+
+                    <div class="navbar-header">
+
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                        <a class="navbar-brand" onclick="openNav()" href="#/">Sistema de Condomínio</a>
+                    </div>
+
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#/">Home</a></li>
+
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Configurações <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#/progile">Meu Perfil</a></li>
+                                    <li><a href="#/account/change-password">Alterar Senha</a></li>
+                                    <li><a onclick="hidenMenu()" href="#/account/logout">Sair</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="javascript:void(0)" ng-click="changeTheme('default')">Default</a></li>
+                                    <li><a href="javascript:void(0)" ng-click="changeTheme('cerulean')">Cerulean</a></li>
+                                    <li><a href="javascript:void(0)" ng-click="changeTheme('cosmo')">Cosmo</a></li>
+                                    <li><a href="javascript:void(0)" ng-click="changeTheme('cyborg')">Cyborg</a></li>
+                                    <li><a href="javascript:void(0)" ng-click="changeTheme('darkly')">Darkly</a></li>
+                                    <li><a href="javascript:void(0)" ng-click="changeTheme('flatly')">Flatly</a></li>
+                                    <li><a href="javascript:void(0)" ng-click="changeTheme('journal')">Journal</a></li>
+                                    <li><a href="javascript:void(0)" ng-click="changeTheme('lumen')">Lumen</a></li>
+                                    <li><a href="javascript:void(0)" ng-click="changeTheme('paper')">Paper</a></li>
+                                    <li><a href="javascript:void(0)" ng-click="changeTheme('readable')">Readable</a></li>
+                                    <li><a href="javascript:void(0)" ng-click="changeTheme('sandstone')">Sandstone</a></li>
+                                    <li><a href="javascript:void(0)" ng-click="changeTheme('symplex')">Symplex</a></li>
+                                    <li><a href="javascript:void(0)" ng-click="changeTheme('slate')">Slate</a></li>
+                                    <li><a href="javascript:void(0)" ng-click="changeTheme('spacelab')">Space Lab</a></li>
+                                    <li><a href="javascript:void(0)" ng-click="changeTheme('superhero')">Super Hero</a></li>
+                                    <li><a href="javascript:void(0)" ng-click="changeTheme('united')">United</a></li>
+                                    <li><a href="javascript:void(0)" ng-click="changeTheme('yeti')">Yeti</a></li>
+                                </ul>
+                            </li>
                         </ul>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </div>
+           
+
+
+            <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="#">About</a>
+                <a href="#">Services</a>
+                <a href="#">Clients</a>
+                <a href="#">Contact</a>
+            </div>
+
+            <div class="container" role="main">
+                <br />
+                <br /><br />
+
+                <div ng-view></div>
+            </div>
+
+            <!-- Base Scripts -->
+            <script src="content/vendor/jquery/jquery-2.1.1.min.js"></script>
+            <script src="content/vendor/bootstrap/bootstrap.min.js"></script>
+            <script src="content/vendor/toastr/toastr.min.js"></script>
+            <script src="content/js/startup.js"></script>
+            <script type="text/javascript">
+                $(window).load(function () {
+                    $("#tabs").removeClass("hideAll");
+                });
+            </script>
+
+            <!-- Angular JS -->
+            <script src="content/vendor/angularjs/angular.min.js"></script>
+            <script src="content/vendor/angularjs/angular-resource.min.js"></script>
+            <script src="content/vendor/angularjs/angular-route.min.js"></script>
+            <script src="content/vendor/angularjs/angular-sanitize.min.js"></script>
+            <script src="content/vendor/angularjs/angular-animate.min.js"></script>
+            <script src="content/vendor/angularjs/angular-cookies.min.js"></script>
+            <script src="content/vendor/angularjs/angular-touch.min.js"></script>
+
+            <!-- External Directives -->
+            <script src="content/vendor/angularjs/directives/ui-bootstrap.min.js"></script>
+            <script src="content/vendor/angularjs/directives/ui-bootstrap-tpls.min.js"></script>
+            <script src="content/vendor/angular-input-masks-standalone.min.js"></script>
+            <script src="content/vendor/angular-input-masks.br.min.js"></script>
+            <script src="content/vendor/menu/menu.js"></script>
+
+
+            <!-- Configuration -->
+            <script src="modules/config.js"></script>
+
+            <!-- Controllers -->
+            <script src="modules/AppCtrl.js"></script>
+            <script src="modules/home/controllers/HomeCtrl.js"></script>
+            <script src="modules/account/controllers/LoginCtrl.js"></script>
+            <script src="modules/account/controllers/LogoutCtrl.js"></script>
+            <script src="modules/account/controllers/SignUpCtrl.js"></script>
+            <script src="modules/account/controllers/AptoCtrl.js"></script>
+            <script src="modules/account/controllers/ForgotPasswordCtrl.js"></script>
+
+            <!-- Repositories -->
+            <script src="repositories/AuthRepository.js"></script>
+            <script src="repositories/UserRepository.js"></script>
+            <script src="repositories/TodoRepository.js"></script>
         </div>
     </div>
-
-    <div class="container" role="main">
-        <br />
-        <br /><br />
-        
-        <div ng-view></div>
-    </div>
-
-    <!-- Base Scripts -->
-    <script src="content/vendor/jquery/jquery-2.1.1.min.js"></script>
-    <script src="content/vendor/bootstrap/bootstrap.min.js"></script>
-    <script src="content/vendor/toastr/toastr.min.js"></script>
-    <script src="content/js/startup.js"></script>
-
-    <!-- Angular JS -->
-    <script src="content/vendor/angularjs/angular.min.js"></script>
-    <script src="content/vendor/angularjs/angular-resource.min.js"></script>
-    <script src="content/vendor/angularjs/angular-route.min.js"></script>
-    <script src="content/vendor/angularjs/angular-sanitize.min.js"></script>
-    <script src="content/vendor/angularjs/angular-animate.min.js"></script>
-    <script src="content/vendor/angularjs/angular-cookies.min.js"></script>
-    <script src="content/vendor/angularjs/angular-touch.min.js"></script>        
-
-    <!-- External Directives -->
-    <script src="content/vendor/angularjs/directives/ui-bootstrap.min.js"></script>
-    <script src="content/vendor/angularjs/directives/ui-bootstrap-tpls.min.js"></script>
-    
-    <!-- Configuration -->
-    <script src="modules/config.js"></script>
-
-    <!-- Controllers -->
-    <script src="modules/AppCtrl.js"></script>
-    <script src="modules/home/controllers/HomeCtrl.js"></script>
-    <script src="modules/account/controllers/LoginCtrl.js"></script>
-    <script src="modules/account/controllers/LogoutCtrl.js"></script>
-    <script src="modules/account/controllers/SignUpCtrl.js"></script>
-    <script src="modules/account/controllers/ForgotPasswordCtrl.js"></script>
-
-    <!-- Repositories -->
-    <script src="repositories/AuthRepository.js"></script>
-    <script src="repositories/UserRepository.js"></script>
-    <script src="repositories/TodoRepository.js"></script>
 </body>
 </html>

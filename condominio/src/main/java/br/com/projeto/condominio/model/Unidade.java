@@ -24,7 +24,7 @@ public class Unidade implements Serializable{
 	@Column
 	private String veiculo;
 	@Column
-	private String proprietario;
+	private Long id_usuario;
 	
 	
 
@@ -68,12 +68,12 @@ public class Unidade implements Serializable{
 		this.veiculo = veiculo;
 	}
 
-	public String getProprietario() {
-		return proprietario;
+	public Long getProprietario() {
+		return id_usuario;
 	}
 
-	public void setProprietario(String proprietario) {
-		this.proprietario = proprietario;
+	public void setProprietario(Long id_usuario) {
+		this.id_usuario = id_usuario;
 	}
 	
 }

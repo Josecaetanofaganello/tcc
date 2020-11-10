@@ -11,7 +11,7 @@
                        class="form-control input-lg"
                        placeholder="Nome"
                        name="name"
-                       ng-model="signupModel.name"
+                       ng-model="signupModel.nome"
                        ng-minlength=6
                        ng-maxlength=20
                        required />
@@ -26,36 +26,60 @@
                        ng-minlength=6
                        ng-maxlength=120
                        required />
-            </div>            
+            </div>
             <div class="form-group">
-                <label for="password">Senha</label>
+                <label for="telefone">Telefone</label>
+                <input type="text" ui-br-phone-number"
+                       class="form-control input-lg"
+                       placeholder="Telefone"
+                       name="telefone"
+                       ng-model="signupModel.telefone"
+                       ng-minlength=6
+                       ng-maxlength=120
+                       required />
+            </div>
+            <div class="form-group">
+                <label for="apto">Apto</label>
+
+             
+                <select ng-model="signupModel.apto"
+                        ng-options="item.id as item.identificacao for item in aptos">
+                    <option value="">Selecione o Apto</option>
+                </select>
+
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="senha">Senha</label>
                 <input type="password"
                        class="form-control input-lg"
                        placeholder="Senha"
-                       name="password"
-                       ng-model="signupModel.password"
+                       name="senha"
+                       ng-model="signupModel.senha"
                        ng-minlength=6
                        ng-maxlength=20
                        required />
             </div>
             <div class="form-group">
-                <label for="repassword">Confirme sua Senha</label>
+                <label for="resenha">Confirme sua Senha</label>
                 <input type="password"
                        class="form-control input-lg"
                        placeholder="Confirme sua Senha"
-                       name="repassword"
-                       ng-model="signupModel.confirmPassword"
+                       name="resenha"
+                       ng-model="signupModel.confirmsenha"
                        ng-minlength=6
                        ng-maxlength=20
                        required />
             </div>
             <br />
             <p class="text-center">
-                <button type="submit" ng-disabled="signup_form.$invalid || signupModel.password != signupModel.confirmPassword" class="btn btn-lg btn-primary" data-loading-text="Aguarde...">Cadastrar</button>
+                <button type="submit" ng-disabled="signup_form.$invalid || signupModel.senha != signupModel.confirmsenha" class="btn btn-lg btn-primary" data-loading-text="Aguarde...">Cadastrar</button>
                 <a href="#/account/login" class="btn btn-lg btn-default">Cancelar</a>
             </p>
 
-            <div class="alert alert-danger" ng-show="signup_form.$invalid && signup_form.$dirty || signupModel.password != signupModel.confirmPassword">
+            <div class="alert alert-danger" ng-show="signup_form.$invalid && signup_form.$dirty || signupModel.senha != signupModel.confirmsenha">
                 <ul>
                     <li ng-show="signup_form.name.$invalid">
                         O nome é requerido e deve conter mais de 6 caracteres.
@@ -63,10 +87,10 @@
                     <li ng-show="signup_form.email.$invalid">
                         O E-mail é requerido e deve ser válido.
                     </li>
-                    <li ng-show="signup_form.password.$invalid">
+                    <li ng-show="signup_form.senha.$invalid">
                         A senha é obrigatória e deve conter pelo menos 6 caracteres.
                     </li>
-                    <li ng-hide="signupModel.password === signupModel.confirmPassword">
+                    <li ng-hide="signupModel.senha === signupModel.confirmsenha">
                         A senhas digitadas não coincidem.
                     </li>
                 </ul>
