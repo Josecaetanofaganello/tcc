@@ -1,10 +1,14 @@
 package br.com.projeto.condominio.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -47,6 +51,12 @@ public class Usuario implements Serializable{
 	private String apto;
 	@Column 
 	private String bloco;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id")
+	private List<Pagamento> pagamentos;
+	
+	
 	public Long getId() {
 		return id;
 	}
