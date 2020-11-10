@@ -10,7 +10,7 @@
     function HomeCtrl($scope, $http, TodoRepository) {
         $scope.todo = {
             id: 0,
-            text: '',
+            nome: '',
             done: false
         }
 
