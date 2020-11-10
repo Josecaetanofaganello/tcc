@@ -39,7 +39,7 @@ public class UnidadeController {
 	
 	@DeleteMapping
 	public void deletar(Long id) {
-		
+		unidadeServiceImpl.deletar(id);
 	}
 	
 }
