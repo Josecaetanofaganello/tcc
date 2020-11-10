@@ -3,6 +3,7 @@ package br.com.projeto.condominio.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import br.com.projeto.condominio.model.EnqueteUsuario;
 import br.com.projeto.condominio.service.impl.AssembleiaServiceImpl;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/assembleia")
 public class AssembleiaController {
 

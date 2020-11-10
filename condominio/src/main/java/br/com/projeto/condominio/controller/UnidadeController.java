@@ -3,6 +3,7 @@ package br.com.projeto.condominio.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -14,6 +15,7 @@ import br.com.projeto.condominio.model.Unidade;
 import br.com.projeto.condominio.service.impl.UnidadeServiceImpl;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/unidade")
 public class UnidadeController {
 	

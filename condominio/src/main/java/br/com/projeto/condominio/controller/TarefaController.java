@@ -3,6 +3,7 @@ package br.com.projeto.condominio.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import br.com.projeto.condominio.model.Tarefa;
 import br.com.projeto.condominio.service.impl.TarefaServiceImpl;
 
 @RestController()
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/tarefa")
 public class TarefaController {
 	
