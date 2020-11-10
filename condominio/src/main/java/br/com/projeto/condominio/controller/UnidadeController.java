@@ -16,7 +16,6 @@ import br.com.projeto.condominio.model.Unidade;
 import br.com.projeto.condominio.service.impl.UnidadeServiceImpl;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/unidade")
 public class UnidadeController {
 	
