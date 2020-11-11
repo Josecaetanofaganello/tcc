@@ -3,11 +3,13 @@ package br.com.projeto.condominio.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.projeto.condominio.model.Enquete;
 import br.com.projeto.condominio.repository.EnqueteRepository;
 import br.com.projeto.condominio.service.EnqueteService;
 
+@Service
 public class EnquenteServiceImpl implements EnqueteService{
 
 	@Autowired

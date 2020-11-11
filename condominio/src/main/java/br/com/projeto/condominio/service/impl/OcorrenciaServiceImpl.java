@@ -3,11 +3,13 @@ package br.com.projeto.condominio.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.projeto.condominio.model.Ocorrencia;
 import br.com.projeto.condominio.repository.OcorrenciaRepository;
 import br.com.projeto.condominio.service.OcorrenciaService;
 
+@Service
 public class OcorrenciaServiceImpl implements OcorrenciaService {
 
 	@Autowired
