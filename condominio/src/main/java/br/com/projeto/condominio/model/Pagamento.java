@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -17,7 +18,8 @@ public class Pagamento {
 	@Id
 	private Long id;
 	
-	@ManyToOne
+	@ManyToOne()
+	@JoinColumn(name = "id_usuario")
 	private Usuario idUsuario;
 	
 	@Column
