@@ -52,7 +52,7 @@ public class Usuario implements Serializable{
 	@Column 
 	private String bloco;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany
 	@JoinColumn(name = "id")
 	private List<Pagamento> pagamentos;
 	
