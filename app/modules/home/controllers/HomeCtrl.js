@@ -1,5 +1,5 @@
 ﻿(function () {
-    'use strict';
+    //'use strict';
 
     angular
         .module('app')
@@ -25,6 +25,22 @@
             });
             return count;
         };
+
+        $scope.user = function () {
+            loadUser();
+            return $scope.usuario.nome;
+        }
+
+         function loadUser() {
+            $scope.usuario = {
+                id: localStorage.getItem('id'),
+                nome: localStorage.getItem('nome'),
+                email: localStorage.getItem('email'),
+                tipo: localStorage.getItem('tipo')
+            } ;
+        };
+              
+
 
         $scope.save = function (todo) {
             if (todo.id == 0) {
@@ -60,10 +76,13 @@
         function New() {
             $scope.todo = {
                 id: 0,
-                text: '',
+                nome: '',
                 done: false
             }
         }
+
+
+
 
         function Load() {
             if (navigator.onLine) {
