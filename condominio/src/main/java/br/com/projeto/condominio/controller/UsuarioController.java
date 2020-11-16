@@ -32,6 +32,7 @@ public class UsuarioController {
 	public @ResponseBody List<Usuario> buscarUsuario() {
 
 		List<Usuario> usuarios = usuarioServiceImpl.pesquisar();
+		
 
 		return usuarios;
 	}
@@ -40,9 +41,9 @@ public class UsuarioController {
 	public @ResponseBody Usuario autenticar(@RequestBody Usuario usuario) {
 
 		Usuario isValid = usuarioServiceImpl.autenticar(usuario.getEmail(),usuario.getSenha());
-		isValid.setSenha("");
+		
 		if(isValid!= null) {
-			
+			isValid.setSenha("");
 			return isValid;
 		}else {
 		 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Senha ou Usuario Incorretos!");

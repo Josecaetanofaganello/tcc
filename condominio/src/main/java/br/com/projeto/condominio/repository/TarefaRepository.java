@@ -6,4 +6,5 @@ import br.com.projeto.condominio.model.Tarefa;
 
 public interface TarefaRepository extends JpaRepository<Tarefa, Long>{
 
+	Tarefa findById(long id);
 }

@@ -52,14 +52,7 @@ public class Usuario implements Serializable{
 	@Column 
 	private String bloco;
 	
-	@OneToMany
-	@JoinColumn(name = "id")
-	private List<Pagamento> pagamentos;
-	
-	@OneToMany
-	@JoinColumn(name = "id")
-	private List<Ocorrencia> occorrencias;
-	
+
 	
 	public Long getId() {
 		return id;

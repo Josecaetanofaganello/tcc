@@ -28,8 +28,9 @@ public class Ocorrencia implements Serializable {
 	@Column
 	private String status;
 	
-	@ManyToOne
-	private Usuario usuario;
+	
+	@Column
+	private Usuario usuario_id;
 	
 	@Column
 	private String notificacao;
@@ -70,11 +71,11 @@ public class Ocorrencia implements Serializable {
 	}
 
 	public Usuario getUsuario() {
-		return usuario;
+		return usuario_id;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUsuario(Usuario usuario_id) {
+		this.usuario_id = usuario_id;
 	}
 
 	public String getNotificacao() {

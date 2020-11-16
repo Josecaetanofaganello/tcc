@@ -21,8 +21,25 @@ public class TarefaServiceImpl implements TarefaService{
 	}
 
 	@Override
-	public Tarefa atualizar(Tarefa tarefa) {
-		return tarefaRepository.saveAndFlush(tarefa);
+	public List<Tarefa> atualizar(List<Tarefa> tarefa) {
+		
+		int contador = 0;
+		for	(Tarefa item : tarefa) {
+			
+			if(item.getId() > 0) {
+			   tarefaRepository.saveAndFlush(item);	
+			   contador ++;
+			}else {
+				tarefaRepository.save(item);
+			   contador ++;
+			}		
+		}
+		if(contador== tarefa.size()) {
+			return tarefa;
+		}
+		return null;
+		
+		
 	}
 
 	@Override

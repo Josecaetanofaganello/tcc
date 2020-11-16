@@ -25,7 +25,7 @@ public class Pagamento {
 	@Column
 	private String status;
 	
-	@Column
+	@Column (name = "periodo_referencia")
 	private Date peridoReferencia;
 	
 	@Column

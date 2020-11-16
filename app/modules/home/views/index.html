@@ -2,13 +2,13 @@
     <div class="pos-f-t">
         <div class="collapse" id="navbarToggleExternalContent">
             <div class="bg-dark p-4">
-                <h5 class="text-white h4">Conteúdo expandido</h5>
-                <span class="text-muted">Expansível, atráves da marca no navbar.</span>
+                <h5 class="text-white h4">Conteúdo de Ajuda da Página</h5>
+                <span class="text-muted">Nessa tela você pode registrar tarefas, controlalas atraves do marcador de seleção assim que a mesma estiver pronta, poderá também editar  ou apagar as mesmas.</span>
             </div>
         </div>
         <nav class="navbar navbar-dark bg-dark">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Alterna navegação">
-                <span class="navbar-toggler-icon"></span>
+              <i class="fa fa-info-circle"></i>  <span class="navbar-toggler-icon"></span>
             </button>
         </nav>
     </div>
@@ -28,7 +28,7 @@
             <div class="col-md-4 pull-left">
                 <div class="input-group">
                     <input type="hidden" value="{{ todo.id}}" />
-                    <input type="text" class="form-control" placeholder="Tarefa" ng-model="todo.nome" />
+                    <input type="text" class="form-control" placeholder="Tarefa" ng-model="todo.descricao" />
                     <span class="input-group-btn">
                         <button class="btn btn-primary" ng-show="todo.id == 0" ng-click="save(todo)"><i class="fa fa-plus"></i></button>
                     </span>
@@ -43,12 +43,15 @@
         <ul class="list-unstyled" ng-repeat="todo in todos | filter: search">
             <li class="todo-item">
                 <input type="hidden" value="{{ todo.id}}" />
-                <input type="checkbox" ng-model="todo.done"> -
-                <span class="todo-{{ todo.done }}">{{ todo.nome }}</span>
+                <input type="checkbox" ng-model="todo.statusTarefa"> 
+                <input type="text" ng-model="todo.descricao" value="{{ todo.descricao }}" /> 
+                <input type="datetime-local" value="{{ todo.dataInicial }}" /> -
+                <input type="datetime-local" ng-model="todo.dataFinal" md-placeholder="yyyy-MM-dd HH:mm:ss" min="2020-01-01 00:00:00" max="2050-12-31 00:00:00" required /> 
                 <div class="btn-group pull-right">
                     <button class="btn btn-danger btn-sm" ng-click="delete(todo)"><i class="fa fa-remove"></i></button>
                 </div>
             </li>
         </ul>
+      
     </div>
 </div>
