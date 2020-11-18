@@ -49,6 +49,7 @@
         // Verifica se não existe um token
         if (!localStorage.getItem('token')) {
             localStorage.setItem('token', '');
+
         } else {
             $rootScope.isAuthorized = true;
             UserRepository.setCurrentProfile(localStorage.getItem('id'));
