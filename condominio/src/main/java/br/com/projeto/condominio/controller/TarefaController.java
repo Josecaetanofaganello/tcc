@@ -22,8 +22,9 @@ import org.springframework.web.server.ResponseStatusException;
 import br.com.projeto.condominio.model.Tarefa;
 import br.com.projeto.condominio.service.impl.TarefaServiceImpl;
 
-@RestController()
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@RestController()
+
 @RequestMapping(value = "/tarefa")
 public class TarefaController {
 	
@@ -53,11 +54,11 @@ public class TarefaController {
 	}
 	
 	@PostMapping("/atualizar")
-	public @ResponseBody String atualizar(@RequestBody List<Tarefa> tarefa) {
+	public @ResponseBody List<Tarefa> atualizar(@RequestBody List<Tarefa> tarefa) {
 		List<Tarefa> tarefas =tarefaServiceImpl.atualizar(tarefa);
 		if(tarefas != null) {
 			
-			return "sucesso";
+			return tarefas;
 		}else
 		  throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Falha ao persistir algum dos elementos");
 		
@@ -66,7 +67,8 @@ public class TarefaController {
 	
 	
 	@DeleteMapping("/deletar/{id}")
-	public void deletar(@PathVariable Long id) {
+	public  @ResponseBody String deletar(@PathVariable Long id) {
 		tarefaServiceImpl.deletar(id);
+		return "sucesso";
 	}
 }

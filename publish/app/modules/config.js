@@ -51,7 +51,7 @@
             localStorage.setItem('token', '');
         } else {
             $rootScope.isAuthorized = true;
-            UserRepository.setCurrentProfile();
+            UserRepository.setCurrentProfile(localStorage.getItem('id'));
         }
 
         // Verifica o tema

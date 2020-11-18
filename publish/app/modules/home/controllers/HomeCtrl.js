@@ -15,8 +15,8 @@
             dataFinal: null,
             dataAtualizacao: null,
             statusTarefa: false,
-            nomeResponsavel:'',
-          
+            nomeResponsavel: '',
+
         }
 
         $scope.todos = [];
@@ -36,19 +36,19 @@
             return $scope.usuario.nome;
         }
 
-         function loadUser() {
+        function loadUser() {
             $scope.usuario = {
                 id: localStorage.getItem('id'),
                 nome: localStorage.getItem('nome'),
                 email: localStorage.getItem('email'),
                 tipo: localStorage.getItem('tipo')
-            } ;
+            };
         };
-              
+
 
 
         $scope.save = function (todo) {
-            if (todo.id == 0) {
+            if (todo.id == 0 && todo.descricao != '') {
                 Save($scope.todo);
             } else {
                 Edit();
@@ -67,16 +67,17 @@
         $scope.delete = function (todo) {
             toastr.error("<br /><br /><button type='button' id='confirmationRevertYes' class='btn clear'>Yes</button>", 'Deseja realmente apagar?',
                 {
-                    
+
                     allowHtml: true,
                     onShown: function (toast) {
                         $("#confirmationRevertYes").click(function () {
+                            Delete(todo);
                             var index = $scope.todos.indexOf(todo)
                             $scope.todos.splice(index, 1);
                         });
                     }
                 });
-            
+
         }
 
         $scope.sync = function () {
@@ -85,8 +86,21 @@
 
         function Save(item) {
             //item.id = $scope.todos.length + 1;
-            item.dataInicial = Date.now();
+
             $scope.todos.push(item);
+        }
+
+        function Delete(item) {
+            TodoRepository
+                .delete(item)
+                .then(
+                    function (result) {
+
+                        toastr.info(result.data, "Deletado com sucesso!")
+                    },
+                    function (error) {
+                        toastr.error(error.data, "Falha na requisição");
+                    });
         }
 
         function New() {
@@ -107,8 +121,10 @@
         function Load() {
             if (navigator.onLine) {
                 ReadCloud();
+                document.getElementById("mySidenav").style.visibility = "visible";
             } else {
                 ReadLocal();
+                document.getElementById("mySidenav").style.visibility = "visible";
             }
         }
 
@@ -139,7 +155,7 @@
                             result.data[i].dataInicial = result.data[i].dataInicial.replace(' ', 'T');
                             result.data[i].dataFinal = result.data[i].dataFinal.replace(' ', 'T');
                         }
-                     $scope.todos = result.data;
+                        $scope.todos = result.data;
                     },
                     function (error) {
                         toastr.error(error.data, "Falha na requisição");

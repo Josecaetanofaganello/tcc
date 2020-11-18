@@ -42,7 +42,7 @@
 
         $http({
             method: 'GET',
-            url: 'http://localhost:8084/unidade/listar/',
+            url: 'http://localhost:8084/unidade/listar',
             data: { applicationId: 3 }
         }).success(function (result) {
             $scope.aptos = result;

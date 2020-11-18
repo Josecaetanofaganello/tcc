@@ -26,6 +26,10 @@
 
                 return $http.post("http://localhost:8084/tarefa/atualizar", todos, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } });
             },
+            delete: function (item) {
+                return $http.delete("http://localhost:8084/tarefa/deletar/" + item.id, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
+
+            },
         };
     }
 })();

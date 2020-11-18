@@ -30,7 +30,9 @@ public class TarefaServiceImpl implements TarefaService{
 			   tarefaRepository.saveAndFlush(item);	
 			   contador ++;
 			}else {
-				tarefaRepository.save(item);
+				Tarefa tar =tarefaRepository.save(item);
+				tarefaRepository.flush();
+			long teste =	item.getId();
 			   contador ++;
 			}		
 		}
