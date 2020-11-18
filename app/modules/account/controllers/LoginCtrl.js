@@ -19,7 +19,6 @@
                    function (result) {
                     localStorage.setItem('tipo', result.tipo);
                     localStorage.setItem('id', result.id);
-                    localStorage.setItem('nome', result.nome);
                     $rootScope.isAuthorized = true;
                     UserRepository.setCurrentProfile(result.id);
                     $location.path('/');

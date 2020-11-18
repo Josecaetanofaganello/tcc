@@ -43,12 +43,13 @@
         <ul class="list-unstyled" ng-repeat="todo in todos | filter: search">
             <li class="todo-item">
                 <input type="hidden" value="{{ todo.id}}" />
-                <input type="checkbox" ng-model="todo.statusTarefa"> 
-                <input type="text" ng-model="todo.descricao" value="{{ todo.descricao }}" /> 
-                <input type="datetime-local" value="{{ todo.dataInicial }}" /> -
-                <input type="datetime-local" ng-model="todo.dataFinal" md-placeholder="yyyy-MM-dd HH:mm:ss" min="2020-01-01 00:00:00" max="2050-12-31 00:00:00" required /> 
+                <input type="checkbox" ng-model="todo.statusTarefa">
+                <input type="text" ng-model="todo.descricao" value="{{ todo.descricao }}" />
+                <input type="datetime-local"  ng-model="todo.dataInicial" value="{{ todo.dataInicial }}  md-placeholder="dd-MM-yyyy HH:mm:ss" min="01-01-2020 00:00:00" max="01-12-2050 23:59:59" required" step="1"/> 
+                <input type="datetime-local" ng-model="todo.dataFinal"  value="{{ todo.dataFinal }} md-placeholder="dd-MM-yyyy HH:mm:ss" min="01-01-2020 00:00:00" max="01-12-2050 23:59:59" required" step="1"/>
+                <input type="text" ng-model="todo.nomeResponsavel" value="{{ todo.nomeResponsavel }}" />
                 <div class="btn-group pull-right">
-                    <button class="btn btn-danger btn-sm" ng-click="delete(todo)"><i class="fa fa-remove"></i></button>
+                <button class="btn btn-danger btn-sm" ng-click="delete(todo)"><i class="fa fa-remove"></i></button>
                 </div>
             </li>
         </ul>

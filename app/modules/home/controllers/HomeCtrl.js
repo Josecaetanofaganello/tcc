@@ -65,8 +65,18 @@
         }
 
         $scope.delete = function (todo) {
-            var index = $scope.todos.indexOf(todo)
-            $scope.todos.splice(index, 1);
+            toastr.error("<br /><br /><button type='button' id='confirmationRevertYes' class='btn clear'>Yes</button>", 'Deseja realmente apagar?',
+                {
+                    
+                    allowHtml: true,
+                    onShown: function (toast) {
+                        $("#confirmationRevertYes").click(function () {
+                            var index = $scope.todos.indexOf(todo)
+                            $scope.todos.splice(index, 1);
+                        });
+                    }
+                });
+            
         }
 
         $scope.sync = function () {
