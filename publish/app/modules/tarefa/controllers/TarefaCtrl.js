@@ -82,6 +82,7 @@
 
         $scope.sync = function () {
             Sync();
+            location.reload();
         }
 
         function Save(item) {

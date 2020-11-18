@@ -16,6 +16,11 @@
                 templateUrl: 'modules/account/views/login.html',
                 requireLogin: false
             })
+            .when('/tarefa', {
+                controller: 'TarefaCtrl',
+                templateUrl: 'modules/tarefa/views/tarefa.html',
+                requireLogin: true
+            })
             .when('/account/logout', {
                 controller: 'LogoutCtrl',
                 templateUrl: 'modules/account/views/logout.html',
