@@ -67,7 +67,7 @@ public class UsuarioController {
 		Usuario usuarioRetorno = usuarioServiceImpl.salvar(usuario);
 		
 		if (usuarioRetorno == null) {
-			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Usuario já cadastrado!");
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Email já cadastrado!");
 		}
 		usuarioRetorno.setSenha("");
 		return usuarioRetorno;

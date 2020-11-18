@@ -25,6 +25,7 @@
                     UserRepository.setCurrentProfile(result.id);
                     $location.path('/');
                     document.getElementById("mySidenav").style.visibility = "visible";
+                    openNav();
                    },
                    function (error) {
                        toastr.error(error.responseJSON.message, 'Falha na autenticação');

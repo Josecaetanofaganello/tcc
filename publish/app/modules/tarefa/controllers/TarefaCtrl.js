@@ -3,11 +3,11 @@
 
     angular
         .module('app')
-        .controller('HomeCtrl', HomeCtrl);
+        .controller('TarefaCtrl', TarefaCtrl);
 
-    HomeCtrl.$inject = ['$scope', '$http', 'TodoRepository'];
+    TarefaCtrl.$inject = ['$scope', '$http', 'TodoRepository'];
 
-    function HomeCtrl($scope, $http, TodoRepository) {
+    function TarefaCtrl($scope, $http, TodoRepository) {
         $scope.todo = {
             id: 0,
             descricao: '',

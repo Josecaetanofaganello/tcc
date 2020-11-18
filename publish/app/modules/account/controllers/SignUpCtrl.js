@@ -25,10 +25,11 @@
             UserRepository.register($scope.signupModel).then(
                 function (result) {
                     toastr.success(result, 'Cadastro efetuado com sucesso');
+                    openNav();
                     $location.path('/signup-success');
                 },
                 function (error) {
-                    toastr.error(error.data, 'Falha no registro');
+                    toastr.error(error.data.message, 'Falha no registro');
                 });
         }
 
