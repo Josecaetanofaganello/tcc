@@ -1,6 +1,9 @@
 package br.com.projeto.condominio.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,25 +23,35 @@ public class TarefaServiceImpl implements TarefaService{
 		tarefaRepository.save(tarefa);
 	}
 
+	@Transactional
 	@Override
 	public List<Tarefa> atualizar(List<Tarefa> tarefa) {
 		
+		Long id = 0L;
+		
 		int contador = 0;
+		Tarefa tarefaRetorno;
+		List<Tarefa> listaRetorno = new ArrayList<Tarefa>();
 		for	(Tarefa item : tarefa) {
+			tarefaRetorno = new Tarefa();
 			
 			if(item.getId() > 0) {
-			   tarefaRepository.saveAndFlush(item);	
+			  tarefaRetorno = tarefaRepository.saveAndFlush(item);	
 			   contador ++;
 			}else {
-			  tarefaRepository.save(item);
-			  tarefaRepository.flush();
+				id = tarefaRepository.buscarUltimoId();
+				id = (id == null ? 1 : id + 1);
+				item.setId(id);
+				tarefaRetorno = tarefaRepository.save(item);
+//				tarefaRepository.flush();
+			long teste =	item.getId();
 			   contador ++;
-			}		
+			}
+			
+			listaRetorno.add(tarefaRetorno);
 		}
-		if(contador== tarefa.size()) {
-			return tarefa;
-		}
-		return null;
+		
+		return listaRetorno;
 		
 		
 	}
