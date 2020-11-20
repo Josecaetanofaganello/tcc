@@ -3,20 +3,19 @@
 
     angular
         .module('app')
-        .controller('TarefaCtrl', TarefaCtrl);
+        .controller('AssembleiaCtrl', AssembleiaCtrl);
 
-    TarefaCtrl.$inject = ['$scope', '$http', 'TodoRepository'];
+    AssembleiaCtrl.$inject = ['$scope', '$http', 'AssembleiaRepository'];
 
-    function TarefaCtrl($scope, $http, TodoRepository) {
+    function AssembleiaCtrl($scope, $http, AssembleiaRepository) {
         $scope.todo = {
             id: 0,
-            descricao: '',
+            assunto: '',
             dataInicial: null,
             dataFinal: null,
             dataAtualizacao: null,
-            statusTarefa: false,
-            nomeResponsavel: '',
-
+            statusEnquete: false,
+            dataCriacao: null,
         }
 
         $scope.todos = [];
@@ -24,6 +23,14 @@
         Load();
 
         $scope.remaining = function () {
+            var count = 0;
+            angular.forEach($scope.todos, function (todo) {
+                count += todo.statusTarefa ? 0 : 1;
+            });
+            return count;
+        };
+
+        $scope.remainingVote = function () {
             var count = 0;
             angular.forEach($scope.todos, function (todo) {
                 count += todo.statusTarefa ? 0 : 1;
@@ -48,7 +55,7 @@
 
 
         $scope.save = function (todo) {
-            if (todo.id == 0 && todo.descricao != '') {
+            if (todo.id == 0 && todo.assunto != '') {
                 Save($scope.todo);
             } else {
                 Edit();
@@ -92,7 +99,7 @@
         }
 
         function Delete(item) {
-            TodoRepository
+            AssembleiaRepository
                 .delete(item)
                 .then(
                     function (result) {
@@ -107,12 +114,12 @@
         function New() {
             $scope.todo = {
                 id: 0,
-                descricao: '',
-                dataInicial: Date.now(),
+                assunto: '',
+                dataInicial: Date.now,
                 dataFinal: null,
                 dataAtualizacao: null,
-                statusTarefa: false,
-                nomeResponsavel: '',
+                statusEnquete: false,
+                dataCriacao: null,
             }
         }
 
@@ -148,7 +155,29 @@
         }
 
         function ReadCloud() {
-            TodoRepository
+            AssembleiaRepository
+                .getTodos()
+                .then(
+                    function (result) {
+                        for (let i = 0; i < result.data.length; i = i + 1) {
+
+                            result.data[i].dataInicial = result.data[i].dataInicial.replace(' ', 'T');
+
+                            if (result.data[i].dataFinal != null) {
+                                result.data[i].dataFinal = result.data[i].dataFinal.replace(' ', 'T');
+                            }
+                        }
+                        $scope.todos = result.data;
+                    },
+                    function (error) {
+                        toastr.error(error.data, "Falha na requisição");
+                    });
+        }
+
+
+
+        function ReadVote() {
+            AssembleiaRepository
                 .getTodos()
                 .then(
                     function (result) {
@@ -164,14 +193,17 @@
         }
 
         function SaveCloud() {
-            TodoRepository
+            AssembleiaRepository
                 .sync($scope.todos)
                 .then(
                     function (result) {
 
                         for (let i = 0; i < $scope.todos.length; i = i + 1) {
+
                             $scope.todos[i].dataInicial = $scope.todos[i].dataInicial.replace(' ', 'T');
-                            $scope.todos[i].dataFinal = $scope.todos[i].dataFinal.replace(' ', 'T');
+                            if (result.data[i].dataFinal != null) {
+                                result.data[i].dataFinal = result.data[i].dataFinal.replace(' ', 'T');
+                            }
                         }
                         toastr.info(result.data, "Sincronização completa")
                     },

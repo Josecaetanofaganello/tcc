@@ -21,6 +21,11 @@
                 templateUrl: 'modules/tarefa/views/tarefa.html',
                 requireLogin: true
             })
+            .when('/assembleia', {
+                controller: 'AssembleiaCtrl',
+                templateUrl: 'modules/assembleia/views/assembleia.html',
+                requireLogin: true
+            })
             .when('/account/logout', {
                 controller: 'LogoutCtrl',
                 templateUrl: 'modules/account/views/logout.html',

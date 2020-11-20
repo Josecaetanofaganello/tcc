@@ -1,0 +1,60 @@
+﻿<div class="row">
+    <div class="pos-f-t">
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-dark p-4">
+                <h5 class="text-white h4">Conteúdo de Ajuda da Página</h5>
+                <span class="text-muted">Nessa tela você pode registrar tarefas, controlalas atraves do marcador de seleção assim que a mesma estiver pronta, poderá também editar  ou apagar as mesmas.</span>
+            </div>
+        </div>
+        <nav class="navbar navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Alterna navegação">
+              <i class="fa fa-info-circle"></i>  <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+    </div>
+    <div class="col-md-12">
+        <div class="btn-group pull-right">
+            <a href="/app" class="btn btn-primary btn-lg"><i class="fa fa-refresh"></i></a>
+            <button class="btn btn-primary btn-lg" ng-click="sync()"><i class="fa fa-save"></i></button>
+        </div>
+        <h3>Olá, <small>{{user()}}</small></h3>
+        <p id="assembleia-voto">Você tem <big><strong><em>{{ remaining() }}</em></strong></big> enquetes pendentes de voto! </p>
+        <p id="assembleia-manter">Você tem <big><strong><em>{{ remaining() }}</em></strong></big> enquetes criadas! </p>
+</div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-4 pull-left">
+                <div class="input-group">
+                    <input type="hidden" value="{{ todo.id}}" />
+                    <input type="text" class="form-control" placeholder="Tarefa" ng-model="todo.assunto" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" ng-show="todo.id == 0" ng-click="save(todo)"><i class="fa fa-plus"></i></button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4 pull-right">
+                <input type="text" class="form-control" placeholder="Filtrar" ng-model="search" />
+            </div>
+        </div>
+
+        <br />
+        <ul class="list-unstyled" ng-repeat="todo in todos | filter: search">
+            <li class="todo-item">
+                <input type="hidden" value="{{ todo.id}}"/>
+                <input type="checkbox" ng-model="todo.statusTarefa">
+                <input type="text" ng-model="todo.assunto" value="{{ todo.assunto }}" />
+                <input type="datetime-local"  ng-model="todo.dataInicial" value="{{ todo.dataInicial }}  md-placeholder="dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required" /> 
+                <input type="datetime-local" ng-model="todo.dataFinal"  value="{{ todo.dataFinal }} md-placeholder="dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required"/>
+                <input type="text" ng-model="todo.dataCriacao" value="{{ todo.dataCriacao }}" />
+               
+                <div class="btn-group pull-right">
+                <button class="btn btn-danger btn-sm" ng-click="delete(todo)"><i class="fa fa-remove"></i></button>
+                </div>
+            </li>
+        </ul>
+      
+    </div>
+</div>

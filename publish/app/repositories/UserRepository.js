@@ -34,7 +34,11 @@
             },
             resetPassword: function (email) {
                 return $http.post($rootScope.baseUrl +"/api/account/resetpassword", email, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } });
-            }
+            },
+            loadAptos: function () {
+                return $http.get($rootScope.baseUrl + "/unidade/listar" , { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
+
+            },
         };
 
         function ClearUserData() {

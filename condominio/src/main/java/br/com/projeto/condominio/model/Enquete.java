@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import lombok.AllArgsConstructor;
@@ -25,9 +26,11 @@ public class Enquete {
 	@Id
 	private Long id;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	@Column(name ="data_ini" )
 	private Date dataInicial;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	@Column(name = "data_fim")
 	private Date dataFinal;
 	
@@ -37,6 +40,7 @@ public class Enquete {
 	@Column(name = "status")
 	private String statusEnquete;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	@Column(name = "data_criacao")
 	private Date dataCriacao;
 

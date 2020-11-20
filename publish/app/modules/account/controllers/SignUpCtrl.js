@@ -18,7 +18,7 @@
             id: 0
         };
 
-
+        ReadAptos();
 
         $scope.signup = function ($event) {
             console.log($event);
@@ -39,14 +39,19 @@
 
         $scope.matchPassword = function () {
             return $scope.password === $scope.repassword;
-        }
+        };
+            
 
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8084/unidade/listar',
-            data: { applicationId: 3 }
-        }).success(function (result) {
-            $scope.aptos = result;
-        });
+        function ReadAptos() {
+            UserRepository
+                .loadAptos()
+                .then(
+                    function (result) {
+                        $scope.aptos = result.data;
+                    },
+                    function (error) {
+                        toastr.error(error.data, "Falha na requisição de lista de aptos");
+                    });
+        }
     }
 })();
