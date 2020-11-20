@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\publish",
+    "\\publish\\app",
+    "\\publish\\app\\jsonserver",
+    "\\publish\\app\\modules",
+    "\\publish\\app\\modules\\tarefa",
+    "\\publish\\app\\modules\\tarefa\\controllers",
+    "\\publish\\app\\modules\\unidades",
+    "\\publish\\app\\modules\\vagas",
+    "\\publish\\app\\repositories"
+  ],
+  "SelectedNode": "\\publish\\app\\index.html",
+  "PreviewInSolutionExplorer": false
+}

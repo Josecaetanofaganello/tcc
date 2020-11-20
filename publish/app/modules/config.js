@@ -46,6 +46,7 @@
     app.run(['$http', '$rootScope', '$location', 'UserRepository', function ($http, $rootScope, $location, UserRepository) {
         // Usuário logado        
         $rootScope.isAuthorized = false;
+        $rootScope.baseUrl = 'http://localhost:8084';
         $rootScope.user = {
             name: '',
             email: ''

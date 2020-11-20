@@ -10,7 +10,7 @@
     function UserRepository($http, $rootScope, $location) {
         return {
             setCurrentProfile: function (id) {
-                return $http.get("http://localhost:8084/usuario/consultar/" + id, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
+                return $http.get($rootScope.baseUrl+"/usuario/consultar/" + id, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
                     .then(
                         function (result) {
                             $rootScope.user = {
@@ -30,10 +30,10 @@
                 ClearUserData();
             },
             register: function (user) {
-                return $http.post("http://localhost:8084/usuario/salvar", user, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } });
+                return $http.post($rootScope.baseUrl +"/usuario/salvar", user, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } });
             },
             resetPassword: function (email) {
-                return $http.post("/api/account/resetpassword", email, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } });
+                return $http.post($rootScope.baseUrl +"/api/account/resetpassword", email, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } });
             }
         };
 

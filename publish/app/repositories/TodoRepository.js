@@ -10,7 +10,7 @@
     function TodoRepository($http, $rootScope, $location) {
         return {
             getTodos: function () {
-                return $http.get("http://localhost:8084/tarefa/pesquisar", { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
+                return $http.get($rootScope.baseUrl +"/tarefa/pesquisar", { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
                     
              
 
@@ -18,16 +18,20 @@
             },
             sync: function (todos) {
                 for (let i = 0; i < todos.length; i = i + 1) {
-
-                    todos[i].dataInicial = todos[i].dataInicial.replace('T', ' ');
-                    todos[i].dataFinal = todos[i].dataFinal.replace('T', ' ');
+                    if (todos[i].dataInicial != null) {
+                        todos[i].dataInicial = todos[i].dataInicial.replace('T', ' ');
+                    }
+                    if (todos[i].dataFinal !=null){
+                        todos[i].dataFinal = todos[i].dataFinal.replace('T', ' ');
+                    }
+                  
                    
                 }
 
-                return $http.post("http://localhost:8084/tarefa/atualizar", todos, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } });
+                return $http.post($rootScope.baseUrl +"/tarefa/atualizar", todos, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } });
             },
             delete: function (item) {
-                return $http.delete("http://localhost:8084/tarefa/deletar/" + item.id, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
+                return $http.delete($rootScope.baseUrl +"/tarefa/deletar/" + item.id, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
 
             },
         };

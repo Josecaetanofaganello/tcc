@@ -13,7 +13,7 @@
                 var settings = {
                     "async": true,
                     "crossDomain": true,
-                    "url": "http://localhost:8084/usuario/autenticar",
+                    "url": $rootScope.baseUrl +"/usuario/autenticar",
                     "method": "POST",
                     "headers": {
                         "content-type": "application/json",
