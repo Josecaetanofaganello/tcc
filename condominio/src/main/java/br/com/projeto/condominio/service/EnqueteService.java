@@ -6,7 +6,7 @@ import br.com.projeto.condominio.model.Enquete;
 
 public interface EnqueteService {
 	Enquete salvar(Enquete enquete);
-	Enquete atualizar(Enquete enquete);
+	List<Enquete> atualizar(List<Enquete> manterEnquete);
     List<Enquete> pesquisar();
     Enquete consultar(Long id);
     void deletar(Long id);

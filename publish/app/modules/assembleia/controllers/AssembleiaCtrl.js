@@ -56,11 +56,37 @@
 
         $scope.save = function (todo) {
             if (todo.id == 0 && todo.assunto != '') {
+
+                var date = new Date();
+                todo.statusEnquete = 'Aberta';
+                todo.dataInicial = format(date, 'yyyy-MM-ddThh:mm');
+                todo.dataCriacao = format(date, 'yyyy-MM-ddThh:mm');
+                //Insere 7 dias a data final
+                date.setDate(date.getDate() + 7);
+               
+                todo.dataFinal = format(date, 'yyyy-MM-ddThh:mm');
                 Save($scope.todo);
             } else {
                 Edit();
             }
             New();
+        }
+
+        format = function date2str(x, y) {
+            var z = {
+                M: x.getMonth() + 1,
+                d: x.getDate(),
+                h: x.getHours(),
+                m: x.getMinutes(),
+                s: x.getSeconds()
+            };
+            y = y.replace(/(M+|d+|h+|m+|s+)/g, function (v) {
+                return ((v.length > 1 ? "0" : "") + eval('z.' + v.slice(-1))).slice(-2)
+            });
+
+            return y.replace(/(y+)/g, function (v) {
+                return x.getFullYear().toString().slice(-v.length)
+            });
         }
 
         $scope.new = function () {
@@ -89,7 +115,7 @@
 
         $scope.sync = function () {
             Sync();
-            location.reload();
+            //location.reload();
         }
 
         function Save(item) {
@@ -118,8 +144,8 @@
                 dataInicial: Date.now,
                 dataFinal: null,
                 dataAtualizacao: null,
-                statusEnquete: false,
-                dataCriacao: null,
+                statusEnquete: 'Aberta',
+                dataCriacao: Date.now,
             }
         }
 
@@ -201,9 +227,8 @@
                         for (let i = 0; i < $scope.todos.length; i = i + 1) {
 
                             $scope.todos[i].dataInicial = $scope.todos[i].dataInicial.replace(' ', 'T');
-                            if (result.data[i].dataFinal != null) {
-                                result.data[i].dataFinal = result.data[i].dataFinal.replace(' ', 'T');
-                            }
+                            $scope.todos[i].dataFinal = $scope.todos[i].dataFinal.replace(' ', 'T');
+                            
                         }
                         toastr.info(result.data, "Sincronização completa")
                     },

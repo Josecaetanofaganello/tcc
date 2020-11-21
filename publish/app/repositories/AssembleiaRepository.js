@@ -17,12 +17,16 @@
 
             },
             sync: function (todos) {
+        
                 for (let i = 0; i < todos.length; i = i + 1) {
                     if (todos[i].dataInicial != null) {
                         todos[i].dataInicial = todos[i].dataInicial.replace('T', ' ');
                     }
                     if (todos[i].dataFinal != null) {
                         todos[i].dataFinal = todos[i].dataFinal.replace('T', ' ');
+                    }
+                    if (todos[i].dataCriacao != null) {
+                        todos[i].dataCriacao = todos[i].dataCriacao.replace('T', ' ');
                     }
 
 

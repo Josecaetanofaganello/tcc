@@ -3,6 +3,7 @@ package br.com.projeto.condominio.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import br.com.projeto.condominio.model.Enquete;
 import br.com.projeto.condominio.service.EnqueteService;
@@ -44,8 +46,17 @@ public class EnqueteController {
 	}
 	
 	@PostMapping("/atualizar")
-	public void atualizar(@RequestBody Enquete manterCaixa) {
-		enqueteService.atualizar(manterCaixa);
+	public @ResponseBody List<Enquete> atualizar(@RequestBody List<Enquete> manterEnquete) {
+		List<Enquete> result = enqueteService.atualizar(manterEnquete);
+		if(result!= null) {
+			
+		 return result;	
+		}else {
+			
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Falha ao gravar algum dos registros!");
+		}
+		
+		
 	}
 	
 	
