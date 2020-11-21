@@ -19,6 +19,7 @@ import br.com.projeto.condominio.model.Usuario;
 import br.com.projeto.condominio.service.impl.UsuarioServiceImpl;
 //import br.com.projeto.condominio.utils.JavaMailApp;
 //import br.com.projeto.condominio.utils.JavaMailApp;
+import br.com.projeto.condominio.utils.JavaMailApp;
 
 @RestController()
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -86,9 +87,9 @@ public class UsuarioController {
 	
 	@GetMapping("/envia")
 	public void forgot() {
-		//JavaMailApp mail = new JavaMailApp();
+		JavaMailApp mail = new JavaMailApp();
 		
-	//	mail.configEmail();
+		mail.enviarEmail();
 	}
 
 }
