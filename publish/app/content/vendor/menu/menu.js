@@ -3,6 +3,7 @@ function openNav() {
     if (localStorage.getItem('token') != '') {
         document.getElementById("mySidenav").style.width = "300px";
         document.getElementById("main").style.marginLeft = "300px";
+        document.getElementById("mySidenav").style.visibility = "visible";
     }
     else
     {
