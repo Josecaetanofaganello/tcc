@@ -41,6 +41,11 @@
                 templateUrl: 'modules/account/views/forgot-password.html',
                 requireLogin: false
             })
+            .when('/unidade', {
+                controller: 'UnidadeCtrl',
+                templateUrl: 'modules/unidade/views/unidade.html',
+                requireLogin: true
+            })
             .otherwise({
                 controller: 'HomeCtrl as vm',
                 templateUrl: 'modules/home/views/404.html',
