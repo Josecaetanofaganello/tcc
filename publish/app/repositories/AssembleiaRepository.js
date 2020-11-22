@@ -38,6 +38,15 @@
                 return $http.delete($rootScope.baseUrl + "/enquete/deletar/" + item.id, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
 
             },
+            vote: function (todo) {
+                return $http.post($rootScope.baseUrl + "/assembleia/votar", todo, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
+
+            },
+
+            loadVote: function () {
+                return $http.post($rootScope.baseUrl + "/assembleia/pesquisar-votos",  { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
+
+            },
         };
     }
 })();

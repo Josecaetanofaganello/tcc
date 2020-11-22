@@ -33,5 +33,6 @@ function showMenu() {
 
 function hidenMenu() {
     document.getElementById("mySidenav").style.visibility = "hidden";
-
+    closeNav();
+    document.getElementById("main").style.marginLeft = "300px";
 }

@@ -16,11 +16,16 @@
             dataAtualizacao: null,
             statusEnquete: false,
             dataCriacao: null,
+            positiveVote: 0,
+            negativeVote: 0,
+            enableVote: true
         }
 
         $scope.todos = [];
 
         Load();
+        VoteLoad();
+        
 
         $scope.remaining = function () {
             var count = 0;
@@ -41,8 +46,15 @@
         $scope.user = function () {
             loadUser();
             return $scope.usuario.nome;
-        }
+        };
 
+        $scope.loadPanel = function (valor) {
+            return getNum(valor);
+
+
+        };
+
+      
         function loadUser() {
             $scope.usuario = {
                 id: localStorage.getItem('id'),
@@ -53,6 +65,58 @@
         };
 
 
+
+        $scope.upVote = function (todo) {
+
+            toastr.warning("<br /><br /><button type='button' id='confirmationRevertYes' class='btn clear'>Sim</button>", 'Voce só poderá votar 1 vez nesta enquete, está certo do seu voto?',
+                {
+
+                    allowHtml: true,
+                    onShown: function (toast) {
+                        $("#confirmationRevertYes").click(function () {
+                            $scope.usuarioVoto = {
+                                enquete: todo.id,
+                                usuario: localStorage.getItem('id'),
+                                tipoVoto: 1,
+                            };
+                            if (todo.id > 0) {
+                                VoteTask($scope.usuarioVoto);
+                                todo.enableVote = false;
+                            } else {
+
+                                toastr.error("Salve a enquete antes para poder votar!!!");
+                            }
+                        });
+                    }
+                });
+
+           
+        };
+
+        $scope.downVote = function (todo) {
+            toastr.warning("<br /><br /><button type='button' id='confirmationRevertYes' class='btn clear'>Sim</button>", 'Voce só poderá votar 1 vez nesta enquete, está certo do seu voto?',
+                {
+
+                    allowHtml: true,
+                    onShown: function (toast) {
+                        $("#confirmationRevertYes").click(function () {
+                            $scope.usuarioVoto = {
+                                enquete: todo.id,
+                                usuario: localStorage.getItem('id'),
+                                tipoVoto: 0,
+                            };
+                            if (todo.id > 0) {
+                                
+                                VoteTask($scope.usuarioVoto);
+                            } else {
+
+                                toastr.error("Salve a enquete antes para poder votar!!!");
+                            }
+                        });
+                    }
+                });
+
+        };
 
         $scope.save = function (todo) {
             if (todo.id == 0 && todo.assunto != '') {
@@ -115,6 +179,7 @@
 
         $scope.sync = function () {
             Sync();
+            VoteLoad();
             //location.reload();
         }
 
@@ -137,6 +202,83 @@
                     });
         }
 
+        function VoteTask(item) {
+            AssembleiaRepository
+                .vote(item)
+                .then(
+                    function (result) {
+
+                        toastr.info(result.data, "Votado com sucesso!")
+                        VoteLoad();
+                    },
+                    function (error) {
+                        toastr.error(error.data, "Falha no voto");
+                    });
+        }
+
+
+        function getNum(val) {
+            if (isNaN(val)) {
+                return 0;
+            }
+            return val;
+        }
+
+        function VoteLoad() {
+            AssembleiaRepository
+                .loadVote()
+                .then(
+                    function (result) {
+                        for (let i = 0; i < $scope.todos.length; i = i + 1) {
+                            $scope.todos[i].negativeVote = 0;
+                            $scope.todos[i].positiveVote = 0;
+
+                            for (let x = 0; x < result.data.length; x = x + 1) {
+
+                                if (result.data[x].enquete == $scope.todos[i].id) {
+
+                                    if (result.data[x].tipoVoto == 0) {
+                                        if (isNaN($scope.todos[i].negativeVote)) {
+                                            $scope.todos[i].negativeVote = 0;
+                                             $scope.todos[i].negativeVote = $scope.todos[i].negativeVote +1;
+
+                                        } else {
+                                            $scope.todos[i].negativeVote = $scope.todos[i].negativeVote + 1;
+                                        }
+
+                                       
+
+                                    } else {
+
+                                        if (isNaN($scope.todos[i].positiveVote)) {
+                                            $scope.todos[i].positiveVote = 0;
+                                            $scope.todos[i].positiveVote = $scope.todos[i].positiveVote + 1;
+                                        } else {
+
+                                            $scope.todos[i].positiveVote = $scope.todos[i].positiveVote + 1;
+                                        }
+
+
+                                       
+
+                                    }
+
+                                } 
+
+
+
+                            }
+                            //result.data[0]
+
+                        }
+
+                        toastr.info(result.data, "Votos Carregados!")
+                    },
+                    function (error) {
+                        toastr.error(error.data, "Falha no voto");
+                    });
+        }
+
         function New() {
             $scope.todo = {
                 id: 0,
@@ -146,6 +288,7 @@
                 dataAtualizacao: null,
                 statusEnquete: 'Aberta',
                 dataCriacao: Date.now,
+
             }
         }
 
@@ -187,6 +330,7 @@
                     function (result) {
                         for (let i = 0; i < result.data.length; i = i + 1) {
 
+
                             result.data[i].dataInicial = result.data[i].dataInicial.replace(' ', 'T');
 
                             if (result.data[i].dataFinal != null) {
@@ -225,7 +369,8 @@
                     function (result) {
 
                         for (let i = 0; i < $scope.todos.length; i = i + 1) {
-
+                          
+                            $scope.todos[i].id = result.data[i].id;
                             $scope.todos[i].dataInicial = $scope.todos[i].dataInicial.replace(' ', 'T');
                             $scope.todos[i].dataFinal = $scope.todos[i].dataFinal.replace(' ', 'T');
                             

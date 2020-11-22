@@ -1,16 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\publish",
-    "\\publish\\app",
-    "\\publish\\app\\jsonserver",
-    "\\publish\\app\\modules",
-    "\\publish\\app\\modules\\tarefa",
-    "\\publish\\app\\modules\\tarefa\\controllers",
-    "\\publish\\app\\modules\\unidades",
-    "\\publish\\app\\modules\\vagas",
-    "\\publish\\app\\repositories"
+    "\\condominio",
+    "\\condominio\\src",
+    "\\condominio\\src\\main",
+    "\\condominio\\src\\main\\java",
+    "\\condominio\\src\\main\\java\\br",
+    "\\condominio\\src\\main\\java\\br\\com",
+    "\\condominio\\src\\main\\java\\br\\com\\projeto",
+    "\\condominio\\src\\main\\java\\br\\com\\projeto\\condominio",
+    "\\condominio\\src\\main\\java\\br\\com\\projeto\\condominio\\controller"
   ],
-  "SelectedNode": "\\publish\\app\\index.html",
+  "SelectedNode": "\\condominio\\src\\main\\java\\br\\com\\projeto\\condominio\\controller\\UsuarioController.java",
   "PreviewInSolutionExplorer": false
 }
