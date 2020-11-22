@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.projeto.condominio.model.EnqueteUsuario;
 import br.com.projeto.condominio.service.impl.AssembleiaServiceImpl;
 
-@RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@RestController
+
 @RequestMapping(value = "/assembleia")
 public class AssembleiaController {
 
