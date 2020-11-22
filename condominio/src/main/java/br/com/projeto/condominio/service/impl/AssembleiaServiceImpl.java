@@ -37,11 +37,10 @@ public class AssembleiaServiceImpl {
 		
 		enqueteUsuario.setPrimaryKey(enqueteUsuarioPK);
 		
-		if(this.isInserir(enqueteUsuario)) {
+//		if(this.isInserir(enqueteUsuario)) {
 			return assembleiaRepository.save(enqueteUsuario);
-		}
+//		}
 	
-		return null;
 	}
 	
 	public List<EnqueteUsuario> pesquisar(){
