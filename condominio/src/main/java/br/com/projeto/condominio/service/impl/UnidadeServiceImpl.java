@@ -22,6 +22,10 @@ public class UnidadeServiceImpl {
 		return unidadeRepository.save(unidade);
 	}
 	
+	public Unidade atualizar(Unidade unidade) {
+		return unidadeRepository.save(unidade);
+	}
+	
 	public void deletar(Long id) {
 		unidadeRepository.deleteById(id);
 	}
