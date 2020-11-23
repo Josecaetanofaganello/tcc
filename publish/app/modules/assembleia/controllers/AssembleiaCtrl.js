@@ -56,15 +56,18 @@
 
       
         function loadUser() {
-            $scope.usuario = {
+
+           
+                $scope.usuario = {
                 id: localStorage.getItem('id'),
                 nome: localStorage.getItem('nome'),
                 email: localStorage.getItem('email'),
                 tipo: localStorage.getItem('tipo')
             };
+            checkUser();
         };
 
-
+      
 
         $scope.upVote = function (todo) {
 

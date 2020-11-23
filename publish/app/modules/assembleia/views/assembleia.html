@@ -3,7 +3,7 @@
         <div class="collapse" id="navbarToggleExternalContent">
             <div class="bg-dark p-4">
                 <h5 class="text-white h4">Conteúdo de Ajuda da Página</h5>
-                <span class="text-muted">Nessa tela você pode registrar tarefas, controlalas atraves do marcador de seleção assim que a mesma estiver pronta, poderá também editar  ou apagar as mesmas.</span>
+                <span class="text-muted">Nessa tela você pode visualizar e iteragir com as ações da assembléia online.</span>
             </div>
         </div>
         <nav class="navbar navbar-dark bg-dark">
@@ -28,7 +28,7 @@
     <div class="col-md-12">
         <div class="row">
             <div class="col-md-4 pull-left">
-                <div class="input-group">
+                <div id="addItem" class="input-group">
                     <input type="hidden" value="{{ todo.id}}" />
                     <input type="text" class="form-control" placeholder="Criar Enquete" ng-model="todo.assunto" />
 
@@ -65,11 +65,11 @@
                 </div>
               
                     <input type="hidden" value="{{ todo.id}}" />
-                    <p><strong>Assunto: </strong> <textarea class="textarea resize-ta" ng-model="todo.assunto" value="{{ todo.assunto }}"></textarea></p>
-                    <p><strong>Inicio:</strong></p><input type="datetime-local" ng-model="todo.dataInicial" value="{{ todo.dataInicial }}  md-placeholder=" dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required" />
-                    <p><strong>Fim:</strong></p><input type="datetime-local" ng-model="todo.dataFinal" value="{{ todo.dataFinal }} md-placeholder=" dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required" />
+                    <p><strong>Assunto: </strong> <textarea id="text" class="textareaAssembleia resize-ta" ng-model="todo.assunto" value="{{ todo.assunto }}"></textarea></p>
+                    <p><strong>Inicio:</strong></p><input id="dataIni" class="calendario" type="datetime-local" ng-model="todo.dataInicial" value="{{ todo.dataInicial }}  md-placeholder=" dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required" />
+                    <p><strong>Fim:</strong></p><input id="dataFim" class="calendario" type="datetime-local" ng-model="todo.dataFinal" value="{{ todo.dataFinal }} md-placeholder=" dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required" />
                     <p><strong>Status:</strong></p>
-                    <select ng-model="todo.statusEnquete">
+                    <select id="status" ng-model="todo.statusEnquete">
                         <option value="{{ todo.statusEnquete }}">Aberta</option>
                         <option value="Aberta">Aberta</option>
                         <option value="Cancelada">Cancelada</option>
