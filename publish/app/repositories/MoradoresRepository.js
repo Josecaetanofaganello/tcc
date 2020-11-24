@@ -20,8 +20,8 @@
                 return $http.delete($rootScope.baseUrl + "/morador/deletar/" + item.id, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
 
             },
-            getUsuarios: function () {
-                return $http.get($rootScope.baseUrl +"/usuario/pesquisar", { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
+            getUnidades: function () {
+                return $http.get($rootScope.baseUrl +"/unidade/listar", { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
             },
             
         };

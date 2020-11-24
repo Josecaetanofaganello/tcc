@@ -24,6 +24,8 @@ public class Morador implements Serializable{
 	private String email;
 	@Column(name = "id_unidade")
 	private Long idUnidade;
+	@Column
+	private String tipo;
 	
 	
 	public Long getId() {
@@ -55,6 +57,12 @@ public class Morador implements Serializable{
 	}
 	public void setIdUnidade(Long idUnidade) {
 		this.idUnidade = idUnidade;
+	}
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 	
 }

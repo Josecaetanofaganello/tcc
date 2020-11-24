@@ -13,17 +13,18 @@
             nome: null,
             contato: null,
             email: null,
-            idUnidade: 0
+            idUnidade: 0,
+            tipo: null
         }
 
         $scope.todos = [];
 
         Load();
 
-        $scope.findUser = function(todo){
-            for(let i = 0; $scope.usuarios.length; i++){
-                if($scope.usuarios[i].id == todo.idUsuario){
-                    return $scope.usuarios[i].nome;
+        $scope.findUnit = function(todo){
+            for(let i = 0; $scope.unidades.length; i++){
+                if($scope.unidades[i].id == todo.idUnidade){
+                    return ($scope.unidades[i].identificacao + ' - ' +$scope.unidades[i].bloco);
                 }
             }
         };
@@ -49,16 +50,8 @@
         };
 
         $scope.save = function (todo) {
-            if (todo.id == 0 && todo.assunto != '') {
-
-                var date = new Date();
-                todo.status = 'Aberta';
-                todo.dataInicial = format(date, 'yyyy-MM-ddThh:mm');
-                
-                //Insere 7 dias a data final
-                date.setDate(date.getDate() + 7);
-                todo.idUsuario = $scope.usuario.id
-                todo.dataFinal = format(date, 'yyyy-MM-ddThh:mm');
+            if (todo.id == 0) {
+                todo.tipo = 'Morador'
                 Save($scope.todo);
             } else {
                 Edit();
@@ -146,7 +139,8 @@
                 nome: null,
                 contato: null,
                 email: null,
-                idUnidade: 0
+                idUnidade: 0,
+                tipo:null
 
             }
         }
@@ -192,11 +186,11 @@
                     });
 
             MoradoresRepository
-                    .getUsuarios()
+                    .getUnidades()
                     .then(
                         function (result) {
                            
-                            $scope.usuarios = result.data;
+                            $scope.unidades = result.data;
                         },
                         function (error) {
                             toastr.error(error.data, "Falha na requisição");

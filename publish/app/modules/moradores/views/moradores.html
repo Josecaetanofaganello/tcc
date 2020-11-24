@@ -29,7 +29,7 @@
             <div class="col-md-4 pull-left">
                 <div class="input-group">
                     <input type="hidden" value="{{ todo.id}}" />
-                    <input type="text" class="form-control" placeholder="Descrição do Boletim de Ocorrência" ng-model="todo.descricao" />
+                    <input type="text" class="form-control" placeholder="Adicionar Morador" ng-model="todo.descricao" readonly />
 
                     <span class="input-group-btn">
                         <button class="btn btn-primary" ng-show="todo.id == 0" ng-click="save(todo)"><i class="fa fa-plus"></i></button>
@@ -48,13 +48,13 @@
               
                     <input type="hidden" value="{{ todo.id}}" />
                     <p>
-                        <strong>Nome: </strong><input type="text"  value="{{ todo.nome}}"  />
+                        <strong>Nome: </strong><input type="text" ng-model="todo.nome"  value="{{ todo.nome}}"  />
                         <strong>Contato: </strong>  <input type="text" ng-model="todo.contato" value="{{ todo.contato }}" required />
                    </p>
                     <p><strong>E-mail: </strong> <input type="text" ng-model="todo.email" value="{{ todo.email }}" required /></p>
                     <select ng-model="todo.idUnidade">
-                        <option value="{{ todo.proprietario }}">{{ findUser(unidade) }}</option>
-                        <option ng-repeat="usuario in usuarios" value="{{ usuario.id }}" >{{ usuario.nome }}</option>
+                        <option value="{{ todo.idUnidade }}">{{ findUnit(todo) }}</option>
+                        <option ng-repeat="unidade in unidades" value="{{ unidade.id }}" >{{ unidade.bloco }} {{ unidade.identificacao }}</option>
                     </select>
                     <p></p>
                     <div class="btn-group">
