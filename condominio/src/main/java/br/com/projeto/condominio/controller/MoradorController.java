@@ -66,8 +66,10 @@ public class MoradorController {
 
 	}
 	
-	@DeleteMapping("/deletar")
-	public void delete(Long id) {
+	@DeleteMapping("/deletar/{id}")
+	public @ResponseBody String delete(@PathVariable Long id) {
 		moradorService.deletar(id);
+		
+		return "Sucesso";
 	}
 }
