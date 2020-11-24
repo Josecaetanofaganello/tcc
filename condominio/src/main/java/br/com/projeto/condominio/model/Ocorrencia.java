@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 @Entity
@@ -19,16 +22,18 @@ public class Ocorrencia implements Serializable {
 	@Id
 	private Long id;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	@Column(name = "data_ini")
 	private Date dataInicial;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	@Column(name = "data_fim")
 	private Date dataFinal;
 	
 	@Column
 	private String status;
 	
-	
+	@Transient
 	@Column
 	private Usuario usuario_id;
 	
@@ -37,6 +42,14 @@ public class Ocorrencia implements Serializable {
 	
 	@Column
 	private String tratamento;
+	
+	@Column(name = "usuario_id")
+	private Long idUsuario;
+	
+	@Column
+	private String descricao;
+	
+	
 
 	public Long getId() {
 		return id;
@@ -86,6 +99,14 @@ public class Ocorrencia implements Serializable {
 		this.notificacao = notificacao;
 	}
 
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
 	public String getTratamento() {
 		return tratamento;
 	}
@@ -97,5 +118,14 @@ public class Ocorrencia implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
 	
 }

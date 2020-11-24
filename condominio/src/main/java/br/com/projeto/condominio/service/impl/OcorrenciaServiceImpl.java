@@ -21,8 +21,8 @@ public class OcorrenciaServiceImpl implements OcorrenciaService {
 	}
 
 	@Override
-	public Ocorrencia atualizar(Ocorrencia ocorrencia) {
-		return ocorrenciaRepository.saveAndFlush(ocorrencia);
+	public List<Ocorrencia> atualizar(List<Ocorrencia> ocorrencias) {
+		return ocorrenciaRepository.saveAll(ocorrencias);
 	}
 
 	@Override

@@ -5,43 +5,23 @@
         .module('app')
         .controller('OcorrenciaCtrl', OcorrenciaCtrl);
 
-    OcorrenciaCtrl.$inject = ['$scope', '$http', 'AssembleiaRepository'];
+    OcorrenciaCtrl.$inject = ['$scope', '$http', 'OcorrenciaRepository'];
 
-    function OcorrenciaCtrl($scope, $http, AssembleiaRepository) {
+    function OcorrenciaCtrl($scope, $http, OcorrenciaRepository) {
         $scope.todo = {
             id: 0,
-            assunto: '',
             dataInicial: null,
             dataFinal: null,
-            dataAtualizacao: null,
-            statusEnquete: false,
-            dataCriacao: null,
-            positiveVote: 0,
-            negativeVote: 0,
-            enableVote: true
+            descricao: '',
+            status: false,
+            idUsuario: 0,
+            notificacao: null,
+            tratamento: null
         }
 
         $scope.todos = [];
 
         Load();
-        VoteLoad();
-        
-
-        $scope.remaining = function () {
-            var count = 0;
-            angular.forEach($scope.todos, function (todo) {
-                count += todo.statusTarefa ? 0 : 1;
-            });
-            return count;
-        };
-
-        $scope.remainingVote = function () {
-            var count = 0;
-            angular.forEach($scope.todos, function (todo) {
-                count += todo.statusTarefa ? 0 : 1;
-            });
-            return count;
-        };
 
         $scope.user = function () {
             loadUser();
@@ -53,7 +33,6 @@
 
 
         };
-
       
         function loadUser() {
             $scope.usuario = {
@@ -64,70 +43,16 @@
             };
         };
 
-
-
-        $scope.upVote = function (todo) {
-
-            toastr.warning("<br /><br /><button type='button' id='confirmationRevertYes' class='btn clear'>Sim</button>", 'Voce só poderá votar 1 vez nesta enquete, está certo do seu voto?',
-                {
-
-                    allowHtml: true,
-                    onShown: function (toast) {
-                        $("#confirmationRevertYes").click(function () {
-                            $scope.usuarioVoto = {
-                                enquete: todo.id,
-                                usuario: localStorage.getItem('id'),
-                                tipoVoto: 1,
-                            };
-                            if (todo.id > 0) {
-                                VoteTask($scope.usuarioVoto);
-                                todo.enableVote = false;
-                            } else {
-
-                                toastr.error("Salve a enquete antes para poder votar!!!");
-                            }
-                        });
-                    }
-                });
-
-           
-        };
-
-        $scope.downVote = function (todo) {
-            toastr.warning("<br /><br /><button type='button' id='confirmationRevertYes' class='btn clear'>Sim</button>", 'Voce só poderá votar 1 vez nesta enquete, está certo do seu voto?',
-                {
-
-                    allowHtml: true,
-                    onShown: function (toast) {
-                        $("#confirmationRevertYes").click(function () {
-                            $scope.usuarioVoto = {
-                                enquete: todo.id,
-                                usuario: localStorage.getItem('id'),
-                                tipoVoto: 0,
-                            };
-                            if (todo.id > 0) {
-                                
-                                VoteTask($scope.usuarioVoto);
-                            } else {
-
-                                toastr.error("Salve a enquete antes para poder votar!!!");
-                            }
-                        });
-                    }
-                });
-
-        };
-
         $scope.save = function (todo) {
             if (todo.id == 0 && todo.assunto != '') {
 
                 var date = new Date();
-                todo.statusEnquete = 'Aberta';
+                todo.status = 'Aberta';
                 todo.dataInicial = format(date, 'yyyy-MM-ddThh:mm');
-                todo.dataCriacao = format(date, 'yyyy-MM-ddThh:mm');
+                
                 //Insere 7 dias a data final
                 date.setDate(date.getDate() + 7);
-               
+                todo.idUsuario = $scope.usuario.id
                 todo.dataFinal = format(date, 'yyyy-MM-ddThh:mm');
                 Save($scope.todo);
             } else {
@@ -179,7 +104,7 @@
 
         $scope.sync = function () {
             Sync();
-            VoteLoad();
+            //VoteLoad();
             //location.reload();
         }
 
@@ -190,7 +115,7 @@
         }
 
         function Delete(item) {
-            AssembleiaRepository
+            OcorrenciaRepository
                 .delete(item)
                 .then(
                     function (result) {
@@ -202,21 +127,6 @@
                     });
         }
 
-        function VoteTask(item) {
-            AssembleiaRepository
-                .vote(item)
-                .then(
-                    function (result) {
-
-                        toastr.info(result.data, "Votado com sucesso!")
-                        VoteLoad();
-                    },
-                    function (error) {
-                        toastr.error(error.data, "Falha no voto");
-                    });
-        }
-
-
         function getNum(val) {
             if (isNaN(val)) {
                 return 0;
@@ -225,7 +135,7 @@
         }
 
         function VoteLoad() {
-            AssembleiaRepository
+            OcorrenciaRepository
                 .loadVote()
                 .then(
                     function (result) {
@@ -282,12 +192,13 @@
         function New() {
             $scope.todo = {
                 id: 0,
-                assunto: '',
                 dataInicial: Date.now,
                 dataFinal: null,
-                dataAtualizacao: null,
-                statusEnquete: 'Aberta',
-                dataCriacao: Date.now,
+                descricao: '',
+                status: 'Aberta',
+                idUsuario: 0,
+                notificacao: null,
+                tratamento: null
 
             }
         }
@@ -324,7 +235,7 @@
         }
 
         function ReadCloud() {
-            AssembleiaRepository
+            OcorrenciaRepository
                 .getTodos()
                 .then(
                     function (result) {
@@ -347,7 +258,7 @@
 
 
         function ReadVote() {
-            AssembleiaRepository
+            OcorrenciaRepository
                 .getTodos()
                 .then(
                     function (result) {
@@ -363,7 +274,7 @@
         }
 
         function SaveCloud() {
-            AssembleiaRepository
+            OcorrenciaRepository
                 .sync($scope.todos)
                 .then(
                     function (result) {

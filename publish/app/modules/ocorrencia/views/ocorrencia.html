@@ -15,9 +15,7 @@
     <div class="col-md-12">
         
         <h3>Olá, <small>{{user()}}</small></h3>
-        <p id="assembleia-voto">Você tem <big><strong><em>{{ remaining() }}</em></strong></big> enquetes pendentes de voto! </p>
-        <p id="assembleia-manter">Você tem <big><strong><em>{{ remaining() }}</em></strong></big> enquetes criadas! </p>
-</div>
+    </div>
 </div>
 <hr />
 
@@ -30,7 +28,7 @@
             <div class="col-md-4 pull-left">
                 <div class="input-group">
                     <input type="hidden" value="{{ todo.id}}" />
-                    <input type="text" class="form-control" placeholder="Criar Enquete" ng-model="todo.assunto" />
+                    <input type="text" class="form-control" placeholder="Descrição do Boletim de Ocorrência" ng-model="todo.descricao" />
 
                     <span class="input-group-btn">
                         <button class="btn btn-primary" ng-show="todo.id == 0" ng-click="save(todo)"><i class="fa fa-plus"></i></button>
@@ -46,31 +44,16 @@
         <br />
                
         <div class="list-unstyled" ng-repeat="todo in todos | filter: search">
-
-            <div class="todo-item">
-                <div id="rowVoting" class="row">
-                    <div class="column">
-                        <div class="card1">
-                            <bold><h2>{{loadPanel(todo.positiveVote)}}</h2></bold>
-                            <button class="btnup btn-primary btn-lg" ng-click="upVote(todo)"><i class="fa fa-thumbs-o-up" aria-hidden="false"></i></button>
-
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="card2">
-                            <bold><h2>{{loadPanel(todo.negativeVote)}}</h2></bold>
-                            <button class="btndown btn-primary btn-lg" ng-click="downVote(todo)"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></button>
-                        </div>
-                    </div>
-                </div>
               
                     <input type="hidden" value="{{ todo.id}}" />
-                    <p><strong>Assunto: </strong> <textarea class="textarea resize-ta" ng-model="todo.assunto" value="{{ todo.assunto }}"></textarea></p>
+                    <p><strong>Descrição: </strong>  <input type="text" ng-model="todo.descricao" value="{{ todo.descricao }}" required /></p>
+                    <p><strong>Notificação: </strong> <textarea class="textarea resize-ta" ng-model="todo.notificacao" value="{{ todo.notificacao }}" required></textarea></p>
+                    <p><strong>Tratamento: </strong> <textarea class="textarea resize-ta" ng-model="todo.tratamento" value="{{ todo.tratamento }}" required></textarea></p>
                     <p><strong>Inicio:</strong></p><input type="datetime-local" ng-model="todo.dataInicial" value="{{ todo.dataInicial }}  md-placeholder=" dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required" />
                     <p><strong>Fim:</strong></p><input type="datetime-local" ng-model="todo.dataFinal" value="{{ todo.dataFinal }} md-placeholder=" dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required" />
                     <p><strong>Status:</strong></p>
-                    <select ng-model="todo.statusEnquete">
-                        <option value="{{ todo.statusEnquete }}">Aberta</option>
+                    <select ng-model="todo.status">
+                        <option value="{{ todo.status }}">Aberta</option>
                         <option value="Aberta">Aberta</option>
                         <option value="Cancelada">Cancelada</option>
                     </select>
@@ -81,8 +64,9 @@
                     <div class="btn-group">
                         <button class="btn btn-primary btn-lg" ng-click="sync()"><i class="fa fa-save"></i></button>
                     </div>
+                    <hr class="solid">
                 </div>
-                <hr class="solid">
+                
             </div>
 
     </div>

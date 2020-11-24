@@ -7,7 +7,7 @@ import br.com.projeto.condominio.model.Ocorrencia;
 public interface OcorrenciaService {
 
 	Ocorrencia salvar(Ocorrencia ocorrencia);
-	Ocorrencia atualizar(Ocorrencia ocorrencia);
+	List<Ocorrencia> atualizar(List<Ocorrencia> ocorrencias);
     List<Ocorrencia> pesquisar();
     Ocorrencia consultar(Long id);
     void deletar(Long id);

@@ -3,18 +3,14 @@
 
     angular
         .module('app')
-        .factory('AssembleiaRepository', AssembleiaRepository);
+        .factory('OcorrenciaRepository', OcorrenciaRepository);
 
-    AssembleiaRepository.$inject = ['$http', '$rootScope', '$location'];
+    OcorrenciaRepository.$inject = ['$http', '$rootScope', '$location'];
 
-    function AssembleiaRepository($http, $rootScope, $location) {
+    function OcorrenciaRepository($http, $rootScope, $location) {
         return {
             getTodos: function () {
-                return $http.get($rootScope.baseUrl + "/enquete/pesquisar", { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
-
-
-
-
+                return $http.get($rootScope.baseUrl + "/ocorrencia/listar", { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
             },
             sync: function (todos) {
         
@@ -32,21 +28,13 @@
 
                 }
 
-                return $http.post($rootScope.baseUrl + "/enquete/atualizar", todos, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } });
+                return $http.put($rootScope.baseUrl + "/ocorrencia/atualizar", todos, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } });
             },
             delete: function (item) {
-                return $http.delete($rootScope.baseUrl + "/enquete/deletar/" + item.id, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
+                return $http.delete($rootScope.baseUrl + "/ocorrencia/deletar/" + item.id, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
 
             },
-            vote: function (todo) {
-                return $http.post($rootScope.baseUrl + "/assembleia/votar", todo, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
-
-            },
-
-            loadVote: function () {
-                return $http.post($rootScope.baseUrl + "/assembleia/pesquisar-votos",  { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
-
-            },
+            
         };
     }
 })();
