@@ -29,7 +29,7 @@
             <div class="col-md-4 pull-left">
                 <div class="input-group">
                     <input type="hidden" value="{{ todo.id}}" />
-                    <input type="text" class="form-control" placeholder="Descrição do Boletim de Ocorrência" ng-model="todo.descricao" />
+                    <input type="text" class="form-control" placeholder="Adicionar Morador" ng-model="todo.descricao" readonly />
 
                     <span class="input-group-btn">
                         <button class="btn btn-primary" ng-show="todo.id == 0" ng-click="save(todo)"><i class="fa fa-plus"></i></button>
@@ -48,18 +48,13 @@
               
                     <input type="hidden" value="{{ todo.id}}" />
                     <p>
-                        <strong>Nome Responsável: </strong><input type="text" readonly value="{{ findUser(todo) }}"  />
-                        <strong>Descrição: </strong>  <input type="text" ng-model="todo.descricao" value="{{ todo.descricao }}" required />
+                        <strong>Nome: </strong><input type="text" ng-model="todo.nome"  value="{{ todo.nome}}"  />
+                        <strong>Contato: </strong>  <input type="text" ng-model="todo.contato" value="{{ todo.contato }}" required />
                    </p>
-                    <p><strong>Notificação: </strong> <textarea class="textarea resize-ta" ng-model="todo.notificacao" value="{{ todo.notificacao }}" required></textarea></p>
-                    <p><strong>Tratamento: </strong> <textarea class="textarea resize-ta" ng-model="todo.tratamento" value="{{ todo.tratamento }}" required></textarea></p>
-                    <p><strong>Inicio:</strong></p><input type="datetime-local" ng-model="todo.dataInicial" value="{{ todo.dataInicial }}  md-placeholder=" dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required" />
-                    <p><strong>Fim:</strong></p><input type="datetime-local" ng-model="todo.dataFinal" value="{{ todo.dataFinal }} md-placeholder=" dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required" />
-                    <p><strong>Status:</strong></p>
-                    <select ng-model="todo.status">
-                        <option value="{{ todo.status }}">Aberta</option>
-                        <option value="Aberta">Aberta</option>
-                        <option value="Cancelada">Cancelada</option>
+                    <p><strong>E-mail: </strong> <input type="text" ng-model="todo.email" value="{{ todo.email }}" required /></p>
+                    <select ng-model="todo.idUnidade">
+                        <option value="{{ todo.idUnidade }}">{{ findUnit(todo) }}</option>
+                        <option ng-repeat="unidade in unidades" value="{{ unidade.id }}" >{{ unidade.bloco }} - {{ unidade.identificacao }}</option>
                     </select>
                     <p></p>
                     <div class="btn-group">

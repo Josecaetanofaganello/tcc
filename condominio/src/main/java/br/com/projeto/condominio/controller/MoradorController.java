@@ -16,59 +16,60 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.com.projeto.condominio.model.Ocorrencia;
-import br.com.projeto.condominio.service.OcorrenciaService;
+import br.com.projeto.condominio.model.Morador;
+import br.com.projeto.condominio.service.MoradorService;
 
-@RestController
-@RequestMapping("/ocorrencia")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class OcorrenciaController {
+@RestController
+@RequestMapping(value = "/morador")
+public class MoradorController {
 
 	@Autowired
-	private OcorrenciaService ocorrenciaService;
-
+	private MoradorService moradorService;
+	
 	@PostMapping("/salvar")
-	private @ResponseBody Ocorrencia salvar(@RequestBody Ocorrencia ocorrencia) {
+	private @ResponseBody Morador salvar(@RequestBody Morador morador) {
 
-		Ocorrencia ocorrenciaRetorno = ocorrenciaService.salvar(ocorrencia);
+		Morador moradorRetorno = moradorService.salvar(morador);
 
-		if (ocorrenciaRetorno == null) {
+		if (moradorRetorno == null) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Não foi possível cadastrar a ocorrência.");
 		}
 
-		return ocorrenciaRetorno;
+		return moradorRetorno;
 	}
 	
 	@PutMapping("/atualizar")
-	private @ResponseBody List<Ocorrencia> atualizar(@RequestBody List<Ocorrencia> ocorrencias) {
+	private @ResponseBody List<Morador> atualizar(@RequestBody List<Morador> moradores) {
 
-		List<Ocorrencia> ocorrenciaRetornos = ocorrenciaService.atualizar(ocorrencias);
+		List<Morador>moradoresRetorno = moradorService.atualizar(moradores);
 
-		if (ocorrenciaRetornos == null || ocorrenciaRetornos.isEmpty()) {
+		if (moradoresRetorno == null || moradoresRetorno.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Não foi possível cadastrar a ocorrência.");
 		}
 
-		return ocorrenciaRetornos;
+		return moradoresRetorno;
 	}
 	
 
 	@GetMapping("/listar")
-	public @ResponseBody List<Ocorrencia> listar() {
+	public @ResponseBody List<Morador> listar() {
 
-		List<Ocorrencia> ocorrencias = ocorrenciaService.pesquisar();
+		List<Morador> moradores = moradorService.pesquisar();
 
-		return ocorrencias;
+		return moradores;
 	}
 
 	@GetMapping("/consultar/{id}")
-	public @ResponseBody Ocorrencia consultar(@PathVariable Long id) {
-		return ocorrenciaService.consultar(id);
+	public @ResponseBody Morador consultar(@PathVariable Long id) {
+		return moradorService.consultar(id);
 
 	}
 	
-	@DeleteMapping("/delete")
-	public void delete(Long id) {
-		ocorrenciaService.deletar(id);
+	@DeleteMapping("/deletar/{id}")
+	public @ResponseBody String delete(@PathVariable Long id) {
+		moradorService.deletar(id);
+		
+		return "Sucesso";
 	}
-
 }

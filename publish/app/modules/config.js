@@ -56,6 +56,11 @@
                 templateUrl: 'modules/ocorrencia/views/ocorrencia.html',
                 requireLogin: true
             })
+            .when('/moradores', {
+                controller: 'MoradoresCtrl',
+                templateUrl: 'modules/moradores/views/moradores.html',
+                requireLogin: true
+            })
             .otherwise({
                 controller: 'HomeCtrl as vm',
                 templateUrl: 'modules/home/views/404.html',

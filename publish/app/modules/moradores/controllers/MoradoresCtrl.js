@@ -3,30 +3,28 @@
 
     angular
         .module('app')
-        .controller('OcorrenciaCtrl', OcorrenciaCtrl);
+        .controller('MoradoresCtrl', MoradoresCtrl);
 
-    OcorrenciaCtrl.$inject = ['$scope', '$http', 'OcorrenciaRepository'];
+    MoradoresCtrl.$inject = ['$scope', '$http', 'MoradoresRepository'];
 
-    function OcorrenciaCtrl($scope, $http, OcorrenciaRepository) {
+    function MoradoresCtrl($scope, $http, MoradoresRepository) {
         $scope.todo = {
             id: 0,
-            dataInicial: null,
-            dataFinal: null,
-            descricao: '',
-            status: false,
-            idUsuario: 0,
-            notificacao: null,
-            tratamento: null
+            nome: null,
+            contato: null,
+            email: null,
+            idUnidade: 0,
+            tipo: null
         }
 
         $scope.todos = [];
 
         Load();
 
-        $scope.findUser = function(todo){
-            for(let i = 0; $scope.usuarios.length; i++){
-                if($scope.usuarios[i].id == todo.idUsuario){
-                    return $scope.usuarios[i].nome;
+        $scope.findUnit = function(todo){
+            for(let i = 0; $scope.unidades.length; i++){
+                if($scope.unidades[i].id == todo.idUnidade){
+                    return ($scope.unidades[i].bloco + ' - ' +$scope.unidades[i].identificacao);
                 }
             }
         };
@@ -52,16 +50,8 @@
         };
 
         $scope.save = function (todo) {
-            if (todo.id == 0 && todo.assunto != '') {
-
-                var date = new Date();
-                todo.status = 'Aberta';
-                todo.dataInicial = format(date, 'yyyy-MM-ddThh:mm');
-                
-                //Insere 7 dias a data final
-                date.setDate(date.getDate() + 7);
-                todo.idUsuario = $scope.usuario.id
-                todo.dataFinal = format(date, 'yyyy-MM-ddThh:mm');
+            if (todo.id == 0) {
+                todo.tipo = 'Morador'
                 Save($scope.todo);
             } else {
                 Edit();
@@ -123,7 +113,7 @@
         }
 
         function Delete(item) {
-            OcorrenciaRepository
+            MoradoresRepository
                 .delete(item)
                 .then(
                     function (result) {
@@ -146,13 +136,11 @@
         function New() {
             $scope.todo = {
                 id: 0,
-                dataInicial: Date.now,
-                dataFinal: null,
-                descricao: '',
-                status: 'Aberta',
-                idUsuario: 0,
-                notificacao: null,
-                tratamento: null
+                nome: null,
+                contato: null,
+                email: null,
+                idUnidade: 0,
+                tipo:null
 
             }
         }
@@ -187,66 +175,33 @@
         }
 
         function ReadCloud() {
-            OcorrenciaRepository
+            MoradoresRepository
                 .getTodos()
                 .then(
                     function (result) {
-                        for (let i = 0; i < result.data.length; i = i + 1) {
-
-
-                            result.data[i].dataInicial = result.data[i].dataInicial.replace(' ', 'T');
-
-                            if (result.data[i].dataFinal != null) {
-                                result.data[i].dataFinal = result.data[i].dataFinal.replace(' ', 'T');
-                            }
-                        }
                         $scope.todos = result.data;
                     },
                     function (error) {
                         toastr.error(error.data, "Falha na requisição");
                     });
 
-            OcorrenciaRepository
-                    .getUsuarios()
+            MoradoresRepository
+                    .getUnidades()
                     .then(
                         function (result) {
                            
-                            $scope.usuarios = result.data;
+                            $scope.unidades = result.data;
                         },
                         function (error) {
                             toastr.error(error.data, "Falha na requisição");
                         });
         }
 
-        function ReadVote() {
-            OcorrenciaRepository
-                .getTodos()
-                .then(
-                    function (result) {
-                        for (let i = 0; i < result.data.length; i = i + 1) {
-                            result.data[i].dataInicial = result.data[i].dataInicial.replace(' ', 'T');
-                            result.data[i].dataFinal = result.data[i].dataFinal.replace(' ', 'T');
-                        }
-                        $scope.todos = result.data;
-                    },
-                    function (error) {
-                        toastr.error(error.data, "Falha na requisição");
-                    });
-        }
-
         function SaveCloud() {
-            OcorrenciaRepository
+            MoradoresRepository
                 .sync($scope.todos)
                 .then(
                     function (result) {
-
-                        for (let i = 0; i < $scope.todos.length; i = i + 1) {
-                          
-                            $scope.todos[i].id = result.data[i].id;
-                            $scope.todos[i].dataInicial = $scope.todos[i].dataInicial.replace(' ', 'T');
-                            $scope.todos[i].dataFinal = $scope.todos[i].dataFinal.replace(' ', 'T');
-                            
-                        }
                         toastr.info(result.data, "Sincronização completa")
                     },
                     function (error) {
