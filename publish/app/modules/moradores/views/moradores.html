@@ -1,0 +1,72 @@
+﻿<div class="row">
+    <div class="pos-f-t">
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-dark p-4">
+                <h5 class="text-white h4">Conteúdo de Ajuda da Página</h5>
+                <span class="text-muted">Nessa tela você pode registrar tarefas, controlalas atraves do marcador de seleção assim que a mesma estiver pronta, poderá também editar  ou apagar as mesmas.</span>
+            </div>
+        </div>
+        <nav class="navbar navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Alterna navegação">
+              <i class="fa fa-info-circle"></i>  <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+    </div>
+    <div class="col-md-12">
+        
+        <h3>Olá, <small>{{user()}}</small></h3>
+    </div>
+</div>
+<hr />
+
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        
+        <div class="row">
+            <div class="col-md-4 pull-left">
+                <div class="input-group">
+                    <input type="hidden" value="{{ todo.id}}" />
+                    <input type="text" class="form-control" placeholder="Descrição do Boletim de Ocorrência" ng-model="todo.descricao" />
+
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" ng-show="todo.id == 0" ng-click="save(todo)"><i class="fa fa-plus"></i></button>
+                    </span>
+                </div>
+            </div>
+          
+            <div class="col-md-3 pull-right">
+                <input type="text" class="form-control" placeholder="Filtrar" ng-model="search" />
+            </div>
+        </div>
+
+        <br />
+               
+        <div class="list-unstyled" ng-repeat="todo in todos | filter: search">
+              
+                    <input type="hidden" value="{{ todo.id}}" />
+                    <p>
+                        <strong>Nome: </strong><input type="text"  value="{{ todo.nome}}"  />
+                        <strong>Contato: </strong>  <input type="text" ng-model="todo.contato" value="{{ todo.contato }}" required />
+                   </p>
+                    <p><strong>E-mail: </strong> <input type="text" ng-model="todo.email" value="{{ todo.email }}" required /></p>
+                    <select ng-model="todo.idUnidade">
+                        <option value="{{ todo.proprietario }}">{{ findUser(unidade) }}</option>
+                        <option ng-repeat="usuario in usuarios" value="{{ usuario.id }}" >{{ usuario.nome }}</option>
+                    </select>
+                    <p></p>
+                    <div class="btn-group">
+                        <button class="btn btn-danger btn-lg" ng-click="delete(todo)"><i class="fa fa-remove"></i></button>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-primary btn-lg" ng-click="sync()"><i class="fa fa-save"></i></button>
+                    </div>
+                    <hr class="solid">
+                </div>
+                
+            </div>
+
+    </div>
+</div>
