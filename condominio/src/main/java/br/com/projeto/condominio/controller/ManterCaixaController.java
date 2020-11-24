@@ -45,8 +45,10 @@ public class ManterCaixaController {
 	}
 	
 	@PostMapping("/atualizar")
-	public void atualizar(@RequestBody ManterCaixa manterCaixa) {
-		manterCaixaService.atualizar(manterCaixa);
+	public @ResponseBody List<ManterCaixa> atualizar(@RequestBody List<ManterCaixa> manterCaixa) {
+		
+		
+		return manterCaixaService.atualizar(manterCaixa);
 	}
 	
 	

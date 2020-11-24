@@ -1,0 +1,71 @@
+﻿<p>
+    <div class="btn btn-primary pull-right" ng-click="click()">Create PDF File</div>
+</p>
+
+<!--<p>
+    <div class="btn btn-primary" ng-click="HTMLclick()">Create PDF File from Text box</div>
+</p>-->
+
+
+<h2>Controle de Caixa</h2>
+
+<div class="containerCaixa">
+    <h4>Saldo atual</h4>
+
+    <h1 id="balance" class="balance">R$ {{loadSaldo()}}</h1>
+
+    <div class="inc-exp-container">
+        <div>
+            <h4 class="h4balance">Receitas</h4>
+            <p id="money-plus" class="money plus">+ R$ </p>
+        </div>
+
+        <div>
+            <h4 class="h4balance">Despesas</h4>
+            <p id="money-minus" class="money minus">- R$0.00</p>
+        </div>
+    </div>
+    <div class="cardCaixa">
+        <div id="addItem" class="input-group-lg">
+            <input type="hidden" value="{{ todo.id}}" />
+            <input type="text" class="form-control" placeholder="Nome da transação" ng-model="todo.descricao" />
+            <input type="number" class="form-control" placeholder="Valor" ng-model="todo.valor" />
+
+        </div>
+
+    </div>
+    <div class="row">
+        <button class="btnReceita btn-primary pull-left" ng-show="todo.id == 0" ng-click="save(todo,'plus')"><i class="fa fa-plus"></i> Receita</button>
+        <button class="btnDespesa btn-primary pull-rigth" ng-show="todo.id == 0" ng-click="save(todo,'minus')"><i class="fa fa-minus"></i> Despesa</button>
+    </div>
+
+    <div class="col-md-3 pull-right">
+        <input type="text" class="form-control" placeholder="Filtrar" ng-model="search" />
+    </div>
+    <h3 class="h3balance">Transações</h3>
+
+
+    <div  ng-bind-html="HtmlData | UnsafeHtml" id="section">
+        <ul class="list-unstyled" ng-repeat="todo in todos | filter: search">
+            <li>
+                <button class="btn btn-danger btn-sm pull-left" ng-click="delete(todo)"><i class="fa fa-remove"></i></button>
+                <!--<span ng-model="todo.data" class="pull-left">{{ todo.data }}</span>-->
+                <input id="dataIni" class="pull-left" type="datetime-local" ng-model="todo.data" value="{{ todo.data }}  md-placeholder=" dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required" />
+            </li>
+            <li>  <input type="text" ng-model="todo.descricao" value="{{todo.descricao}}"> </li>
+            <!--<li id="tipo"> <span ng-model="todo.tipo "> </span>-->
+            <li id="saldo{{todo.id}}"> <span ng-model="todo.valor" class="text-center">R$ {{checkCaixaTipo(todo)}}</span></li>
+
+            <li class="solid1">
+        </ul>
+    </div>
+
+
+    <hr class="solid">
+
+
+
+
+
+
+</div>

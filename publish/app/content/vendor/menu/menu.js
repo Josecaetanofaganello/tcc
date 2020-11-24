@@ -47,7 +47,8 @@ function checkUser() {
      
 
     } else {
-    
+
+        toggleFormElements(false);
         for (let el of document.querySelectorAll('.btn-group')) el.style.visibility = 'visible';
         
     }

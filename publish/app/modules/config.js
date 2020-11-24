@@ -26,6 +26,11 @@
                 templateUrl: 'modules/assembleia/views/assembleia.html',
                 requireLogin: true
             })
+            .when('/caixa', {
+                controller: 'CaixaCtrl',
+                templateUrl: 'modules/caixa/views/caixa.html',
+                requireLogin: true
+            })
             .when('/account/logout', {
                 controller: 'LogoutCtrl',
                 templateUrl: 'modules/account/views/logout.html',
