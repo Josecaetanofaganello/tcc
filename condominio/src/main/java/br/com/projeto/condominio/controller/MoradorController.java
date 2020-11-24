@@ -66,7 +66,7 @@ public class MoradorController {
 
 	}
 	
-	@DeleteMapping("/delete")
+	@DeleteMapping("/deletar")
 	public void delete(Long id) {
 		moradorService.deletar(id);
 	}

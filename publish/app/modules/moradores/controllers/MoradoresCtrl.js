@@ -24,7 +24,7 @@
         $scope.findUnit = function(todo){
             for(let i = 0; $scope.unidades.length; i++){
                 if($scope.unidades[i].id == todo.idUnidade){
-                    return ($scope.unidades[i].identificacao + ' - ' +$scope.unidades[i].bloco);
+                    return ($scope.unidades[i].bloco + ' - ' +$scope.unidades[i].identificacao);
                 }
             }
         };
