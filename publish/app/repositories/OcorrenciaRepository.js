@@ -34,6 +34,9 @@
                 return $http.delete($rootScope.baseUrl + "/ocorrencia/deletar/" + item.id, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
 
             },
+            getUsuarios: function () {
+                return $http.get($rootScope.baseUrl +"/usuario/pesquisar", { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
+            },
             
         };
     }

@@ -23,6 +23,14 @@
 
         Load();
 
+        $scope.findUser = function(todo){
+            for(let i = 0; $scope.usuarios.length; i++){
+                if($scope.usuarios[i].id == todo.idUsuario){
+                    return $scope.usuarios[i].nome;
+                }
+            }
+        };
+
         $scope.user = function () {
             loadUser();
             return $scope.usuario.nome;
@@ -133,61 +141,7 @@
             }
             return val;
         }
-
-        function VoteLoad() {
-            OcorrenciaRepository
-                .loadVote()
-                .then(
-                    function (result) {
-                        for (let i = 0; i < $scope.todos.length; i = i + 1) {
-                            $scope.todos[i].negativeVote = 0;
-                            $scope.todos[i].positiveVote = 0;
-
-                            for (let x = 0; x < result.data.length; x = x + 1) {
-
-                                if (result.data[x].enquete == $scope.todos[i].id) {
-
-                                    if (result.data[x].tipoVoto == 0) {
-                                        if (isNaN($scope.todos[i].negativeVote)) {
-                                            $scope.todos[i].negativeVote = 0;
-                                             $scope.todos[i].negativeVote = $scope.todos[i].negativeVote +1;
-
-                                        } else {
-                                            $scope.todos[i].negativeVote = $scope.todos[i].negativeVote + 1;
-                                        }
-
-                                       
-
-                                    } else {
-
-                                        if (isNaN($scope.todos[i].positiveVote)) {
-                                            $scope.todos[i].positiveVote = 0;
-                                            $scope.todos[i].positiveVote = $scope.todos[i].positiveVote + 1;
-                                        } else {
-
-                                            $scope.todos[i].positiveVote = $scope.todos[i].positiveVote + 1;
-                                        }
-
-
-                                       
-
-                                    }
-
-                                } 
-
-
-
-                            }
-                            //result.data[0]
-
-                        }
-
-                        toastr.info(result.data, "Votos Carregados!")
-                    },
-                    function (error) {
-                        toastr.error(error.data, "Falha no voto");
-                    });
-        }
+      
 
         function New() {
             $scope.todo = {
@@ -202,8 +156,6 @@
 
             }
         }
-
-
 
 
         function Load() {
@@ -253,9 +205,18 @@
                     function (error) {
                         toastr.error(error.data, "Falha na requisição");
                     });
+
+            OcorrenciaRepository
+                    .getUsuarios()
+                    .then(
+                        function (result) {
+                           
+                            $scope.usuarios = result.data;
+                        },
+                        function (error) {
+                            toastr.error(error.data, "Falha na requisição");
+                        });
         }
-
-
 
         function ReadVote() {
             OcorrenciaRepository
