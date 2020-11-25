@@ -61,6 +61,11 @@
                 templateUrl: 'modules/moradores/views/moradores.html',
                 requireLogin: true
             })
+            .when('/areacomum', {
+                controller: 'AreaComumCtrl',
+                templateUrl: 'modules/areacomum/views/areaComum.html',
+                requireLogin: true
+            })
             .otherwise({
                 controller: 'HomeCtrl as vm',
                 templateUrl: 'modules/home/views/404.html',
