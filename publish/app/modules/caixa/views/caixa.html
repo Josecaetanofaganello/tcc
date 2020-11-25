@@ -1,5 +1,5 @@
 ﻿<p>
-    <div class="btn btn-primary pull-right" ng-click="click()">Create PDF File</div>
+    <div class="btn btn-primary pull-right" ng-click="click()">Imprimir<i class="fa fa-print" aria-hidden="true"></i></div>
 </p>
 
 <!--<p>
@@ -17,12 +17,12 @@
     <div class="inc-exp-container">
         <div>
             <h4 class="h4balance">Receitas</h4>
-            <p id="money-plus" class="money plus">+ R$ </p>
+            <p id="money-plus" class="money plus"> R$ {{loadReceita()}}</p>
         </div>
 
         <div>
             <h4 class="h4balance">Despesas</h4>
-            <p id="money-minus" class="money minus">- R$0.00</p>
+            <p id="money-minus" class="money minus"> R$ {{loadDespesa()}}</p>
         </div>
     </div>
     <div class="cardCaixa">
@@ -38,6 +38,9 @@
         <button class="btnReceita btn-primary pull-left" ng-show="todo.id == 0" ng-click="save(todo,'plus')"><i class="fa fa-plus"></i> Receita</button>
         <button class="btnDespesa btn-primary pull-rigth" ng-show="todo.id == 0" ng-click="save(todo,'minus')"><i class="fa fa-minus"></i> Despesa</button>
     </div>
+    <div class="btn-group">
+        <button class="btn btn-primary btn-lg pull-left" ng-click="sync()"><i class="fa fa-refresh"></i></button>
+    </div>
 
     <div class="col-md-3 pull-right">
         <input type="text" class="form-control" placeholder="Filtrar" ng-model="search" />
@@ -45,7 +48,7 @@
     <h3 class="h3balance">Transações</h3>
 
 
-    <div  ng-bind-html="HtmlData | UnsafeHtml" id="section">
+    <div ng-bind-html="HtmlData | UnsafeHtml" id="section">
         <ul class="list-unstyled" ng-repeat="todo in todos | filter: search">
             <li>
                 <button class="btn btn-danger btn-sm pull-left" ng-click="delete(todo)"><i class="fa fa-remove"></i></button>

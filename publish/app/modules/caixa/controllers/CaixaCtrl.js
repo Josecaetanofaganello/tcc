@@ -32,7 +32,7 @@
         $scope.todos = [];
 
         Load();
-        VoteLoad();
+        //VoteLoad();
 
 
 
@@ -41,10 +41,24 @@
             //  $scope.order.showPopupAddedToCart = !$scope.order.showPopupAddedToCart;
 
             var doc = new jsPDF();
-            doc.text(20, 20, 'Relatorio do Caixa!');
-            angular.forEach($scope.todos, function (todo) {
-                doc.text(20, 20, todo.data + ' - ' + todo.valor + ' ' + todo.descricao);
-            });
+            doc.text(20, 20, 'Relatorio do Caixa');
+
+
+            var text = []
+            for (let x = 0; x < $scope.todos.length; x = x + 1) {
+
+
+                if ($scope.todos[x].tipo == 0) {
+
+                    text.push($scope.todos[x].data + ' - ' + ' ' + $scope.todos[x].descricao + ' \t (' + $scope.todos[x].valor + ')');
+                } else {
+                    // doc.text(20, 20, '\n' + $scope.todos[x].data + ' - ' + $scope.todos[x].valor + ' ' + $scope.todos[x].descricao);
+                    text.push($scope.todos[x].data + ' - ' + ' ' + $scope.todos[x].descricao + ' \t ' + $scope.todos[x].valor);
+                }
+            }
+                      
+           
+            doc.text(text, 10, 30)
 
             // Save the PDF
             doc.save('Test.pdf');
@@ -54,9 +68,7 @@
 
 
         $scope.loadSaldo = function () {
-            //    console.log("button clicked");
-            //  $scope.order.showPopupAddedToCart = !$scope.order.showPopupAddedToCart;
-
+          
             var saldo=0;
             angular.forEach($scope.todos, function (todo) {
                 if (todo.tipo == 0) {
@@ -71,6 +83,45 @@
 
 
         };
+
+
+
+        $scope.loadDespesa = function () {
+            //    console.log("button clicked");
+            //  $scope.order.showPopupAddedToCart = !$scope.order.showPopupAddedToCart;
+
+            var despesa = 0;
+            angular.forEach($scope.todos, function (todo) {
+                if (todo.tipo == 0) {
+                    despesa = despesa - todo.valor;
+                } 
+            });
+
+            // Save the PDF
+            return despesa.toFixed(2);
+
+
+        };
+
+        $scope.loadReceita = function () {
+            //    console.log("button clicked");
+            //  $scope.order.showPopupAddedToCart = !$scope.order.showPopupAddedToCart;
+
+            var receita = 0;
+            angular.forEach($scope.todos, function (todo) {
+                if (todo.tipo != 0) {
+                    receita = receita + todo.valor;
+                } 
+            });
+
+            // Save the PDF
+            return receita.toFixed(2);
+
+
+        };
+
+
+
 
 
         $scope.HTMLclick = function () {
@@ -361,60 +412,60 @@
             return val;
         }
 
-        function VoteLoad() {
-            CaixaRepository
-                .loadVote()
-                .then(
-                    function (result) {
-                        for (let i = 0; i < $scope.todos.length; i = i + 1) {
-                            $scope.todos[i].negativeVote = 0;
-                            $scope.todos[i].positiveVote = 0;
+        //function VoteLoad() {
+        //    CaixaRepository
+        //        .loadVote()
+        //        .then(
+        //            function (result) {
+        //                for (let i = 0; i < $scope.todos.length; i = i + 1) {
+        //                    $scope.todos[i].negativeVote = 0;
+        //                    $scope.todos[i].positiveVote = 0;
 
-                            for (let x = 0; x < result.data.length; x = x + 1) {
+        //                    for (let x = 0; x < result.data.length; x = x + 1) {
 
-                                if (result.data[x].enquete == $scope.todos[i].id) {
+        //                        if (result.data[x].enquete == $scope.todos[i].id) {
 
-                                    if (result.data[x].tipoVoto == 0) {
-                                        if (isNaN($scope.todos[i].negativeVote)) {
-                                            $scope.todos[i].negativeVote = 0;
-                                            $scope.todos[i].negativeVote = $scope.todos[i].negativeVote + 1;
+        //                            if (result.data[x].tipoVoto == 0) {
+        //                                if (isNaN($scope.todos[i].negativeVote)) {
+        //                                    $scope.todos[i].negativeVote = 0;
+        //                                    $scope.todos[i].negativeVote = $scope.todos[i].negativeVote + 1;
 
-                                        } else {
-                                            $scope.todos[i].negativeVote = $scope.todos[i].negativeVote + 1;
-                                        }
-
-
-
-                                    } else {
-
-                                        if (isNaN($scope.todos[i].positiveVote)) {
-                                            $scope.todos[i].positiveVote = 0;
-                                            $scope.todos[i].positiveVote = $scope.todos[i].positiveVote + 1;
-                                        } else {
-
-                                            $scope.todos[i].positiveVote = $scope.todos[i].positiveVote + 1;
-                                        }
+        //                                } else {
+        //                                    $scope.todos[i].negativeVote = $scope.todos[i].negativeVote + 1;
+        //                                }
 
 
 
+        //                            } else {
 
-                                    }
+        //                                if (isNaN($scope.todos[i].positiveVote)) {
+        //                                    $scope.todos[i].positiveVote = 0;
+        //                                    $scope.todos[i].positiveVote = $scope.todos[i].positiveVote + 1;
+        //                                } else {
 
-                                }
+        //                                    $scope.todos[i].positiveVote = $scope.todos[i].positiveVote + 1;
+        //                                }
 
 
 
-                            }
-                            //result.data[0]
 
-                        }
+        //                            }
 
-                        toastr.info(result.data, "Votos Carregados!")
-                    },
-                    function (error) {
-                        toastr.error(error.data, "Falha no voto");
-                    });
-        }
+        //                        }
+
+
+
+        //                    }
+        //                    //result.data[0]
+
+        //                }
+
+        //                toastr.info(result.data, "Votos Carregados!")
+        //            },
+        //            function (error) {
+        //                toastr.error(error.data, "Falha no voto");
+        //            });
+        //}
 
         function New() {
             var date = new Date();
