@@ -9,13 +9,13 @@
     CaixaCtrl.$inject = ['$scope', '$http', 'CaixaRepository'];
 
 
-    app.filter('UnsafeHtml', ["$sce",
-        function ($sce) {
-            return function (val) {
-                return $sce.trustAsHtml(val);
-            };
-        }
-    ]);
+    //app.filter('UnsafeHtml', ["$sce",
+    //    function ($sce) {
+    //        return function (val) {
+    //            return $sce.trustAsHtml(val);
+    //        };
+    //    }
+    //]);
 
     function CaixaCtrl($scope, $http, CaixaRepository) {
         $scope.todo = {
@@ -32,7 +32,7 @@
         $scope.todos = [];
 
         Load();
-        VoteLoad();
+        //VoteLoad();
 
 
 
@@ -41,10 +41,24 @@
             //  $scope.order.showPopupAddedToCart = !$scope.order.showPopupAddedToCart;
 
             var doc = new jsPDF();
-            doc.text(20, 20, 'Relatorio do Caixa!');
-            angular.forEach($scope.todos, function (todo) {
-                doc.text(20, 20, todo.data + ' - ' + todo.valor + ' ' + todo.descricao);
-            });
+            doc.text(20, 20, 'Relatorio do Caixa');
+
+
+            var text = []
+            for (let x = 0; x < $scope.todos.length; x = x + 1) {
+
+
+                if ($scope.todos[x].tipo == 0) {
+
+                    text.push($scope.todos[x].data + ' - ' + ' ' + $scope.todos[x].descricao + ' \t (' + $scope.todos[x].valor + ')');
+                } else {
+                    // doc.text(20, 20, '\n' + $scope.todos[x].data + ' - ' + $scope.todos[x].valor + ' ' + $scope.todos[x].descricao);
+                    text.push($scope.todos[x].data + ' - ' + ' ' + $scope.todos[x].descricao + ' \t ' + $scope.todos[x].valor);
+                }
+            }
+                      
+           
+            doc.text(text, 10, 30)
 
             // Save the PDF
             doc.save('Test.pdf');
@@ -54,9 +68,7 @@
 
 
         $scope.loadSaldo = function () {
-            //    console.log("button clicked");
-            //  $scope.order.showPopupAddedToCart = !$scope.order.showPopupAddedToCart;
-
+          
             var saldo=0;
             angular.forEach($scope.todos, function (todo) {
                 if (todo.tipo == 0) {
@@ -73,63 +85,102 @@
         };
 
 
-        $scope.HTMLclick = function () {
 
-            console.log("starting HTMLclick");
-            var pdf = new jsPDF('p', 'pt', 'letter');
+        $scope.loadDespesa = function () {
+            //    console.log("button clicked");
+            //  $scope.order.showPopupAddedToCart = !$scope.order.showPopupAddedToCart;
 
-            // source can be HTML-formatted string, or a reference
-            // to an actual DOM element from which the text will be scraped.
+            var despesa = 0;
+            angular.forEach($scope.todos, function (todo) {
+                if (todo.tipo == 0) {
+                    despesa = despesa - todo.valor;
+                } 
+            });
 
-            var source = $scope.HtmlData;
+            // Save the PDF
+            return despesa.toFixed(2);
 
-            // we support special element handlers. Register them with jQuery-style 
-            // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
-            // There is no support for any other type of selectors 
-            // (class, of compound) at this time.
-
-            var specialElementHandlers = {
-                // element with id of "bypass" - jQuery style selector
-                '#bypassme': function (element, renderer) {
-                    // true = "handled elsewhere, bypass text extraction"
-                    return true;
-                }
-            };
-
-            var margins = {
-                top: 80,
-                bottom: 60,
-                left: 40,
-                width: 522
-            };
-
-            console.log("Building  HTML" + source);
-            // all coords and widths are in jsPDF instance's declared units
-            // 'inches' in this case
-            pdf.fromHTML(
-                source // HTML string or DOM elem ref.
-                , margins.left // x coord
-                , margins.top // y coord
-                , {
-                    'width': margins.width // max width of content on PDF
-                    ,
-                    'elementHandlers': specialElementHandlers
-                },
-                function (dispose) {
-                    // dispose: object with X, Y of the last line add to the PDF 
-                    //          this allow the insertion of new lines after html
-
-                    //Didn't work
-                    //   console.log("Saving HTMLclick");
-                    // pdf.save('Test.pdf');
-                },
-                margins
-            );
-
-            console.log("after from HTML.");
-            pdf.save('Test.pdf');
 
         };
+
+        $scope.loadReceita = function () {
+            //    console.log("button clicked");
+            //  $scope.order.showPopupAddedToCart = !$scope.order.showPopupAddedToCart;
+
+            var receita = 0;
+            angular.forEach($scope.todos, function (todo) {
+                if (todo.tipo != 0) {
+                    receita = receita + todo.valor;
+                } 
+            });
+
+            // Save the PDF
+            return receita.toFixed(2);
+
+
+        };
+
+
+
+
+
+        //$scope.HTMLclick = function () {
+
+        //    console.log("starting HTMLclick");
+        //    var pdf = new jsPDF('p', 'pt', 'letter');
+
+        //    // source can be HTML-formatted string, or a reference
+        //    // to an actual DOM element from which the text will be scraped.
+
+        //    var source = $scope.HtmlData;
+
+        //    // we support special element handlers. Register them with jQuery-style 
+        //    // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
+        //    // There is no support for any other type of selectors 
+        //    // (class, of compound) at this time.
+
+        //    var specialElementHandlers = {
+        //        // element with id of "bypass" - jQuery style selector
+        //        '#bypassme': function (element, renderer) {
+        //            // true = "handled elsewhere, bypass text extraction"
+        //            return true;
+        //        }
+        //    };
+
+        //    var margins = {
+        //        top: 80,
+        //        bottom: 60,
+        //        left: 40,
+        //        width: 522
+        //    };
+
+        //    console.log("Building  HTML" + source);
+        //    // all coords and widths are in jsPDF instance's declared units
+        //    // 'inches' in this case
+        //    pdf.fromHTML(
+        //        source // HTML string or DOM elem ref.
+        //        , margins.left // x coord
+        //        , margins.top // y coord
+        //        , {
+        //            'width': margins.width // max width of content on PDF
+        //            ,
+        //            'elementHandlers': specialElementHandlers
+        //        },
+        //        function (dispose) {
+        //            // dispose: object with X, Y of the last line add to the PDF 
+        //            //          this allow the insertion of new lines after html
+
+        //            //Didn't work
+        //            //   console.log("Saving HTMLclick");
+        //            // pdf.save('Test.pdf');
+        //        },
+        //        margins
+        //    );
+
+        //    console.log("after from HTML.");
+        //    pdf.save('Test.pdf');
+
+        //};
 
 
 
@@ -257,9 +308,12 @@
         $scope.save = function (todo,tipe) {
 
 
-            if (todo.id == 0 && todo.descricao != '') {
+            if (todo.id == 0 && todo.descricao != '' && todo.valor> 0) {
+
+
                 if (tipe == 'plus') {
                     todo.tipo = '1';
+
                 }
                 else {
                     todo.tipo = '0';
@@ -272,7 +326,7 @@
                 Sync();
               
             } else {
-                Edit();
+                toastr.warning('Valor Inválido, não digite numeros negativos, utilize a opção despesa!');
             }
             New();
         }
@@ -361,60 +415,60 @@
             return val;
         }
 
-        function VoteLoad() {
-            CaixaRepository
-                .loadVote()
-                .then(
-                    function (result) {
-                        for (let i = 0; i < $scope.todos.length; i = i + 1) {
-                            $scope.todos[i].negativeVote = 0;
-                            $scope.todos[i].positiveVote = 0;
+        //function VoteLoad() {
+        //    CaixaRepository
+        //        .loadVote()
+        //        .then(
+        //            function (result) {
+        //                for (let i = 0; i < $scope.todos.length; i = i + 1) {
+        //                    $scope.todos[i].negativeVote = 0;
+        //                    $scope.todos[i].positiveVote = 0;
 
-                            for (let x = 0; x < result.data.length; x = x + 1) {
+        //                    for (let x = 0; x < result.data.length; x = x + 1) {
 
-                                if (result.data[x].enquete == $scope.todos[i].id) {
+        //                        if (result.data[x].enquete == $scope.todos[i].id) {
 
-                                    if (result.data[x].tipoVoto == 0) {
-                                        if (isNaN($scope.todos[i].negativeVote)) {
-                                            $scope.todos[i].negativeVote = 0;
-                                            $scope.todos[i].negativeVote = $scope.todos[i].negativeVote + 1;
+        //                            if (result.data[x].tipoVoto == 0) {
+        //                                if (isNaN($scope.todos[i].negativeVote)) {
+        //                                    $scope.todos[i].negativeVote = 0;
+        //                                    $scope.todos[i].negativeVote = $scope.todos[i].negativeVote + 1;
 
-                                        } else {
-                                            $scope.todos[i].negativeVote = $scope.todos[i].negativeVote + 1;
-                                        }
-
-
-
-                                    } else {
-
-                                        if (isNaN($scope.todos[i].positiveVote)) {
-                                            $scope.todos[i].positiveVote = 0;
-                                            $scope.todos[i].positiveVote = $scope.todos[i].positiveVote + 1;
-                                        } else {
-
-                                            $scope.todos[i].positiveVote = $scope.todos[i].positiveVote + 1;
-                                        }
+        //                                } else {
+        //                                    $scope.todos[i].negativeVote = $scope.todos[i].negativeVote + 1;
+        //                                }
 
 
 
+        //                            } else {
 
-                                    }
+        //                                if (isNaN($scope.todos[i].positiveVote)) {
+        //                                    $scope.todos[i].positiveVote = 0;
+        //                                    $scope.todos[i].positiveVote = $scope.todos[i].positiveVote + 1;
+        //                                } else {
 
-                                }
+        //                                    $scope.todos[i].positiveVote = $scope.todos[i].positiveVote + 1;
+        //                                }
 
 
 
-                            }
-                            //result.data[0]
 
-                        }
+        //                            }
 
-                        toastr.info(result.data, "Votos Carregados!")
-                    },
-                    function (error) {
-                        toastr.error(error.data, "Falha no voto");
-                    });
-        }
+        //                        }
+
+
+
+        //                    }
+        //                    //result.data[0]
+
+        //                }
+
+        //                toastr.info(result.data, "Votos Carregados!")
+        //            },
+        //            function (error) {
+        //                toastr.error(error.data, "Falha no voto");
+        //            });
+        //}
 
         function New() {
             var date = new Date();
