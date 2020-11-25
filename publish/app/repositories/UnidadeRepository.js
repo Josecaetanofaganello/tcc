@@ -12,8 +12,8 @@
             getUnidades: function () {
                 return $http.get($rootScope.baseUrl +"/unidade/listar", { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
             },
-            sync: function (todos) {
-                return $http.post($rootScope.baseUrl +"/unidade/atualizar", todos, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } });
+            sync: function (unidade) {
+                return $http.put($rootScope.baseUrl +"/unidade/atualizar", unidade, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } });
             },
             delete: function (item) {
                 return $http.delete($rootScope.baseUrl +"/unidade/deletar/" + item.id, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })

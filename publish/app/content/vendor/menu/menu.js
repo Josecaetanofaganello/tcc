@@ -10,6 +10,8 @@ function openNav() {
         document.getElementById("mySidenav").style.visibility = "hidden";
         document.getElementById("mySidenav").style.width = "0";
     }
+
+    checkUser();
 }
 
 /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
@@ -43,10 +45,18 @@ function checkUser() {
         toggleFormElements(true);
            // document.getElementById("addItem").style.visibility = "hidden";
            // for (let el of document.querySelectorAll('.btn-group')) el.style.visibility = 'hidden';
-        
-     
+           
+        document.getElementById("menuTarefa").style.visibility = "hidden";
+        document.getElementById("menuMorador").style.visibility = "hidden";
+        document.getElementById("menuUnidade").style.visibility = "hidden";
+        document.getElementById("menuCondominio").style.visibility = "hidden";
+    
 
     } else {
+        document.getElementById("menuTarefa").style.visibility = "visible";
+        document.getElementById("menuMorador").style.visibility = "visible";
+        document.getElementById("menuUnidade").style.visibility = "visible";
+        document.getElementById("menuCondominio").style.visibility = "visible";
 
         toggleFormElements(false);
         for (let el of document.querySelectorAll('.btn-group')) el.style.visibility = 'visible';
