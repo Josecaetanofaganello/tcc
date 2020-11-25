@@ -9,8 +9,8 @@
 
     function OcorrenciaRepository($http, $rootScope, $location) {
         return {
-            getTodos: function () {
-                return $http.get($rootScope.baseUrl + "/ocorrencia/listar", { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
+            getTodos: function (usuario) {
+                return $http.get($rootScope.baseUrl + "/ocorrencia/listar/"+usuario.id+"/"+usuario.tipo, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
             },
             sync: function (todos) {
         

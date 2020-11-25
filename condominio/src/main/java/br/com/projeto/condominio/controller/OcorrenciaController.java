@@ -52,22 +52,25 @@ public class OcorrenciaController {
 	}
 	
 
-	@GetMapping("/listar")
-	public @ResponseBody List<Ocorrencia> listar() {
+	@GetMapping("/listar/{idUsuarioLogado}/{tipoUsuarioLogado}")
+	public @ResponseBody List<Ocorrencia> listar(@PathVariable Long idUsuarioLogado, @PathVariable String tipoUsuarioLogado) {
 
-		List<Ocorrencia> ocorrencias = ocorrenciaService.pesquisar();
-
+		List<Ocorrencia> ocorrencias = ocorrenciaService.pesquisar(idUsuarioLogado, tipoUsuarioLogado);
+		
 		return ocorrencias;
 	}
 
 	@GetMapping("/consultar/{id}")
-	public @ResponseBody Ocorrencia consultar(@PathVariable Long id) {
-		return ocorrenciaService.consultar(id);
+	public @ResponseBody List<Ocorrencia> consultar(@PathVariable Long idUsuario) {
+		
+		List<Ocorrencia> ocorrenciasRetorno = ocorrenciaService.consultar(idUsuario);
+		
+		return ocorrenciasRetorno;
 
 	}
 	
-	@DeleteMapping("/delete")
-	public void delete(Long id) {
+	@DeleteMapping("/deletar/{id}")
+	public void delete(@PathVariable Long id) {
 		ocorrenciaService.deletar(id);
 	}
 

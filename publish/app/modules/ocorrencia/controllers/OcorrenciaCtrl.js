@@ -22,7 +22,7 @@
         $scope.todos = [];
 
         Load();
-
+        
         $scope.findUser = function(todo){
             for(let i = 0; $scope.usuarios.length; i++){
                 if($scope.usuarios[i].id == todo.idUsuario){
@@ -187,8 +187,9 @@
         }
 
         function ReadCloud() {
+            loadUser();
             OcorrenciaRepository
-                .getTodos()
+                .getTodos($scope.usuario)
                 .then(
                     function (result) {
                         for (let i = 0; i < result.data.length; i = i + 1) {

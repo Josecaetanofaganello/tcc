@@ -8,8 +8,8 @@ public interface OcorrenciaService {
 
 	Ocorrencia salvar(Ocorrencia ocorrencia);
 	List<Ocorrencia> atualizar(List<Ocorrencia> ocorrencias);
-    List<Ocorrencia> pesquisar();
-    Ocorrencia consultar(Long id);
+    List<Ocorrencia> pesquisar(Long idUsuarioLogado, String tipoUsuarioLogado);
+    List<Ocorrencia> consultar(Long id);
     void deletar(Long id);
     
 }
