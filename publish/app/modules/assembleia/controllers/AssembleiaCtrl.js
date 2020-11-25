@@ -30,7 +30,7 @@
         $scope.remaining = function () {
             var count = 0;
             angular.forEach($scope.todos, function (todo) {
-                count += todo.statusTarefa ? 0 : 1;
+                count++;
             });
             return count;
         };
@@ -38,7 +38,7 @@
         $scope.remainingVote = function () {
             var count = 0;
             angular.forEach($scope.todos, function (todo) {
-                count += todo.statusTarefa ? 0 : 1;
+                todo.enquete;
             });
             return count;
         };
