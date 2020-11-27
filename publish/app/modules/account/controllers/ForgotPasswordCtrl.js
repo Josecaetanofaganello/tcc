@@ -13,7 +13,7 @@
         };
 
         $scope.rememberPassword = function () {
-            UserRepository.resetPassword($scope.forgotPasswordModel).then(
+            UserRepository.resetPassword($scope.forgotPasswordModel.email).then(
                 function (result) {
                     toastr.success(result.data, 'Senha restaurada com sucesso!');
                     $location.path('/forgot-paswword-sucess');

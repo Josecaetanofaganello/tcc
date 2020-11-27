@@ -33,7 +33,7 @@
                 return $http.post($rootScope.baseUrl +"/usuario/salvar", user, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } });
             },
             resetPassword: function (email) {
-                return $http.post($rootScope.baseUrl +"/api/account/resetpassword", email, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } });
+                return $http.get($rootScope.baseUrl +"/usuario/resetpassword/" + email, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } });
             },
             loadAptos: function () {
                 return $http.get($rootScope.baseUrl + "/unidade/listar" , { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
