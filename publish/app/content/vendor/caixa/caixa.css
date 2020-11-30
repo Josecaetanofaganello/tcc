@@ -210,4 +210,23 @@ input[type='number'] {
     background-color: red;
     border-style: solid;
     border-color: blueviolet;
-} 
+}
+
+body,
+#txt,
+#hide {
+    font: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+#txt {
+    border: none;
+    color: #888;
+    min-width: 10px;
+}
+
+#hide {
+    display: none;
+    white-space: pre;
+}

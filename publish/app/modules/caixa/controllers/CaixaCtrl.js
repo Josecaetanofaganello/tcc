@@ -46,22 +46,24 @@
 
             var text = []
             for (let x = 0; x < $scope.todos.length; x = x + 1) {
-
+                var date = new Date($scope.todos[x].data);
+                date = format(date, 'dd-MM-yyyy hh:mm');
 
                 if ($scope.todos[x].tipo == 0) {
 
-                    text.push($scope.todos[x].data + ' - ' + ' ' + $scope.todos[x].descricao + ' \t (' + $scope.todos[x].valor + ')');
+                    text.push(date + ' - ' + ' ' + $scope.todos[x].descricao + ' \t (' + $scope.todos[x].valor + ')');
                 } else {
                     // doc.text(20, 20, '\n' + $scope.todos[x].data + ' - ' + $scope.todos[x].valor + ' ' + $scope.todos[x].descricao);
-                    text.push($scope.todos[x].data + ' - ' + ' ' + $scope.todos[x].descricao + ' \t ' + $scope.todos[x].valor);
+                    text.push(date + ' - ' + ' ' + $scope.todos[x].descricao + ' \t ' + $scope.todos[x].valor);
                 }
             }
                       
            
             doc.text(text, 10, 30)
-
+            var date = new Date();
+            date = format(date, 'dd-MM-yyyy');
             // Save the PDF
-            doc.save('Test.pdf');
+            doc.save('RelatorioCaixa_' + date+'.pdf');
 
 
         };
@@ -78,7 +80,7 @@
                 }
             });
 
-            // Save the PDF
+           
             return saldo.toFixed(2);
 
 
@@ -93,7 +95,7 @@
             var despesa = 0;
             angular.forEach($scope.todos, function (todo) {
                 if (todo.tipo == 0) {
-                    despesa = despesa - todo.valor;
+                    despesa = despesa + todo.valor;
                 } 
             });
 
@@ -213,23 +215,23 @@
 
         $scope.checkCaixaTipo = function (tipo) {
 
-           
-            var valor = tipo.valor.toFixed(2);
+            if (tipo != null) {
+                var valor = tipo.valor.toFixed(2);
 
-            if (tipo.tipo == "0") {
+                if (tipo.tipo == "0") {
 
-                document.getElementById('saldo'+tipo.id).innerHTML = '<i class=\"fa fa-minus\" style=\'color: red;\'></i>'+valor;
-            
+                    document.getElementById('saldo' + tipo.id).innerHTML = '<i class=\"fa fa-minus\" style=\'color: red;\'></i>' + valor;
+
+                }
+                else {
+
+                    document.getElementById('saldo' + tipo.id).innerHTML = '<i class=\"fa fa-plus\" style=\'color: green;\'></i>' + valor;
+
+
+
+                }
+                loadSaldo();
             }
-            else {
-
-                document.getElementById('saldo'+tipo.id).innerHTML = '<i class=\"fa fa-plus\" style=\'color: green;\'></i>' + valor;
-
-               
-
-            }
-            loadSaldo();
-
         };
 
 
@@ -326,7 +328,7 @@
                 Sync();
               
             } else {
-                toastr.warning('Valor Inválido, não digite numeros negativos, utilize a opção despesa!');
+                toastr.warning('Por favor preencha corretamente todos os campos obrigatórios!');
             }
             New();
         }
