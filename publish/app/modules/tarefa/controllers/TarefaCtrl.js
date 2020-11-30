@@ -26,7 +26,10 @@
         $scope.remaining = function () {
             var count = 0;
             angular.forEach($scope.todos, function (todo) {
-                count += todo.statusTarefa ? 0 : 1;
+                if (todo.statusTarefa == 0) {
+                    count++;
+                }
+               // count += todo.statusTarefa ? 0 : 1;
             });
             return count;
         };
@@ -81,8 +84,20 @@
         }
 
         $scope.sync = function () {
-            Sync();
-            location.reload();
+            var valido = true;
+            angular.forEach($scope.todos, function (todo) {
+                if (todo.dataInicial == null) {
+                    valido = false;
+                } 
+                // count += todo.statusTarefa ? 0 : 1;
+            });
+            if (valido) {
+                Sync();
+            } else {
+                toastr.info('Por favor preencha corretamente todos os campos obrigatórios!');
+            }
+
+           // location.reload();
         }
 
         function Save(item) {
@@ -154,7 +169,9 @@
                     function (result) {
                         for (let i = 0; i < result.data.length; i = i + 1) {
                             result.data[i].dataInicial = result.data[i].dataInicial.replace(' ', 'T');
-                            result.data[i].dataFinal = result.data[i].dataFinal.replace(' ', 'T');
+                            if (result.data[i].dataFinal != null) {
+                                result.data[i].dataFinal = result.data[i].dataFinal.replace(' ', 'T');
+                            }
                         }
                         $scope.todos = result.data;
                     },
@@ -170,8 +187,12 @@
                     function (result) {
 
                         for (let i = 0; i < $scope.todos.length; i = i + 1) {
+
+                            $scope.todos[i].id = result.data[i].id;
                             $scope.todos[i].dataInicial = $scope.todos[i].dataInicial.replace(' ', 'T');
-                            $scope.todos[i].dataFinal = $scope.todos[i].dataFinal.replace(' ', 'T');
+                            if ($scope.todos[i].dataFinal != null) {
+                                $scope.todos[i].dataFinal = $scope.todos[i].dataFinal.replace(' ', 'T');
+                            }
                         }
                         toastr.info(result.data, "Sincronização completa")
                     },

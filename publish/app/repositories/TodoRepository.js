@@ -21,11 +21,14 @@
                     if (todos[i].dataInicial != null) {
                         todos[i].dataInicial = todos[i].dataInicial.replace('T', ' ');
                     }
-                    if (todos[i].dataFinal !=null){
+                    if (todos[i].dataFinal != null) {
                         todos[i].dataFinal = todos[i].dataFinal.replace('T', ' ');
                     }
-                  
-                   
+                    if (todos[i].dataAtualizacao != null) {
+                        todos[i].dataAtualizacao = todos[i].dataAtualizacao.replace('T', ' ');
+                    }
+
+
                 }
 
                 return $http.post($rootScope.baseUrl +"/tarefa/atualizar", todos, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } });

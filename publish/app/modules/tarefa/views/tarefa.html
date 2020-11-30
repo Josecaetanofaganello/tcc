@@ -14,7 +14,7 @@
     </div>
     <div class="col-md-12">
         <div class="btn-group pull-right">
-            <a href="/app" class="btn btn-primary btn-lg"><i class="fa fa-refresh"></i></a>
+            <!--<a href="/app" class="btn btn-primary btn-lg"><i class="fa fa-refresh"></i></a>-->
             <button class="btn btn-primary btn-lg" ng-click="sync()"><i class="fa fa-save"></i></button>
         </div>
         <h3>Olá, <small>{{user()}}</small></h3>
@@ -40,14 +40,14 @@
         </div>
 
         <br />
-        <ul class="list-unstyled" ng-repeat="todo in todos | filter: search">
+        <ul class="list-unstyled" ng-repeat="todo in todos |orderBy:'statusTarefa'| filter: search">
             <li class="todo-item">
                 <input type="hidden" value="{{ todo.id}}"/>
                 <input type="checkbox" ng-model="todo.statusTarefa">
-                <input type="text" ng-model="todo.descricao" value="{{ todo.descricao }}" />
-                <input type="datetime-local"  ng-model="todo.dataInicial" value="{{ todo.dataInicial }}  md-placeholder="dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required" /> 
-                <input type="datetime-local" ng-model="todo.dataFinal"  value="{{ todo.dataFinal }} md-placeholder="dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required"/>
-                <input type="text" ng-model="todo.nomeResponsavel" value="{{ todo.nomeResponsavel }}" />
+                <input class="todo-{{ todo.statusTarefa }}" ng-show="teste" type="text" ng-model="todo.descricao" value="{{ todo.descricao }}" />
+                <input class="todo-{{ todo.statusTarefa }}" type="datetime-local"  ng-model="todo.dataInicial" value="{{ todo.dataInicial }}  md-placeholder="dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required" /> 
+                <input class="todo-{{ todo.statusTarefa }}" type="datetime-local" ng-model="todo.dataFinal"  value="{{ todo.dataFinal }} md-placeholder="dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required"/>
+                <input class="todo-{{ todo.statusTarefa }}" type="text" placeholder="Responsável" ng-model="todo.nomeResponsavel" value="{{ todo.nomeResponsavel }}" />
                
                 <div class="btn-group pull-right">
                 <button class="btn btn-danger btn-sm" ng-click="delete(todo)"><i class="fa fa-remove"></i></button>

@@ -1,6 +1,9 @@
 ﻿.todo-true {
     text-decoration: line-through;
     font-style: italic;
+    background: #CCC;
+    color: #333;
+    border: 1px solid #666
 }
 
 .todo-item {
