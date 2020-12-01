@@ -15,7 +15,7 @@ public class UtilsMail {
 
 	public void enviarEmail(String assunto, String msgCorpoEmail, String destinatarios) {
 		final String username = "control.syscondo@gmail.com";
-		final String password = "C0ntrol&20";
+		final String password = "30C0ntrol&20";
 
 		Properties props = new Properties();
 		props.put("mail.transport.protocol", "smtp");

@@ -3,7 +3,7 @@
         <div class="collapse" id="navbarToggleExternalContent">
             <div class="bg-dark p-4">
                 <h5 class="text-white h4">Conteúdo de Ajuda da Página</h5>
-                <span class="text-muted">Nessa tela você pode visualizar e iteragir com as ações da assembléia online.</span>
+                <span class="text-muted">Nessa tela você pode visualizar e manter as areas comuns, faça sua reserva e aguarde a liberação do sindico.</span>
             </div>
         </div>
         <nav class="navbar navbar-dark bg-dark">
@@ -49,8 +49,8 @@
             <div class="todo-item">
                 <input type="hidden" value="{{ todo.id}}" />
                 <strong>Nome Responsável: </strong><input type="text" readonly value="{{ findUser(todo) }}"  />
-                <p><strong>Notificação: </strong> <textarea id="textNotificacao"  class="textareaAreaComum resize-ta" ng-model="todo.notificacao" value="{{ todo.notificacao }}"></textarea></p>
-                <p><strong>Motivo: </strong> <textarea id="text" class="textareaAreaComum resize-ta" ng-model="todo.motivo" value="{{ todo.motivo }}"></textarea></p>
+                <p><strong>Solicitação: </strong> <textarea id="textNotificacao"  class="textareaAreaComum resize-ta" ng-model="todo.notificacao" value="{{ todo.notificacao }}"></textarea></p>
+                <p><strong>Resposta Síndico: </strong> <textarea id="text" class="textareaAreaComum resize-ta" ng-model="todo.motivo" value="{{ todo.motivo }}"></textarea></p>
                 <p><strong>Inicio:</strong></p><input id="dataIni" class="calendario" type="datetime-local" ng-model="todo.dataInicial" value="{{ todo.dataInicial }}  md-placeholder=" dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required" />
                 <p><strong>Fim:</strong></p><input id="dataFim" class="calendario" type="datetime-local" ng-model="todo.dataFinal" value="{{ todo.dataFinal }} md-placeholder=" dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required" />
                 <p><strong>Status:</strong></p>
