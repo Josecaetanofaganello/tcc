@@ -66,6 +66,11 @@
                 templateUrl: 'modules/areacomum/views/areaComum.html',
                 requireLogin: true
             })
+            .when('/usuario', {
+                controller: 'UsuarioCtrl',
+                templateUrl: 'modules/usuario/views/usuario.html',
+                requireLogin: true
+            })
             .otherwise({
                 controller: 'HomeCtrl as vm',
                 templateUrl: 'modules/home/views/404.html',

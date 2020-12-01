@@ -40,11 +40,10 @@
             </div>
             <div class="form-group">
                 <label for="apto">Apto</label>
-
-             
-                <select ng-model="signupModel.apto"
-                        ng-options="item.id as item.identificacao for item in aptos">
+            
+                <select ng-model="signupModel.apto">
                     <option value="">Selecione o Apto</option>
+                    <option ng-repeat="unidade in aptos" value="{{ unidade.id }}" >{{ unidade.bloco }} - {{ unidade.identificacao }}</option>
                 </select>
 
             </div>

@@ -50,6 +50,7 @@ function checkUser() {
         document.getElementById("menuMorador").style.visibility = "hidden";
         document.getElementById("menuUnidade").style.visibility = "hidden";
         document.getElementById("menuCondominio").style.visibility = "hidden";
+        document.getElementById("menuUsuario").style.visibility = "hidden";
     
 
     } else {
@@ -57,6 +58,7 @@ function checkUser() {
         document.getElementById("menuMorador").style.visibility = "visible";
         document.getElementById("menuUnidade").style.visibility = "visible";
         document.getElementById("menuCondominio").style.visibility = "visible";
+        document.getElementById("menuUsuario").style.visibility = "visible";
 
         toggleFormElements(false);
         for (let el of document.querySelectorAll('.btn-group')) el.style.visibility = 'visible';

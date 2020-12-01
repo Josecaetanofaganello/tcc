@@ -17,7 +17,7 @@ public class AreaComum implements Serializable {
 	@Id
 	private Long id;
 	
-	@Column
+	@Column(name = "descricao")
 	private String descricao;
 
 	

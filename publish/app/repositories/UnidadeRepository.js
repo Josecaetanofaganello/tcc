@@ -22,6 +22,7 @@
             getUsuarios: function () {
                 return $http.get($rootScope.baseUrl +"/usuario/pesquisar", { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
             },
+            
         };
     }
 })();

@@ -1,30 +1,34 @@
-(function () {
+﻿(function () {
     //'use strict';
 
     angular
         .module('app')
-        .controller('AreaComumCtrl', AreaComumCtrl);
+        .controller('UsuarioCtrl', UsuarioCtrl);
 
-    AreaComumCtrl.$inject = ['$scope', '$http', 'AreaComumRepository'];
+    UsuarioCtrl.$inject = ['$scope', '$http', 'UsuarioRepository'];
 
-    function AreaComumCtrl($scope, $http, AreaComumRepository) {
+    function UsuarioCtrl($scope, $http, UsuarioRepository) {
         $scope.todo = {
             id: 0,
-            notificacao: '',
-            descricao:'',
-            motivo:'',
-            dataInicial: Date.now,
-            dataFinal: null,
-            status: 'Reservada',
-            areaId: 0,
-            idUsuario: 0
+            nome: '',
+            telefone: null,
+            email: null,
+            tipo: 0,
+            unidade: 0
+           
         }
 
         $scope.todos = [];
-        
+
         Load();
-        
-       
+
+        $scope.findUnit = function(todo){
+            for(let i = 0; $scope.unidades.length; i++){
+                if($scope.unidades[i].id == todo.apto){
+                    return ($scope.unidades[i].bloco + ' - ' +$scope.unidades[i].identificacao);
+                }
+            }
+        };
 
         $scope.user = function () {
             loadUser();
@@ -36,27 +40,21 @@
 
 
         };
+
       
-        function loadUser() {
+        function loadUser() {          
             $scope.usuario = {
                 id: localStorage.getItem('id'),
                 nome: localStorage.getItem('nome'),
                 email: localStorage.getItem('email'),
                 tipo: localStorage.getItem('tipo')
             };
+            
         };
+    
 
         $scope.save = function (todo) {
             if (todo.id == 0) {
-
-                var date = new Date();
-                todo.status = 'Aberta';
-                todo.dataInicial = format(date, 'yyyy-MM-ddThh:mm');
-                
-                //Insere 7 dias a data final
-                date.setDate(date.getDate() + 7);
-                todo.idUsuario = $scope.usuario.id
-                todo.dataFinal = format(date, 'yyyy-MM-ddThh:mm');
                 Save($scope.todo);
             } else {
                 Edit();
@@ -107,40 +105,16 @@
 
         $scope.sync = function (todo) {
             Sync(todo);
-            //VoteLoad();
-            //location.reload();
         }
-
-        $scope.findUser = function(todo){
-            
-            for (let i = 0; $scope.usuarios.length; i++){
-                if($scope.usuarios[i].id == todo.idUsuario){
-                    return $scope.usuarios[i].nome;
-                }
-            }
-        
-        
-    };
-
-    
-    $scope.findArea = function(todo){
-        for (let i = 0; $scope.areas.length; i++){
-            if($scope.areas[i].id == todo.areaId){
-                return $scope.areas[i].descricao;
-            }
-        }
-    };
 
         function Save(item) {
             //item.id = $scope.todos.length + 1;
-            if($scope.todos == ""){
-                $scope.todos = [];
-            }
+
             $scope.todos.push(item);
         }
 
         function Delete(item) {
-            AreaComumRepository
+            UsuarioRepository
                 .delete(item)
                 .then(
                     function (result) {
@@ -152,34 +126,31 @@
                     });
         }
 
+
+
         function getNum(val) {
             if (isNaN(val)) {
                 return 0;
             }
             return val;
         }
+
       
 
         function New() {
             $scope.todo = {
                 id: 0,
-                notificacao: '',
-                descricao:'',
-                motivo:'',
-                dataInicial: Date.now,
-                dataFinal: null,
-                status: 'Reservada',
-                areaId: 0,
-                idUsuario: 0
+                nome: '',
+                telefone: null,
+                email: null,
+                tipo: 0,
+                unidade: 0
 
             }
         }
 
-
         function Load() {
             if (navigator.onLine) {
-                ReadAreas();
-                ReadUsers();
                 ReadCloud();
                 document.getElementById("mySidenav").style.visibility = "visible";
             } else {
@@ -207,74 +178,39 @@
         }
 
         function ReadCloud() {
-            loadUser();
-            AreaComumRepository
-                .getTodos($scope.usuario)
+            UsuarioRepository
+                .getTodos()
                 .then(
                     function (result) {
-                        for (let i = 0; i < result.data.length; i = i + 1) {
-                            
-                            result.data[i].dataInicial = result.data[i].dataInicial.replace(' ', 'T');
-
-                            if (result.data[i].dataFinal != null) {
-                                result.data[i].dataFinal = result.data[i].dataFinal.replace(' ', 'T');
-                            }
-                        }
+                       
                         $scope.todos = result.data;
                     },
                     function (error) {
                         toastr.error(error.data, "Falha na requisição");
                     });
 
+        UsuarioRepository
+                    .getUnidades()
+                    .then(
+                        function (result) {
+                           
+                            $scope.unidades = result.data;
+                        },
+                        function (error) {
+                            toastr.error(error.data, "Falha na requisição");
+                        });
+
         }
 
-        function ReadUsers(){
-            AreaComumRepository
-                   .getUsuarios()
-                   .then(
-                       function (result) {
-                          
-                           $scope.usuarios = result.data;
-                       },
-                       function (error) {
-                           toastr.error(error.data, "Falha na requisição");
-                       });
-       }
-
-       function ReadAreas(){
-                AreaComumRepository
-                       .getAreas()
-                       .then(
-                           function (result) {
-                              
-                               $scope.areas = result.data;
-
-                           },
-                           function (error) {
-                               toastr.error(error.data, "Falha na requisição");
-                           });
-       }
-
-        
 
         function SaveCloud(todo) {
-            AreaComumRepository
+            UsuarioRepository
                 .sync(todo)
                 .then(
                     function (result) {
-                        for (let i = 0; i < $scope.todos.length; i = i + 1) {
-                            $scope.todos[i].id = result.data.id;
-                            $scope.todos[i].dataFinal = result.data.status;
-                            $scope.todos[i].dataInicial = $scope.todos[i].dataInicial.replace(' ', 'T');
-                            $scope.todos[i].dataFinal = $scope.todos[i].dataFinal.replace(' ', 'T');
-                        }
+
                         
-                       
-                        if(result.data.status = 'Reservada'){
-                            toastr.error(result.data, "Esta Area já esta resrvada para a data escolhida!")
-                        } else {
-                            toastr.info(result.data, "Sincronização completa")    
-                        }
+                        toastr.info(result.data, "Sincronização completa")
                     },
                     function (error) {
                         toastr.error(error.data, "Falha na requisição");

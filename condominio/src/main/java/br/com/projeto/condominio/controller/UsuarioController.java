@@ -17,8 +17,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.com.projeto.condominio.model.Usuario;
 import br.com.projeto.condominio.service.impl.UsuarioServiceImpl;
-//import br.com.projeto.condominio.utils.JavaMailApp;
-//import br.com.projeto.condominio.utils.JavaMailApp;
 
 @RestController()
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -51,17 +49,12 @@ public class UsuarioController {
 		
 	}
 	
-//	@PostMapping("/register")
-//	public void cadastrar(@RequestBody Usuario usuario) {
-//		usuarioServiceImpl.salvar(usuario);
-//		
-//	}
-	
 	@GetMapping("/consultar/{id}")
 	  public @ResponseBody Usuario consultar(@PathVariable Long id) {
 	    return usuarioServiceImpl.consultar(id);
 	  }
 
+	// TODO - Validar se já existe usuario cadastrado no apto escolhido
 	@PostMapping("/salvar")
 	public @ResponseBody Usuario salvar(@RequestBody Usuario usuario) {
 		Usuario usuarioRetorno = usuarioServiceImpl.salvar(usuario);
@@ -84,11 +77,16 @@ public class UsuarioController {
 		usuarioServiceImpl.deletar(id);
 	}
 	
-	@GetMapping("/envia")
-	public void forgot() {
-	//	JavaMailApp mail = new JavaMailApp();
+	@GetMapping("/resetpassword/{email}")
+	public @ResponseBody String esqueciSenha(@PathVariable String email) {
 		
-	//	mail.enviarEmail();
+		try {
+			return usuarioServiceImpl.esqueciSenha(email);
+			
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Não foi possível realizar essa operação, por favor contate o administrador do sistema!");
+		}
+		
 	}
 
 }

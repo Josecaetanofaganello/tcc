@@ -8,15 +8,20 @@ import org.springframework.stereotype.Service;
 import br.com.projeto.condominio.model.Usuario;
 import br.com.projeto.condominio.repository.UsuarioRepository;
 import br.com.projeto.condominio.service.UsuarioService;
+import br.com.projeto.condominio.utils.UtilsMail;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
 
 	@Override
 	public Usuario salvar(Usuario usuario) {
+		
+		usuario.setBloco(usuario.getApto().trim());
+		usuario.setTipo("Morador");
 		
 		if (validaSeEmailJaExiste(usuario.getEmail())) {
 			return null;
@@ -39,6 +44,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public List<Usuario> pesquisar() {
+		
 		return usuarioRepository.findAll();
 	}
 
@@ -60,6 +66,39 @@ public class UsuarioServiceImpl implements UsuarioService {
 		Usuario usuario = usuarioRepository.findByEmail(email);
 		
 		return usuario != null;
+	}
+	
+	@Override
+	public String esqueciSenha(String email) throws Exception  {
+		
+		Usuario usuario = usuarioRepository.findByEmail(email);
+		
+		if (usuario == null) {
+			return "Email não cadastrado!";
+		}
+		
+		if ("".equals(usuario.getSenha())) { 
+			return "Houve um problema com sua requisição, favor entrar em contato com o administrador do sistema";
+		}
+		
+		enviarSenha(email, usuario.getSenha());
+		
+		return "Um e-mail de recuperação de senha foi enviado para o endereço "+email;
+		
+		
+	}
+	
+	private void enviarSenha(String emailDestinatario, String senha) throws Exception {
+		
+		UtilsMail mail = new UtilsMail();
+		
+		String assunto = "Recuperação de senha - Sistema de controle de condominio";
+		String msgCorpoEmail = "Foi feito uma requisição de recuperação da senha pelo usuario " + emailDestinatario
+				+". \nSe você não fez essa requisição entre em contato com o administrador do sistema."
+				+ "\nSua senha é: "+senha;
+		
+		mail.enviarEmail(assunto, msgCorpoEmail, emailDestinatario);
+		
 	}
 }
 

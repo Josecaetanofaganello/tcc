@@ -7,8 +7,8 @@ import br.com.projeto.condominio.model.Reserva;
 public interface ReservaService {
 
 	void salvar(Reserva reserva);
-	List<Reserva> atualizar(List<Reserva>  reserva);
-    List<Reserva> pesquisar();
+	Reserva atualizar(Reserva reserva);
+    List<Reserva> pesquisar(Long idUsuarioLogado, String tipoUsuarioLogado);
     Reserva consultar(Long id);
-    void deletar(Long id);
+    void deletar(Long id);	
 }

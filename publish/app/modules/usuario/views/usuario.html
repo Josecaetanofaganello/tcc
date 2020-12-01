@@ -48,26 +48,27 @@
 
             <div class="todo-item">
                 <input type="hidden" value="{{ todo.id}}" />
-                <strong>Nome Responsável: </strong><input type="text" readonly value="{{ findUser(todo) }}"  />
-                <p><strong>Notificação: </strong> <textarea id="textNotificacao"  class="textareaAreaComum resize-ta" ng-model="todo.notificacao" value="{{ todo.notificacao }}"></textarea></p>
-                <p><strong>Motivo: </strong> <textarea id="text" class="textareaAreaComum resize-ta" ng-model="todo.motivo" value="{{ todo.motivo }}"></textarea></p>
-                <p><strong>Inicio:</strong></p><input id="dataIni" class="calendario" type="datetime-local" ng-model="todo.dataInicial" value="{{ todo.dataInicial }}  md-placeholder=" dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required" />
-                <p><strong>Fim:</strong></p><input id="dataFim" class="calendario" type="datetime-local" ng-model="todo.dataFinal" value="{{ todo.dataFinal }} md-placeholder=" dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required" />
-                <p><strong>Status:</strong></p>
-               <p> <select id="status" ng-model="todo.status">
-                    <option value="{{ todo.status }}">{{ todo.status }}</option>
-                    <option value="Reservada">Reservada</option>
-                    <option value="Cancelada">Cancelada</option>
-                    <option value="Expirada">Expirada</option>
+                <strong>Nome: </strong><input type="text" ng-model="todo.nome" value="{{ todo.nome }}" />
+                <strong>Telefone: </strong><input type="text"  ui-br-phone-number ui-mask="(99)9?9999-9999" ng-model="todo.telefone" value="{{ todo.telefone }}"  />
+                <strong>E-mail: </strong><input type="text" ng-model="todo.email" value="{{ todo.email }}"  /></br>
+                <div class="todo-item">
+                <strong>Unidade:</strong>
+                <select ng-model="todo.apto">
+                    <option value="todo.apto">{{findUnit(todo)}}<option
+                    <option ng-repeat="unidade in unidades" value="{{ unidade.id }}" >{{ unidade.bloco }} - {{ unidade.identificacao }}</option>
                 </select>
-              </p>
-                <p>  <strong>Area Comum:</strong>
-                <select id="area" ng-model="todo.areaId">
-                    <option value="{{ todo.areaId }}">{{ findArea(todo) }}</option>
-                    <option ng-repeat="area in areas" value="{{ area.id }}" >{{ area.descricao }}</option>
-                </select>
-                </p>
-                </p>
+            </br>
+                
+                <strong>Tipo:</strong>
+                <select id="tipo" ng-model="todo.tipo">
+                    <option value="todo.tipo">{{todo.tipo}}<option
+                    <option value="Morador">Morador</option>
+                    <option value="Sindico">Síndico</option>
+                </select></br>
+                </div>
+              
+                
+                               
                 <p></p>
                 <div class="btn-group">
                     <button class="btn btn-danger btn-lg" ng-click="delete(todo)"><i class="fa fa-remove"></i></button>

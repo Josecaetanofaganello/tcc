@@ -9,9 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @Entity
-@Table(name = "vagas")
+@Table(name = "reservas")
+@JsonDeserialize
 public class Reserva implements Serializable {
 
 	private static final long serialVersionUID = -4134802893871220489L;
@@ -39,10 +41,7 @@ public class Reserva implements Serializable {
 	
 	@Column
 	private String status;
-	
-	@Column
-	private String descricao;
-	
+		
 	@Column(name = "area_id")
 	private Long areaId;
 	
@@ -101,14 +100,6 @@ public class Reserva implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
 	}
 
 	public Long getAreaId() {
