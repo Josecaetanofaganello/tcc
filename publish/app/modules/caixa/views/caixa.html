@@ -34,7 +34,7 @@
         </div>
 
     </div>
-    <div class="row">
+    <div class="row divCaixa">
         <button class="btnReceita btn-primary pull-left" ng-show="todo.id == 0" ng-click="save(todo,'plus')"><i class="fa fa-plus"></i> Receita</button>
         <button class="btnDespesa btn-primary pull-rigth" ng-show="todo.id == 0" ng-click="save(todo,'minus')"><i class="fa fa-minus"></i> Despesa</button>
     </div>
@@ -48,14 +48,14 @@
     <h3 class="h3balance">Transações</h3>
 
 
-    <div  id="section">
+    <div id="section">
         <ul class="list-unstyled" ng-repeat="todo in todos |orderBy:'-data'|filter: search">
             <li>
                 <button class="btn btn-danger btn-sm pull-left" ng-click="delete(todo)"><i class="fa fa-remove"></i></button>
                 <!--<span ng-model="todo.data" class="pull-left">{{ todo.data }}</span>-->
                 <input id="dataIni" class="pull-left" type="datetime-local" ng-model="todo.data" value="{{ todo.data }}  md-placeholder=" dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required" />
             </li>
-           
+
             <li>  <textarea class="resize-ta" type="text" ng-model="todo.descricao" value="{{todo.descricao}}"></textarea> </li>
             <!--<li id="tipo"> <span ng-model="todo.tipo "> </span>-->
             <li id="saldo{{todo.id}}"> <span ng-model="todo.valor" class="text-center">R$ {{checkCaixaTipo(todo)}}</span></li>
@@ -66,7 +66,7 @@
 
 
     <hr class="solid">
-
+    <h3  type="hidden"><small>Usuário:{{user()}}</small> </h3>
 
 
 

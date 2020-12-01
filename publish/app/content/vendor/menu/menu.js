@@ -79,6 +79,16 @@ function toggleFormElements(bDisabled) {
         calendars[i].disabled = bDisabled;
     }
 
+    var cardCaixa = document.getElementsByClassName("cardCaixa");
+    for (var i = 0; i < cardCaixa.length; i++) {
+        cardCaixa[i].hidden = bDisabled;
+    }
+
+    var rowCaixa = document.getElementsByClassName("divCaixa");
+    for (var i = 0; i < rowCaixa.length; i++) {
+        rowCaixa[i].hidden = bDisabled;
+    }
+
     var selects = document.getElementsByTagName("select");
     for (var i = 0; i < selects.length; i++) {
         selects[i].disabled = bDisabled;
@@ -91,6 +101,14 @@ function toggleFormElements(bDisabled) {
     for (var i = 0; i < buttons.length; i++) {
         buttons[i].hidden = bDisabled;
     }
+    var textatratamento = document.getElementsByClassName("textatratamento");
+    for (var i = 0; i < textatratamento.length; i++) {
+        textatratamento[i].disabled = bDisabled;
+    }
+    //var buttons = document.getElementsByClassName("btn");textatratamento
+    //for (var i = 0; i < buttons.length; i++) {
+    //    buttons[i].hidden = bDisabled;
+    //}
 
     var divareas = document.getElementsByClassName("input-group");
     for (var i = 0; i < divareas.length; i++) {

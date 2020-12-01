@@ -32,6 +32,7 @@
         $scope.todos = [];
 
         Load();
+       
         //VoteLoad();
 
 

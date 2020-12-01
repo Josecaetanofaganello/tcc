@@ -49,6 +49,7 @@
                 email: localStorage.getItem('email'),
                 tipo: localStorage.getItem('tipo')
             };
+            checkUser();
         };
 
         $scope.save = function (todo) {

@@ -8,12 +8,12 @@
         </div>
         <nav class="navbar navbar-dark bg-dark">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Alterna navegação">
-              <i class="fa fa-info-circle"></i>  <span class="navbar-toggler-icon"></span>
+                <i class="fa fa-info-circle"></i>  <span class="navbar-toggler-icon"></span>
             </button>
         </nav>
     </div>
     <div class="col-md-12">
-        
+
         <h3>Olá, <small>{{user()}}</small></h3>
     </div>
 </div>
@@ -24,7 +24,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        
+
         <div class="row">
             <div class="col-md-4 pull-left">
                 <div class="input-group">
@@ -36,42 +36,44 @@
                     </span>
                 </div>
             </div>
-          
+
             <div class="col-md-3 pull-right">
                 <input type="text" class="form-control" placeholder="Filtrar" ng-model="search" />
             </div>
         </div>
 
         <br />
-               
+
         <div class="list-unstyled" ng-repeat="todo in todos | filter: search">
-              
-                    <input type="hidden" value="{{ todo.id}}" />
-                    <p>
-                        <strong>Nome Responsável: </strong><input type="text" readonly value="{{ findUser(todo) }}"  />
-                        <strong>Descrição: </strong>  <input type="text" ng-model="todo.descricao" value="{{ todo.descricao }}" required />
-                   </p>
-                    <p><strong>Notificação: </strong> <textarea class="textarea resize-ta" ng-model="todo.notificacao" value="{{ todo.notificacao }}" required></textarea></p>
-                    <p><strong>Tratamento: </strong> <textarea class="textarea resize-ta" ng-model="todo.tratamento" value="{{ todo.tratamento }}" required></textarea></p>
-                    <p><strong>Inicio:</strong></p><input type="datetime-local" ng-model="todo.dataInicial" value="{{ todo.dataInicial }}  md-placeholder=" dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required" />
-                    <p><strong>Fim:</strong></p><input type="datetime-local" ng-model="todo.dataFinal" value="{{ todo.dataFinal }} md-placeholder=" dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required" />
-                    <p><strong>Status:</strong></p>
-                    <select ng-model="todo.status">
-                        <option value="{{ todo.status }}">Aberta</option>
-                        <option value="Aberta">Aberta</option>
-                        <option value="Cancelada">Cancelada</option>
-                    </select>
-                    <p></p>
-                    <div class="btn-group">
-                        <button class="btn btn-danger btn-lg" ng-click="delete(todo)"><i class="fa fa-remove"></i></button>
-                    </div>
-                    <div class="btn-group">
-                        <button class="btn btn-primary btn-lg" ng-click="sync()"><i class="fa fa-save"></i></button>
-                    </div>
-                    <hr class="solid">
-                </div>
-                
+
+            <input type="hidden" value="{{ todo.id}}" />
+            <p>
+                <strong>Nome Responsável: </strong><input type="text" readonly value="{{ findUser(todo) }}" />
+                <strong>Descrição: </strong>  <input type="text" ng-model="todo.descricao" value="{{ todo.descricao }}" required />
+            </p>
+            <p><strong>Notificação: </strong> <textarea class="textarea resize-ta" ng-model="todo.notificacao" value="{{ todo.notificacao }}" required></textarea></p>
+            <p><strong>Tratamento: </strong> <textarea class="textatratamento resize-ta" ng-model="todo.tratamento" value="{{ todo.tratamento }}" required></textarea></p>
+            <p><strong>Inicio:</strong></p><input type="datetime-local" ng-model="todo.dataInicial" value="{{ todo.dataInicial }}  md-placeholder=" dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required" />
+            <p><strong>Fim:</strong></p><input type="datetime-local" ng-model="todo.dataFinal" value="{{ todo.dataFinal }} md-placeholder=" dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required" />
+            <p><strong>Status:</strong></p>
+            <select ng-model="todo.status">
+                <option value="{{ todo.status }}">Aberta</option>
+                <option value="Aberta">Aberta</option>
+                <option value="Cancelada">Cancelada</option>
+                <option value="Fechada">Fechada</option>
+            </select>
+            <p></p>
+            <div class="btn-group">
+                <button class="btn btn-danger btn-lg" ng-click="delete(todo)"><i class="fa fa-remove"></i></button>
             </div>
+            <div class="btn-group">
+                <button class="btn btn-primary btn-lg" ng-click="sync()"><i class="fa fa-save"></i></button>
+            </div>
+            <hr class="solid">
+
+        </div>
 
     </div>
+
 </div>
+
