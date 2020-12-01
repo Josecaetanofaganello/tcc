@@ -2,7 +2,7 @@
     'use strict';
     var id = 'app';
 
-    var app = angular.module('app', ['ngResource', 'ngRoute', 'ngAnimate', 'ui.bootstrap']);
+    var app = angular.module('app', ['ngResource', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'ui.utils.masks']);
 
     app.config(function ($routeProvider, $locationProvider) {
         $routeProvider

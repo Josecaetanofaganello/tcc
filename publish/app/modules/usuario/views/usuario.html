@@ -3,7 +3,7 @@
         <div class="collapse" id="navbarToggleExternalContent">
             <div class="bg-dark p-4">
                 <h5 class="text-white h4">Conteúdo de Ajuda da Página</h5>
-                <span class="text-muted">Nessa tela você pode visualizar e iteragir com as ações da assembléia online.</span>
+                <span class="text-muted">Nessa tela você pode visualizar e manter o cadastro de usuarios.</span>
             </div>
         </div>
         <nav class="navbar navbar-dark bg-dark">
@@ -50,21 +50,20 @@
                 <input type="hidden" value="{{ todo.id}}" />
                 <strong>Nome: </strong><input type="text" ng-model="todo.nome" value="{{ todo.nome }}" />
                 <strong>Telefone: </strong><input type="text"  ui-br-phone-number ui-mask="(99)9?9999-9999" ng-model="todo.telefone" value="{{ todo.telefone }}"  />
-                <strong>E-mail: </strong><input type="text" ng-model="todo.email" value="{{ todo.email }}"  /></br>
+                <strong>E-mail: </strong><input type="text" ng-model="todo.email" value="{{ todo.email }}"  />
                 <div class="todo-item">
                 <strong>Unidade:</strong>
                 <select ng-model="todo.apto">
-                    <option value="todo.apto">{{findUnit(todo)}}<option
+                    <option value="todo.apto">{{findUnit(todo)}}</option>
                     <option ng-repeat="unidade in unidades" value="{{ unidade.id }}" >{{ unidade.bloco }} - {{ unidade.identificacao }}</option>
                 </select>
-            </br>
                 
                 <strong>Tipo:</strong>
                 <select id="tipo" ng-model="todo.tipo">
-                    <option value="todo.tipo">{{todo.tipo}}<option
+                    <option value="todo.tipo">{{todo.tipo}}</option>
                     <option value="Morador">Morador</option>
                     <option value="Sindico">Síndico</option>
-                </select></br>
+                </select>
                 </div>
               
                 
