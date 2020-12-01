@@ -13,5 +13,6 @@ public interface UsuarioService {
 	    Usuario autenticar(String username,String password);
 	    void deletar(Long id);
 	    String esqueciSenha(String email) throws Exception;
+	    boolean validaSeUsuarioJaCadastrado(String apto);
 	   
 }

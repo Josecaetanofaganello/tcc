@@ -69,6 +69,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 	
 	@Override
+	public boolean validaSeUsuarioJaCadastrado(String apto) {
+		Usuario usuario = null;
+		
+		usuario = usuarioRepository.findByApto(apto.trim());
+		
+		return (usuario != null);
+	}
+	
+	@Override
 	public String esqueciSenha(String email) throws Exception  {
 		
 		Usuario usuario = usuarioRepository.findByEmail(email);

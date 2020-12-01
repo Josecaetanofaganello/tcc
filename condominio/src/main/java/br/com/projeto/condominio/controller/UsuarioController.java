@@ -57,6 +57,11 @@ public class UsuarioController {
 	// TODO - Validar se já existe usuario cadastrado no apto escolhido
 	@PostMapping("/salvar")
 	public @ResponseBody Usuario salvar(@RequestBody Usuario usuario) {
+		
+		if(usuarioServiceImpl.validaSeUsuarioJaCadastrado(usuario.getApto())){
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Já existe usuário cadastrado nesta unidade!");
+		}
+		
 		Usuario usuarioRetorno = usuarioServiceImpl.salvar(usuario);
 		
 		if (usuarioRetorno == null) {
