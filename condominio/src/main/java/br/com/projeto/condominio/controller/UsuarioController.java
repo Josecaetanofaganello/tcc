@@ -59,12 +59,12 @@ public class UsuarioController {
 	public @ResponseBody Usuario salvar(@RequestBody Usuario usuario) {
 		
 		if(usuario.getApto() == null || "".equals(usuario.getApto().trim())) {
-			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "É ncessário escolher uma unidade para cadastrar!");
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Escolha uma unidade para o cadastro!");
 		}
 		
 		
 		if(usuarioServiceImpl.validaSeUsuarioJaCadastrado(usuario.getApto())){
-			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Já existe usuário cadastrado nesta unidade!");
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Já existe usuário cadastrado nesta unidade, entre em contato com o Síndico!");
 		}
 		
 		Usuario usuarioRetorno = usuarioServiceImpl.salvar(usuario);
