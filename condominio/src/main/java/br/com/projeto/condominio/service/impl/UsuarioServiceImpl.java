@@ -1,5 +1,6 @@
 package br.com.projeto.condominio.service.impl;
 
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +21,26 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public Usuario salvar(Usuario usuario) {
 		
+		usuario.setSenha(criptografiaBase64Encoder(usuario.getSenha()));
+		
 		usuario.setBloco(usuario.getApto().trim());
 		usuario.setTipo("Morador");
 		
 		if (validaSeEmailJaExiste(usuario.getEmail())) {
 			return null;
 		}
-		
+				
 		return usuarioRepository.save(usuario);
+	}
+	
+
+	private String criptografiaBase64Encoder(String pValor) {
+	    return new String(Base64.getEncoder().encode(pValor.getBytes()));
+	}
+	
+
+	public static String descriptografiaBase64Decode(String pValor) {
+	    return new String(Base64.getDecoder().decode(pValor.getBytes()));
 	}
 
 	@Override
@@ -55,8 +68,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 	
 	public Usuario autenticar(String email, String password) {
 		
+		password = criptografiaBase64Encoder(password.trim());
 		
-		 Usuario user = usuarioRepository.findByemail(email,password);
+		 Usuario user = usuarioRepository.findByemail(email, password);
 		
 		 return user;
 		 
@@ -90,7 +104,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 			return "Houve um problema com sua requisição, favor entrar em contato com o administrador do sistema";
 		}
 		
-		enviarSenha(email, usuario.getSenha());
+		enviarSenha(email, descriptografiaBase64Decode(usuario.getSenha()));
 		
 		return "Um e-mail de recuperação de senha foi enviado para o endereço "+email;
 		
