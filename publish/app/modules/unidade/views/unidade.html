@@ -39,14 +39,14 @@
         <ul class="list-unstyled" ng-repeat="unidade in unidades | filter: search">
             <li class="unidade-item">
                 <input type="hidden" value="{{ unidade.id}}"/>
-                <input type="text" placeholder="Identificação" ng-model="unidade.identificacao" value="{{ unidade.identificacao }}">
+                <input type="text" placeholder="Identificação Apto" ng-model="unidade.identificacao" value="{{ unidade.identificacao }}">
                 <input type="text" placeholder="Bloco" ng-model="unidade.bloco" value="{{ unidade.bloco }}" />
                 <input type="text" placeholder="Garagem" ng-model="unidade.garagem" value="{{ unidade.garagem }}" />
                 <input type="text" placeholder="Veículo" ng-model="unidade.veiculo" value="{{ unidade.veiculo }}" />
-                <select ng-model="unidade.proprietario">
+                <!--<select ng-model="unidade.proprietario">
                     <option value="{{ unidade.proprietario }}">{{ findUser(unidade) }}</option>
                     <option ng-repeat="usuario in usuarios" value="{{ usuario.id }}" >{{ usuario.nome }}</option>
-                </select>
+                </select>-->
                 
                                
                 <div class="btn-group">
