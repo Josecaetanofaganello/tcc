@@ -4,6 +4,7 @@ import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import br.com.projeto.condominio.model.Usuario;
@@ -86,7 +87,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public boolean validaSeUsuarioJaCadastrado(String apto) {
 		Usuario usuario = null;
 		
-		usuario = usuarioRepository.findByApto(apto.trim());
+		usuario = usuarioRepository.findByApto(apto.trim(), PageRequest.of(0, 1));
 		
 		return (usuario != null);
 	}
