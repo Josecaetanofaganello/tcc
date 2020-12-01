@@ -122,6 +122,21 @@
         
     };
 
+    $scope.checkStatus = function (reserva) {
+        var date = new Date();
+        if (Date.parse(reserva.dataFinal) < Date.parse(date) && reserva.status != "Cancelada") {
+            angular.forEach($scope.todos, function (todo) {
+                if (todo.id == reserva.id) {
+                    todo.status = "Expirada";
+                } 
+            });
+            return todo.status;
+        } else {
+            return todo.status
+        }
+
+    }; 
+
     
     $scope.findArea = function(todo){
         for (let i = 0; $scope.areas.length; i++){
@@ -264,13 +279,13 @@
                     function (result) {
                         for (let i = 0; i < $scope.todos.length; i = i + 1) {
                             $scope.todos[i].id = result.data.id;
-                            $scope.todos[i].dataFinal = result.data.status;
+                            $scope.todos[i].status = result.data.status;
                             $scope.todos[i].dataInicial = $scope.todos[i].dataInicial.replace(' ', 'T');
                             $scope.todos[i].dataFinal = $scope.todos[i].dataFinal.replace(' ', 'T');
                         }
                         
                        
-                        if(result.data.status = 'Reservada'){
+                        if(result.data.statusReserva == 0){
                             toastr.error(result.data, "Esta Area já esta resrvada para a data escolhida!")
                         } else {
                             toastr.info(result.data, "Sincronização completa")    

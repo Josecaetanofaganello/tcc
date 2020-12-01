@@ -15,6 +15,8 @@ public class ReservaServiceImpl implements ReservaService {
 	public static final String SINDICO = "Sindico";
 	public static final String MORADOR = "Morador";
 	
+	public static final String CANCELADA = "Cancelada";
+	
 	@Autowired
 	private ReservaRepository reservaRepository;
 
@@ -25,16 +27,25 @@ public class ReservaServiceImpl implements ReservaService {
 
 	@Override
 	public Reserva atualizar(Reserva reserva) {
+		Reserva reservaRetorno = null;
+		if (CANCELADA.equals(reserva.getStatus())) {
+			Reserva retornoAtualizar = reservaRepository.save(reserva);
+			retornoAtualizar.setStatusReserva(1);
+			return retornoAtualizar;
+		}
 		
-		Reserva reservaRetorno = reservaRepository.findReserva(reserva.getAreaId(), reserva.getDataInicial(), reserva.getDataFinal());
+		 reservaRetorno = reservaRepository.findReserva(reserva.getAreaId(), reserva.getDataInicial(), reserva.getDataFinal());
 		
 		if (reservaRetorno != null) {
-			reservaRetorno.setStatus("Reservada");
+			reservaRetorno.setStatusReserva(0);
 			return reservaRetorno;
 		}
-		reservaRetorno.setStatus("");
-		return reservaRepository.save(reserva);
+		Reserva retornoSalvar = reservaRepository.save(reserva);
+		retornoSalvar.setStatusReserva(1);
+		return retornoSalvar;
 	}
+	
+	
 
 	@Override
 	public List<Reserva> pesquisar(Long idUsuarioLogado, String tipoUsuarioLogado) {

@@ -55,7 +55,7 @@
                 <p><strong>Fim:</strong></p><input id="dataFim" class="calendario" type="datetime-local" ng-model="todo.dataFinal" value="{{ todo.dataFinal }} md-placeholder=" dd-MM-yyyy HH:mm" min="01-01-2020 00:00:00" max="01-12-2050 23:59" required" />
                 <p><strong>Status:</strong></p>
                <p> <select id="status" ng-model="todo.status">
-                    <option value="{{ todo.status }}">{{ todo.status }}</option>
+                    <option value="{{ todo.status }}">{{ checkStatus(todo) }}</option>
                     <option value="Reservada">Reservada</option>
                     <option value="Cancelada">Cancelada</option>
                     <option value="Expirada">Expirada</option>

@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -44,6 +45,9 @@ public class Reserva implements Serializable {
 		
 	@Column(name = "area_id")
 	private Long areaId;
+	
+	@Transient
+	private int statusReserva;
 	
 
 	public Long getId() {
@@ -108,6 +112,14 @@ public class Reserva implements Serializable {
 
 	public void setAreaId(Long areaId) {
 		this.areaId = areaId;
+	}
+
+	public int getStatusReserva() {
+		return statusReserva;
+	}
+
+	public void setStatusReserva(int statusReserva) {
+		this.statusReserva = statusReserva;
 	}
 	
 }

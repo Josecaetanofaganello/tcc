@@ -13,13 +13,14 @@ import br.com.projeto.condominio.model.Reserva;
 public interface ReservaRepository extends JpaRepository<Reserva, Long> {
 	
 	
-	@Query("select r from Reserva r where r.areaId = :areaId and r.dataInicial between :dataInicial and :dataFinal ")
+	@Query("select r from Reserva r where r.status = 'Reservada' and r.areaId = :areaId and r.dataInicial between :dataInicial and :dataFinal ")
 	public Reserva findReserva(@Param("areaId") Long areaId, @Param("dataInicial") Date dataInicial,
 			@Param("dataFinal") Date dataFinal);
 	
 	
 	@Query("select r from Reserva r where r.idUsuario = :idUsuario")
 	public List<Reserva> findByIdUser(@Param("idUsuario") Long idUsuario);
+	
 
 
 }
