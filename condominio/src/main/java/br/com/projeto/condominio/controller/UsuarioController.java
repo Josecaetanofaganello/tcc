@@ -54,9 +54,14 @@ public class UsuarioController {
 	    return usuarioServiceImpl.consultar(id);
 	  }
 
-	// TODO - Validar se já existe usuario cadastrado no apto escolhido
+	
 	@PostMapping("/salvar")
 	public @ResponseBody Usuario salvar(@RequestBody Usuario usuario) {
+		
+		if(usuario.getApto() == null || "".equals(usuario.getApto().trim())) {
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "É ncessário escolher uma unidade para cadastrar!");
+		}
+		
 		
 		if(usuarioServiceImpl.validaSeUsuarioJaCadastrado(usuario.getApto())){
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Já existe usuário cadastrado nesta unidade!");
