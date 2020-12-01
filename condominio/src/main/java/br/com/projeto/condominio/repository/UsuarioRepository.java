@@ -1,5 +1,6 @@
 package br.com.projeto.condominio.repository;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,6 +19,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	Usuario findByEmail(@Param("email") String email);
 	
 	@Query("Select c from Usuario c where c.apto = :apto")
-	Usuario findByApto(@Param("apto") String apto, Pageable peageable);
+	Page<Usuario> findByApto(@Param("apto") String apto, Pageable peageable);
 	
 }

@@ -4,6 +4,7 @@ import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -85,7 +86,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	
 	@Override
 	public boolean validaSeUsuarioJaCadastrado(String apto) {
-		Usuario usuario = null;
+		Page<Usuario> usuario = null;
 		
 		usuario = usuarioRepository.findByApto(apto.trim(), PageRequest.of(0, 1));
 		
