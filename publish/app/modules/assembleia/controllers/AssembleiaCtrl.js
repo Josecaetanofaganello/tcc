@@ -53,6 +53,22 @@
 
 
         };
+        $scope.checkStatus = function (enquete) {
+            var date = new Date();
+            if (Date.parse(enquete.dataFinal) < Date.parse(date) && enquete.statusEnquete != "Cancelada") {
+                angular.forEach($scope.todos, function (todo) {
+                    if (todo.id == enquete.id) {
+                        todo.statusEnquete = "Finalizada";
+                    } 
+                });
+                return todo.statusEnquete;
+            } else {
+                return todo.statusEnquete
+            }
+           
+
+
+        };
 
       
         function loadUser() {
