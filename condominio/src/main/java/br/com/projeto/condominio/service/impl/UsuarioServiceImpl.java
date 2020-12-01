@@ -90,12 +90,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 		
 		usuario = usuarioRepository.findByApto(apto.trim(), PageRequest.of(0, 1));
 		
-		return (usuario != null);
+		return (usuario.getContent() != null && !usuario.getContent().isEmpty());
 	}
 	
 	@Override
 	public String esqueciSenha(String email) throws Exception  {
-		
+		 
 		Usuario usuario = usuarioRepository.findByEmail(email);
 		
 		if (usuario == null) {
